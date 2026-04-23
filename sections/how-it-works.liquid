@@ -1,0 +1,105 @@
+<section class="how-it-works" aria-label="How it works" id="how-it-works">
+  <div class="container">
+    <header class="how-it-works__header reveal">
+      <h2 class="how-it-works__title">{{ section.settings.title }}</h2>
+      <p class="how-it-works__sub">{{ section.settings.subtitle }}</p>
+    </header>
+    <div class="how-it-works__grid">
+      <div class="hiw-step reveal">
+        <span class="hiw-step__num">{{ section.settings.step1_num }}</span>
+        <h3 class="hiw-step__title">{{ section.settings.step1_title }}</h3>
+        <p class="hiw-step__sub">{{ section.settings.step1_body }}</p>
+      </div>
+      <div class="hiw-step reveal" style="transition-delay:80ms">
+        <span class="hiw-step__num">{{ section.settings.step2_num }}</span>
+        <h3 class="hiw-step__title">{{ section.settings.step2_title }}</h3>
+        <p class="hiw-step__sub">{{ section.settings.step2_body }}</p>
+      </div>
+      <div class="hiw-step reveal" style="transition-delay:160ms">
+        <span class="hiw-step__num">{{ section.settings.step3_num }}</span>
+        <h3 class="hiw-step__title">{{ section.settings.step3_title }}</h3>
+        <p class="hiw-step__sub">{{ section.settings.step3_body }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "How it works."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "No subscriptions. No commitments. Try everything that's been on your radar."
+    },
+    {
+      "type": "text",
+      "id": "step1_num",
+      "label": "Step 1 number",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "step1_title",
+      "label": "Step 1 title",
+      "default": "Browse by name"
+    },
+    {
+      "type": "textarea",
+      "id": "step1_body",
+      "label": "Step 1 body",
+      "default": "If it's been on your radar, it's here. Pick the one you've been meaning to try."
+    },
+    {
+      "type": "text",
+      "id": "step2_num",
+      "label": "Step 2 number",
+      "default": "02"
+    },
+    {
+      "type": "text",
+      "id": "step2_title",
+      "label": "Step 2 title",
+      "default": "Pick a size"
+    },
+    {
+      "type": "textarea",
+      "id": "step2_body",
+      "label": "Step 2 body",
+      "default": "A quick test or enough to wear all week. Both options are a few bucks."
+    },
+    {
+      "type": "text",
+      "id": "step3_num",
+      "label": "Step 3 number",
+      "default": "03"
+    },
+    {
+      "type": "text",
+      "id": "step3_title",
+      "label": "Step 3 title",
+      "default": "Know before you commit"
+    },
+    {
+      "type": "textarea",
+      "id": "step3_body",
+      "label": "Step 3 body",
+      "default": "If it's yours, you'll know. If it's not, there are 50 more on the list."
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works"
+    }
+  ]
+}
+{% endschema %}

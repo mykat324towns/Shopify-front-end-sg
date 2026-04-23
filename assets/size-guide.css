@@ -1,0 +1,108 @@
+/* Size Guide Section */
+
+.size-guide {
+  background-color: var(--color-bg-alt);
+  padding-block: var(--space-20);
+}
+
+.size-guide__header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.size-guide__overline {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.size-guide__title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-on-surface);
+  font-feature-settings: "kern" 1;
+}
+
+.size-guide__sub {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--color-on-surface-muted);
+  margin-top: var(--space-3);
+  max-width: 500px;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+.size-guide__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-4);
+  align-items: end;
+}
+
+.size-guide__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.size-guide__bottle-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 140px;
+}
+
+.size-guide__bottle {
+  object-fit: contain;
+  object-position: bottom center;
+  width: auto;
+  filter: drop-shadow(0 4px 12px rgba(20,20,20,0.08));
+}
+
+.size-guide__label {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.size-guide__sprays {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--color-on-surface-muted);
+  line-height: 1.4;
+}
+
+.size-guide__price {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+@media (max-width: 900px) {
+  .size-guide__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .size-guide__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+
+  .size-guide__bottle-wrap {
+    height: 100px;
+  }
+}

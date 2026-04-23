@@ -1,0 +1,128 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "overline": "Fragrance Decants",
+        "headline": "Try the hype.<br>Keep what hits.",
+        "subtext": "Stop putting all your money into one bottle. Try everything on your list — from $4.",
+        "proof_count": 846,
+        "cta_primary_text": "Build Your Collection",
+        "cta_primary_url": "/collections/best-sellers",
+        "cta_secondary_text": "See how it works →",
+        "cta_secondary_url": "#how-it-works",
+        "trust_1": "100% authentic",
+        "trust_2": "Ships in 1–2 days",
+        "trust_3": "Hand packed",
+        "sidebar_text": "Luxury Decants · Try Before You Commit"
+      }
+    },
+    "comparison": {
+      "type": "comparison",
+      "settings": {
+        "headline": "$300 locks you into one.<br>Or it builds your rotation.",
+        "old_label": "One full bottle",
+        "new_label": "Scent Gallery",
+        "tagline": "→ The math is obvious. The collection is waiting.",
+        "cta_text": "Build Your Rotation — From $4",
+        "cta_url": "/collections/best-sellers",
+        "receipt_eyebrow": "The math",
+        "receipt_subtitle": "6 fragrances vs. 1"
+      }
+    },
+    "size-guide": {
+      "type": "size-guide",
+      "settings": {
+        "title": "Every size. Your choice.",
+        "subtitle": "From a quick test to a full rotation. All extracted from authentic bottles."
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best Sellers",
+        "subtitle": "The most-explored fragrances in the rotation. Pick one. Try them all.",
+        "collection": "best-sellers",
+        "view_all_text": "View All →",
+        "view_all_url": "/collections/best-sellers"
+      }
+    },
+    "latest-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Latest Pickups",
+        "subtitle": "Just dropped into the rotation.",
+        "collection": "latest-picks",
+        "view_all_text": "View All →",
+        "view_all_url": "/collections/latest-picks",
+        "section_class": "latest-pickups"
+      }
+    },
+    "kit-builder-cta": {
+      "type": "kit-builder-cta",
+      "settings": {
+        "overline": "Don't commit. Rotate.",
+        "headline": "Build Your Rotation",
+        "subtext": "Add the ones you've been putting off. Try ten for less than one bottle. We pack and ship in days.",
+        "cta_text": "Start Building →",
+        "cta_url": "/collections/best-sellers",
+        "trust_line": "100% authentic · Ships in 1–2 days · From $4"
+      }
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "settings": {
+        "title": "How it works.",
+        "subtitle": "No subscriptions. No commitments. Try everything that's been on your radar.",
+        "step1_num": "01",
+        "step1_title": "Browse by name",
+        "step1_body": "If it's been on your radar, it's here. Pick the one you've been meaning to try.",
+        "step2_num": "02",
+        "step2_title": "Pick a size",
+        "step2_body": "A quick test or enough to wear all week. Both options are a few bucks.",
+        "step3_num": "03",
+        "step3_title": "Know before you commit",
+        "step3_body": "If it's yours, you'll know. If it's not, there are 50 more on the list."
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "overline": "Reviews",
+        "title": "What collectors are saying"
+      }
+    },
+    "cta-section": {
+      "type": "cta-section",
+      "settings": {
+        "overline": "Start your rotation",
+        "title": "Try before you ever commit.",
+        "body": "From $4 a scent. Hundreds of fragrances. No regrets.",
+        "cta_primary_text": "Shop Now",
+        "cta_primary_url": "/collections/best-sellers",
+        "cta_secondary_text": "View All Sizes →",
+        "cta_secondary_url": "/collections/all"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "overline": "Common Questions",
+        "title": "Everything you need to know.",
+        "subtitle": "Quick answers before you start your rotation."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "comparison",
+    "size-guide",
+    "featured-collection",
+    "latest-collection",
+    "kit-builder-cta",
+    "how-it-works",
+    "testimonials",
+    "cta-section",
+    "faq"
+  ]
+}

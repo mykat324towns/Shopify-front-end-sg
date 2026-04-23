@@ -1,0 +1,39 @@
+{% if section.settings.text != blank %}
+  <div
+    id="announcement-bar"
+    class="announcement-bar"
+    data-section-id="{{ section.id }}"
+  >
+    <div class="container announcement-bar__inner">
+      <p class="announcement-bar__text">{{ section.settings.text }}</p>
+      {% if section.settings.dismissible %}
+        <button class="announcement-bar__dismiss" aria-label="Dismiss announcement">&#x2715;</button>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "<strong>FREE SHIPPING</strong> on orders over $35 — Try before you commit."
+    },
+    {
+      "type": "checkbox",
+      "id": "dismissible",
+      "label": "Allow customers to dismiss",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

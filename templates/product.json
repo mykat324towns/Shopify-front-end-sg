@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "product-main": {
+      "type": "product-main",
+      "settings": {
+        "social_title": "As seen on TikTok",
+        "social_sub": "Real reactions from real collectors."
+      },
+      "blocks": {}
+    }
+  },
+  "order": ["product-main"]
+}

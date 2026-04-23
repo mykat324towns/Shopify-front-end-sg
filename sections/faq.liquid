@@ -1,0 +1,121 @@
+<section class="faq" aria-label="FAQ">
+  <div class="container">
+    <header class="faq__header">
+      <span class="faq__overline">{{ section.settings.overline }}</span>
+      <h2 class="faq__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="faq__sub">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </header>
+
+    <ul class="faq__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'faq_item' -%}
+          <li class="faq__item" {{ block.shopify_attributes }}>
+            <button
+              class="faq__question"
+              aria-expanded="false"
+              aria-controls="faq-answer-{{ block.id }}"
+            >
+              {{ block.settings.question }}
+            </button>
+            <div class="faq__answer-wrap" id="faq-answer-{{ block.id }}" role="region">
+              <div class="faq__answer-inner">
+                <div class="faq__answer">
+                  <p>{{ block.settings.answer }}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "Common Questions"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Everything you need to know."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Quick answers before you start your rotation."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the fragrances authentic?",
+            "answer": "Yes — 100%. Every decant is extracted directly from authentic, full bottles. No dupes, no fakes, no dilution."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "Orders are packed and shipped within 1–2 business days. Most domestic orders arrive in 3–5 days."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's the difference between basic and pressurized bottles?",
+            "answer": "Basic bottles use a traditional spray nozzle. Pressurized bottles use an atomizer for a finer, more controlled mist — closer to what you'd get from a department store tester."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I order multiple fragrances?",
+            "answer": "Absolutely. Most customers order 3–6 at a time to build out a rotation. Add as many as you want — they all ship together."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I don't like a fragrance?",
+            "answer": "That's the whole point. If you don't like it, you're out a few bucks — not $300. Move on and try the next one."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

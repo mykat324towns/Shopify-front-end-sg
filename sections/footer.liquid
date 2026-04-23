@@ -1,0 +1,131 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+
+      <!-- Brand column -->
+      <div class="footer__brand">
+        <span class="footer__brand-name">{{ section.settings.brand_name | default: shop.name }}</span>
+        <p class="footer__brand-desc">{{ section.settings.brand_desc }}</p>
+        <div class="footer__social">
+          {% if section.settings.tiktok_url != blank %}
+            <a class="footer__social-link" href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
+              </svg>
+            </a>
+          {% endif %}
+          {% if section.settings.instagram_url != blank %}
+            <a class="footer__social-link" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"/>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Shop column -->
+      <div>
+        <span class="footer__col-title">Shop</span>
+        <nav class="footer__nav" aria-label="Shop navigation">
+          {% for link in linklists[section.settings.menu_shop].links %}
+            <a class="footer__nav-link" href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+
+      <!-- Support column -->
+      <div>
+        <span class="footer__col-title">Support</span>
+        <nav class="footer__nav" aria-label="Support navigation">
+          {% for link in linklists[section.settings.menu_support].links %}
+            <a class="footer__nav-link" href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+
+      <!-- Newsletter column -->
+      <div>
+        <span class="footer__col-title">Stay in the rotation</span>
+        <p class="footer__newsletter-desc">{{ section.settings.newsletter_desc }}</p>
+        {% form 'customer', class: 'footer__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            class="footer__input"
+            type="email"
+            name="contact[email]"
+            placeholder="Your email"
+            required
+            aria-label="Email address"
+          >
+          <button class="footer__subscribe-btn" type="submit">Subscribe</button>
+        {% endform %}
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer__bottom">
+      <p class="footer__legal">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="footer__legal-links">
+        {% for link in linklists[section.settings.menu_legal].links %}
+          <a class="footer__legal-link" href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "info": "Overrides shop name in footer."
+    },
+    {
+      "type": "textarea",
+      "id": "brand_desc",
+      "label": "Brand description",
+      "default": "Luxury fragrance decants. Try before you commit."
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_shop",
+      "label": "Shop menu",
+      "default": "footer-shop"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_support",
+      "label": "Support menu",
+      "default": "footer-support"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_legal",
+      "label": "Legal links menu",
+      "default": "footer-legal"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_desc",
+      "label": "Newsletter description",
+      "default": "New drops, exclusive offers, and fragrance picks — straight to your inbox."
+    }
+  ]
+}
+{% endschema %}

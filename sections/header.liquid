@@ -1,0 +1,87 @@
+<header class="nav container">
+  <div class="nav__inner">
+
+    <!-- Left nav links -->
+    <nav class="nav__links-left" aria-label="Primary navigation">
+      {% for link in linklists[section.settings.menu_left].links %}
+        <a class="nav__link" href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <!-- Logo — centered -->
+    <a class="nav__logo" href="/">
+      {{ section.settings.logo_text | default: shop.name }}
+    </a>
+
+    <!-- Right nav: search + cart + hamburger -->
+    <div class="nav__links-right">
+      {% for link in linklists[section.settings.menu_right].links %}
+        <a class="nav__link" href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+
+      <button class="nav__search" aria-label="Search">
+        <svg class="nav__search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+      </button>
+
+      <button class="nav__cart" aria-label="Cart">
+        <svg class="nav__cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/>
+        </svg>
+      </button>
+
+      <button
+        class="nav__hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-drawer"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="nav__drawer" id="nav-drawer" aria-hidden="true">
+      <div class="nav__drawer-overlay"></div>
+      <div class="nav__drawer-panel">
+        <button class="nav__drawer-close" aria-label="Close menu">&#x2715;</button>
+        <nav aria-label="Mobile navigation">
+          {% assign all_links = linklists[section.settings.menu_left].links | concat: linklists[section.settings.menu_right].links %}
+          {% for link in all_links %}
+            <a class="nav__drawer-link" href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "info": "Overrides shop name. Leave blank to use shop name."
+    },
+    {
+      "type": "link_list",
+      "id": "menu_left",
+      "label": "Left navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_right",
+      "label": "Right navigation menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

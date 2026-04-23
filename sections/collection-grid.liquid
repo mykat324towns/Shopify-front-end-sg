@@ -1,0 +1,110 @@
+{%- paginate collection.products by 24 -%}
+
+<section class="collection" aria-label="{{ collection.title | escape }}">
+  <div class="container">
+
+    <header class="page-header">
+      <h1 class="page-header__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p class="page-header__meta">{{ collection.description }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- if collection.products_count > 0 -%}
+      {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+
+      <div class="listing-controls">
+        <input
+          id="listing-search"
+          class="listing-controls__search"
+          type="search"
+          placeholder="Filter by name…"
+          aria-label="Filter products"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <select
+          class="listing-controls__sort"
+          aria-label="Sort products"
+          onchange="
+            var u = new URL(window.location.href);
+            u.searchParams.set('sort_by', this.value);
+            u.searchParams.delete('page');
+            window.location = u.toString();
+          "
+        >
+          <option value="manual"{% if current_sort == 'manual' %} selected{% endif %}>Featured</option>
+          <option value="best-selling"{% if current_sort == 'best-selling' %} selected{% endif %}>Best Selling</option>
+          <option value="title-ascending"{% if current_sort == 'title-ascending' %} selected{% endif %}>A–Z</option>
+          <option value="title-descending"{% if current_sort == 'title-descending' %} selected{% endif %}>Z–A</option>
+          <option value="price-ascending"{% if current_sort == 'price-ascending' %} selected{% endif %}>Price: Low–High</option>
+          <option value="price-descending"{% if current_sort == 'price-descending' %} selected{% endif %}>Price: High–Low</option>
+          <option value="created-descending"{% if current_sort == 'created-descending' %} selected{% endif %}>Newest</option>
+        </select>
+        <span class="listing-controls__count" id="listing-count">
+          {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}
+        </span>
+      </div>
+
+      <div class="collection__grid" id="listing-grid">
+        {%- for product in collection.products -%}
+          {%- render 'product-card', product: product -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div class="collection__load-more">
+          {{- paginate | default_pagination -}}
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <div class="listing-empty">
+        <p class="listing-empty__title">Nothing here yet.</p>
+        <p class="listing-empty__sub">This collection hasn't been stocked yet — check back soon.</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var input   = document.getElementById('listing-search');
+  var grid    = document.getElementById('listing-grid');
+  var countEl = document.getElementById('listing-count');
+  if (!input || !grid) return;
+
+  var cards = Array.from(grid.querySelectorAll('.product-card'));
+  var names = cards.map(function (c) {
+    return ((c.querySelector('.product-card__name') || {}).textContent || '').toLowerCase();
+  });
+  var total = cards.length;
+
+  input.addEventListener('input', function () {
+    var q = input.value.trim().toLowerCase();
+    var visible = 0;
+    cards.forEach(function (card, i) {
+      var show = !q || names[i].indexOf(q) !== -1;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    if (countEl) {
+      countEl.textContent = (q ? visible + ' of ' + total : total) + ' fragrance' + (total === 1 ? '' : 's');
+    }
+  });
+}());
+</script>
+
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    { "name": "Collection Grid" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,69 @@
+<section class="cta-section" aria-label="{{ section.settings.title | escape }}">
+  <div class="container">
+    <p class="cta-section__overline">{{ section.settings.overline }}</p>
+    <h2 class="cta-section__title">{{ section.settings.title }}</h2>
+    <p class="cta-section__body">{{ section.settings.body }}</p>
+    <div class="cta-section__actions">
+      {%- if section.settings.cta_primary_text != blank -%}
+        <a href="{{ section.settings.cta_primary_url }}" class="btn-primary--white">{{ section.settings.cta_primary_text }}</a>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_text != blank -%}
+        <a href="{{ section.settings.cta_secondary_url }}" class="btn-ghost--white">{{ section.settings.cta_secondary_text }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CTA Section",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "Start your rotation"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Try before you ever commit."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "From $4 a scent. Hundreds of fragrances. No regrets."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Primary CTA text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Primary CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Secondary CTA text",
+      "default": "View All Sizes →"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Secondary CTA URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA Section"
+    }
+  ]
+}
+{% endschema %}

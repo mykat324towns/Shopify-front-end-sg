@@ -1,0 +1,19 @@
+<div class="container" style="padding-block: var(--space-16);">
+  <header class="page-header" style="margin-bottom: var(--space-8);">
+    <h1 class="page-header__title">{{ page.title }}</h1>
+  </header>
+  <div class="rte" style="font-family: var(--font-body); font-size: var(--text-body); color: var(--color-on-surface); line-height: 1.75; max-width: 720px;">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    { "name": "Page" }
+  ]
+}
+{% endschema %}

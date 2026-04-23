@@ -1,0 +1,92 @@
+<div class="container" style="padding-block: var(--space-12) var(--space-16);">
+
+  <header class="page-header" style="margin-bottom: var(--space-8);">
+    <h1 class="page-header__title">Your Cart</h1>
+    {%- if cart.item_count > 0 -%}
+      <p class="page-header__meta">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}</p>
+    {%- endif -%}
+  </header>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="listing-empty">
+      <p class="listing-empty__title">Your cart is empty.</p>
+      <p class="listing-empty__sub">Start building your rotation.</p>
+      <a
+        href="/collections/all"
+        style="display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--color-primary); border-radius: var(--radius-md); min-height: 48px; padding: 12px 28px; text-decoration: none; margin-top: var(--space-6);"
+      >Shop Now</a>
+    </div>
+  {%- else -%}
+
+    {% form 'cart', cart %}
+      <div style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 640px;">
+
+        {%- for item in cart.items -%}
+          <div style="display: flex; gap: var(--space-4); padding: var(--space-4); background: var(--color-surface); border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+            {%- if item.image -%}
+              <img
+                src="{{ item.image | image_url: width: 80 }}"
+                alt="{{ item.title | escape }}"
+                loading="lazy"
+                style="width: 64px; height: 80px; object-fit: contain; flex-shrink: 0; border-radius: var(--radius-sm);"
+              >
+            {%- endif -%}
+            <div style="flex: 1; min-width: 0;">
+              <p style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--color-on-surface); margin-bottom: 2px;">{{ item.product_title }}</p>
+              {%- if item.variant_title and item.variant_title != 'Default Title' -%}
+                <p style="font-family: var(--font-body); font-size: var(--text-caption); color: var(--color-on-surface-muted); margin-bottom: var(--space-2);">{{ item.variant_title }}</p>
+              {%- endif -%}
+              <p style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--color-primary);">{{ item.price | money }}</p>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; flex-shrink: 0;">
+              <p style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--color-on-surface);">{{ item.line_price | money }}</p>
+              <div style="display: flex; align-items: center; gap: var(--space-2);">
+                <label style="font-size: var(--text-caption); color: var(--color-on-surface-muted);" for="qty-{{ item.key }}">Qty</label>
+                <input
+                  id="qty-{{ item.key }}"
+                  type="number"
+                  name="updates[{{ item.key }}]"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  style="width: 48px; text-align: center; font-family: var(--font-body); font-size: var(--text-body-sm); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 4px; background: var(--color-bg); color: var(--color-on-surface);"
+                >
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: var(--space-4); border-top: 1px solid var(--color-border); max-width: 640px;">
+          <div>
+            <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-on-surface-muted);">Subtotal</p>
+            <p style="font-family: var(--font-body); font-size: var(--text-h4); font-weight: 600; color: var(--color-on-surface);">{{ cart.total_price | money }}</p>
+          </div>
+          <div style="display: flex; gap: var(--space-3);">
+            <button
+              type="submit"
+              name="update"
+              style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--color-on-surface); background: transparent; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); min-height: 48px; padding: 12px 20px; cursor: pointer;"
+            >Update</button>
+            <a
+              href="/checkout"
+              style="display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--color-primary); border-radius: var(--radius-md); min-height: 48px; padding: 12px 28px; text-decoration: none;"
+            >Checkout</a>
+          </div>
+        </div>
+
+      </div>
+    {% endform %}
+
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    { "name": "Cart" }
+  ]
+}
+{% endschema %}

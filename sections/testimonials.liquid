@@ -1,0 +1,151 @@
+{%- assign star_svg -%}<svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{%- endassign -%}
+
+<section class="testimonials" aria-label="Customer reviews">
+  <div class="container">
+    <div class="testimonials__with-photo">
+      <div class="testimonials__cards-wrap">
+        <header class="testimonials__header reveal">
+          <span class="testimonials__overline">{{ section.settings.overline }}</span>
+          <h2 class="testimonials__title">{{ section.settings.title }}</h2>
+        </header>
+
+        <div class="testimonials__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <article class="testimonial-card reveal" {% if forloop.index > 1 %}style="transition-delay:{{ forloop.index0 | times: 80 }}ms"{% endif %} {{ block.shopify_attributes }}>
+                <span class="testimonial-card__quote-mark" aria-hidden="true">"</span>
+                <div class="testimonial-card__stars" aria-label="{{ block.settings.stars }} out of 5 stars">
+                  {%- for i in (1..5) -%}
+                    {%- if i <= block.settings.stars -%}
+                      {{ star_svg }}
+                    {%- else -%}
+                      <svg class="star star--empty" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+                <blockquote class="testimonial-card__quote">{{ block.settings.quote }}</blockquote>
+                <footer class="testimonial-card__attribution">
+                  <div class="testimonial-card__avatar">{{ block.settings.initials }}</div>
+                  <div class="testimonial-card__name">{{ block.settings.name }}</div>
+                </footer>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if section.settings.photo != blank -%}
+        <div class="testimonials__photo-placeholder" id="box-panel">
+          <img
+            class="testimonials__order-photo"
+            src="{{ section.settings.photo | image_url: width: 800 }}"
+            alt="{{ section.settings.photo.alt | default: 'Scent Gallery order' | escape }}"
+            loading="lazy"
+          >
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What collectors are saying"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Side photo (order/packaging)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name"
+        },
+        {
+          "type": "text",
+          "id": "initials",
+          "label": "Initials (2 letters)",
+          "info": "Shown in avatar circle"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Fastest shipping I've ever gotten. Packaging was amazing.",
+            "name": "Jacob L.",
+            "initials": "JL",
+            "stars": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Prices are better than anywhere I've seen. Quality is legit.",
+            "name": "Customer",
+            "initials": "CU",
+            "stars": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Clean packaging, no leaks, and high-quality bottles.",
+            "name": "Logan M.",
+            "initials": "LM",
+            "stars": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Ordered 6 scents for $50. Found my new signature. Worth every penny.",
+            "name": "Marcus T.",
+            "initials": "MT",
+            "stars": 5
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

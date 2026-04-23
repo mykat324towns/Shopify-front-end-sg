@@ -1,0 +1,302 @@
+<section class="comparison" aria-label="One bottle vs Scent Gallery">
+  <div class="container">
+    <div class="comparison__with-image">
+
+      <div class="comparison__card-wrap">
+        <h2 class="comparison__headline">{{ section.settings.headline }}</h2>
+
+        <div class="comparison__columns">
+          <div class="comparison__col comparison__col--old">
+            <span class="comparison__col-label">{{ section.settings.old_label }}</span>
+            <ul class="comparison__list">
+              {%- for i in (1..4) -%}
+                {%- assign item_key = 'old_item_' | append: i -%}
+                {%- assign item_val = section.settings[item_key] -%}
+                {%- if item_val != blank -%}
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    {{ item_val }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+
+          <div class="comparison__col comparison__col--new">
+            <span class="comparison__col-label">{{ section.settings.new_label }}</span>
+            <ul class="comparison__list">
+              {%- for i in (1..4) -%}
+                {%- assign item_key = 'new_item_' | append: i -%}
+                {%- assign item_val = section.settings[item_key] -%}
+                {%- if item_val != blank -%}
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    {{ item_val }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+
+        <p class="comparison__tagline">{{ section.settings.tagline }}</p>
+        <a href="{{ section.settings.cta_url }}" class="btn-primary comparison__cta">{{ section.settings.cta_text }}</a>
+      </div>
+
+      <div class="comparison__receipt">
+        <div class="receipt__header">
+          <span class="receipt__eyebrow">{{ section.settings.receipt_eyebrow }}</span>
+          <h3 class="receipt__subtitle"><em>{{ section.settings.receipt_subtitle }}</em></h3>
+        </div>
+        <ul class="receipt__lines" role="list">
+          {%- for i in (1..6) -%}
+            {%- assign name_key = 'receipt_name_' | append: i -%}
+            {%- assign size_key = 'receipt_size_' | append: i -%}
+            {%- assign price_key = 'receipt_price_' | append: i -%}
+            {%- assign name_val = section.settings[name_key] -%}
+            {%- assign price_val = section.settings[price_key] -%}
+            {%- if name_val != blank -%}
+              <li class="receipt__line" data-price="{{ price_val }}">
+                <span class="receipt__name">
+                  {{ name_val }}
+                  {%- assign size_val = section.settings[size_key] -%}
+                  {%- if size_val != blank -%}
+                    <span class="receipt__size">{{ size_val }}</span>
+                  {%- endif -%}
+                </span>
+                <span class="receipt__price">${{ price_val }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        <div class="receipt__sep"></div>
+        <div class="receipt__total">
+          <span class="receipt__total-label">6 fragrances, tried</span>
+          <span class="receipt__total-value" id="receipt-running-total">$0</span>
+        </div>
+        <div class="receipt__vs-row">
+          <span class="receipt__vs-label">vs. one full bottle</span>
+          <span class="receipt__vs-price">$300+</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "$300 locks you into one.<br>Or it builds your rotation."
+    },
+    {
+      "type": "text",
+      "id": "old_label",
+      "label": "Old column label",
+      "default": "One full bottle"
+    },
+    {
+      "type": "text",
+      "id": "old_item_1",
+      "label": "Old item 1",
+      "default": "$300 up front"
+    },
+    {
+      "type": "text",
+      "id": "old_item_2",
+      "label": "Old item 2",
+      "default": "Locked into one fragrance"
+    },
+    {
+      "type": "text",
+      "id": "old_item_3",
+      "label": "Old item 3",
+      "default": "No way to try first"
+    },
+    {
+      "type": "text",
+      "id": "old_item_4",
+      "label": "Old item 4",
+      "default": "Stuck with buyer's remorse"
+    },
+    {
+      "type": "text",
+      "id": "new_label",
+      "label": "New column label",
+      "default": "Scent Gallery"
+    },
+    {
+      "type": "text",
+      "id": "new_item_1",
+      "label": "New item 1",
+      "default": "From $4 per scent"
+    },
+    {
+      "type": "text",
+      "id": "new_item_2",
+      "label": "New item 2",
+      "default": "10+ fragrances for the same price"
+    },
+    {
+      "type": "text",
+      "id": "new_item_3",
+      "label": "New item 3",
+      "default": "Try before you ever commit"
+    },
+    {
+      "type": "text",
+      "id": "new_item_4",
+      "label": "New item 4",
+      "default": "Rotate. Explore. Own your collection."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "→ The math is obvious. The collection is waiting."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Build Your Rotation — From $4"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "receipt_eyebrow",
+      "label": "Receipt eyebrow",
+      "default": "The math"
+    },
+    {
+      "type": "text",
+      "id": "receipt_subtitle",
+      "label": "Receipt subtitle",
+      "default": "6 fragrances vs. 1"
+    },
+    {
+      "type": "text",
+      "id": "receipt_name_1",
+      "label": "Receipt item 1 name",
+      "default": "Sauvage EDP"
+    },
+    {
+      "type": "text",
+      "id": "receipt_size_1",
+      "label": "Receipt item 1 size",
+      "default": "2ml"
+    },
+    {
+      "type": "number",
+      "id": "receipt_price_1",
+      "label": "Receipt item 1 price",
+      "default": 7
+    },
+    {
+      "type": "text",
+      "id": "receipt_name_2",
+      "label": "Receipt item 2 name",
+      "default": "Baccarat Rouge 540"
+    },
+    {
+      "type": "text",
+      "id": "receipt_size_2",
+      "label": "Receipt item 2 size",
+      "default": "2ml"
+    },
+    {
+      "type": "number",
+      "id": "receipt_price_2",
+      "label": "Receipt item 2 price",
+      "default": 11
+    },
+    {
+      "type": "text",
+      "id": "receipt_name_3",
+      "label": "Receipt item 3 name",
+      "default": "Oud Wood"
+    },
+    {
+      "type": "text",
+      "id": "receipt_size_3",
+      "label": "Receipt item 3 size",
+      "default": "2ml"
+    },
+    {
+      "type": "number",
+      "id": "receipt_price_3",
+      "label": "Receipt item 3 price",
+      "default": 13
+    },
+    {
+      "type": "text",
+      "id": "receipt_name_4",
+      "label": "Receipt item 4 name",
+      "default": "Tobacco Vanille"
+    },
+    {
+      "type": "text",
+      "id": "receipt_size_4",
+      "label": "Receipt item 4 size",
+      "default": "2ml"
+    },
+    {
+      "type": "number",
+      "id": "receipt_price_4",
+      "label": "Receipt item 4 price",
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "receipt_name_5",
+      "label": "Receipt item 5 name",
+      "default": "La Vie Est Belle"
+    },
+    {
+      "type": "text",
+      "id": "receipt_size_5",
+      "label": "Receipt item 5 size",
+      "default": "2ml"
+    },
+    {
+      "type": "number",
+      "id": "receipt_price_5",
+      "label": "Receipt item 5 price",
+      "default": 9
+    },
+    {
+      "type": "text",
+      "id": "receipt_name_6",
+      "label": "Receipt item 6 name",
+      "default": "Good Girl"
+    },
+    {
+      "type": "text",
+      "id": "receipt_size_6",
+      "label": "Receipt item 6 size",
+      "default": "2ml"
+    },
+    {
+      "type": "number",
+      "id": "receipt_price_6",
+      "label": "Receipt item 6 price",
+      "default": 9
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison"
+    }
+  ]
+}
+{% endschema %}

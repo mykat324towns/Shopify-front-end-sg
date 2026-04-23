@@ -1,0 +1,64 @@
+<section class="collection" aria-label="Search">
+  <div class="container">
+
+    <header class="page-header">
+      <h1 class="page-header__title">Search</h1>
+      {%- if search.performed and search.results_count > 0 -%}
+        <p class="page-header__meta">
+          {{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms | escape }}&rdquo;
+        </p>
+      {%- endif -%}
+    </header>
+
+    <div class="listing-controls listing-controls--search">
+      <form action="/search" method="get" role="search" style="flex:1">
+        <input type="hidden" name="type" value="product">
+        <input
+          id="listing-search"
+          class="listing-controls__search"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search fragrances…"
+          aria-label="Search fragrances"
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <div class="collection__grid">
+          {%- for result in search.results -%}
+            {%- if result.object_type == 'product' -%}
+              {%- render 'product-card', product: result -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="listing-empty">
+          <p class="listing-empty__title">No results for &ldquo;{{ search.terms | escape }}&rdquo;</p>
+          <p class="listing-empty__sub">Try a different name, house, or scent profile.</p>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="listing-empty">
+        <p class="listing-empty__title">What are you looking for?</p>
+        <p class="listing-empty__sub">Search by fragrance name or house.</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    { "name": "Search" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,103 @@
+{%- assign collection_handle = section.settings.collection -%}
+{%- assign featured_collection = collections[collection_handle] -%}
+{%- assign section_class = section.settings.section_class | default: 'collection' -%}
+
+<section class="{{ section_class }}" aria-label="{{ section.settings.title | escape }}" id="{{ section_class }}">
+  <div class="container">
+    <header class="{{ section_class }}__header collection__header">
+      <h2 class="collection__title">{{ section.settings.title }}</h2>
+      <a href="{{ section.settings.view_all_url }}" class="collection__view-all">{{ section.settings.view_all_text }}</a>
+    </header>
+    <p class="{{ section_class }}__sub collection__sub">{{ section.settings.subtitle }}</p>
+
+    {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+
+      <!-- Mobile Swiper -->
+      <div class="carousel-track {{ section_class }}__swiper">
+        <div class="swiper" id="{{ section.id }}-swiper">
+          <div class="swiper-wrapper">
+            {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+              <div class="swiper-slide">
+                {%- render 'product-card', product: product -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        <div class="carousel-scroll-bar" id="{{ section.id }}-scrollbar">
+          <div class="carousel-scroll-bar__thumb" id="{{ section.id }}-thumb"></div>
+        </div>
+      </div>
+
+      <!-- Desktop grid -->
+      <div class="{{ section_class }}__scroll collection__grid" id="{{ section.id }}-grid">
+        {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+          {%- render 'product-card', product: product -%}
+        {%- endfor -%}
+      </div>
+
+    {%- else -%}
+      <p style="color: var(--color-on-surface-muted); font-family: var(--font-body); padding: var(--space-8) 0;">
+        No products found. Add products to the <strong>{{ collection_handle }}</strong> collection in Shopify admin.
+      </p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The most-explored fragrances in the rotation."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all link text",
+      "default": "View All →"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View all URL"
+    },
+    {
+      "type": "text",
+      "id": "section_class",
+      "label": "CSS section class",
+      "info": "Use 'collection' for Best Sellers, 'latest-pickups' for Latest Picks. Controls CSS scoping.",
+      "default": "collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

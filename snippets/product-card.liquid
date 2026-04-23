@@ -1,0 +1,91 @@
+{%- comment -%}
+  Renders a product card with size pills and add-to-cart.
+  Expects: product (Shopify product object), badge (optional string)
+{%- endcomment -%}
+
+{%- assign first_variant = product.variants.first -%}
+
+<article class="product-card" data-product-id="{{ product.id }}">
+  <a class="product-card__image-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    <div class="product-card__image-wrap">
+      {%- if product.featured_image -%}
+        <img
+          class="product-card__image"
+          src="{{ product.featured_image | image_url: width: 360 }}"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          loading="lazy"
+          width="180"
+          height="240"
+        >
+      {%- endif -%}
+      {%- if badge != blank -%}
+        <span class="product-card__badge">{{ badge }}</span>
+      {%- elsif product.tags contains 'badge:Trending' -%}
+        <span class="product-card__badge">Trending</span>
+      {%- elsif product.tags contains 'badge:Best Seller' -%}
+        <span class="product-card__badge">Best Seller</span>
+      {%- elsif product.tags contains 'badge:New' -%}
+        <span class="product-card__badge">New</span>
+      {%- elsif product.tags contains 'badge:Popular' -%}
+        <span class="product-card__badge">Popular</span>
+      {%- elsif product.tags contains 'badge:Fan Fave' -%}
+        <span class="product-card__badge">Fan Fave</span>
+      {%- endif -%}
+    </div>
+  </a>
+
+  <div class="product-card__info">
+    <p class="product-card__brand">{{ product.vendor }}</p>
+    <h3 class="product-card__name">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    {%- assign rating = product.metafields.reviews.rating.value -%}
+    {%- assign rating_count = product.metafields.reviews.rating_count.value -%}
+    {%- if rating != blank -%}
+      <div class="product-card__stars" aria-label="{{ rating }} stars, {{ rating_count }} reviews">
+        {%- for i in (1..5) -%}
+          {%- if i <= rating -%}
+            <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          {%- else -%}
+            <svg class="star star--empty" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if rating_count != blank -%}
+          <span class="product-card__review-count">({{ rating_count }})</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <form method="post" action="/cart/add" class="product-card__form">
+      <input type="hidden" name="id" value="{{ first_variant.id }}" class="product-card__variant-id">
+      <input type="hidden" name="quantity" value="1">
+
+      <div class="product-card__sizes" role="group" aria-label="Select size">
+        {%- for variant in product.variants -%}
+          <button
+            type="button"
+            class="size-pill{% if forloop.index == 2 %} size-pill--active{% endif %}"
+            data-variant-id="{{ variant.id }}"
+            data-price="{{ variant.price }}"
+            data-size="{{ variant.option1 | downcase }}"
+            data-sprays="{{ variant.metafields.custom.sprays }}"
+            data-label="{{ variant.metafields.custom.size_label }}"
+            aria-pressed="{% if forloop.index == 2 %}true{% else %}false{% endif %}"
+          >{{ variant.option1 }}</button>
+        {%- endfor -%}
+      </div>
+
+      <p class="pill-info">
+        <span class="pill-sprays"></span>
+        <span class="pill-label-text"></span>
+      </p>
+
+      <p class="product-card__price">
+        {{- first_variant.price | money -}}
+      </p>
+
+      <button type="submit" class="product-card__cta">Add to Rotation</button>
+    </form>
+  </div>
+</article>

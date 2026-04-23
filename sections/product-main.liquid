@@ -1,0 +1,280 @@
+<div class="container" id="product-content">
+
+  <nav class="product-breadcrumb" aria-label="Breadcrumb">
+    <a class="product-breadcrumb__link" href="{{ product.collections.first.url | default: '/collections/all' }}">
+      ← {{ product.collections.first.title | default: 'Shop' }}
+    </a>
+  </nav>
+
+  <div class="product-layout">
+
+    <!-- ── Gallery ── -->
+    <div class="product-gallery">
+      <div class="product-gallery__viewer">
+        <div class="product-gallery__main">
+          {%- if product.featured_image -%}
+            <img
+              id="product-gallery-main-img"
+              src="{{ product.featured_image | image_url: width: 600 }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              loading="eager"
+              fetchpriority="high"
+            >
+          {%- else -%}
+            <div class="product-gallery__empty">No image uploaded</div>
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__variant" id="product-gallery-variant">
+            <img
+              id="product-gallery-variant-img"
+              src="{{ product.images[1] | image_url: width: 300 }}"
+              alt="{{ product.images[1].alt | default: product.title | escape }}"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- ── Details ── -->
+    <div class="product-details">
+
+      <h1 class="product-name">{{ product.title }}</h1>
+
+      <p class="product-price" id="product-price" aria-live="polite">
+        {{- product.variants.first.price | money -}}
+      </p>
+
+      <!-- Scent notes -->
+      {%- assign scent_notes  = product.metafields.custom.scent_notes.value -%}
+      {%- assign scent_body   = product.metafields.custom.description_body.value -%}
+      {%- assign scent_bestfor = product.metafields.custom.best_for.value -%}
+      {%- assign has_scent_content = false -%}
+      {%- if scent_notes != blank or scent_body != blank or product.description != blank -%}
+        {%- assign has_scent_content = true -%}
+      {%- endif -%}
+
+      {%- if has_scent_content -%}
+        <div class="scent-toggle" id="scent-toggle">
+          <button
+            class="scent-toggle__trigger"
+            aria-expanded="false"
+            aria-controls="scent-toggle-body"
+          >
+            Scent Notes
+            <span class="scent-toggle__chevron" aria-hidden="true"></span>
+          </button>
+          <div class="scent-toggle__body" id="scent-toggle-body">
+            {%- if scent_notes != blank -%}
+              <div class="scent-toggle__section scent-toggle__section--notes">
+                {%- assign notes_array = scent_notes | split: ',' -%}
+                {%- for note in notes_array -%}
+                  <span class="scent-note">{{ note | strip }}</span>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+            {%- if scent_body != blank -%}
+              <div class="scent-toggle__section scent-toggle__section--body">
+                <p class="scent-toggle__desc">{{ scent_body }}</p>
+              </div>
+            {%- elsif product.description != blank -%}
+              <div class="scent-toggle__section scent-toggle__section--body">
+                <p class="scent-toggle__desc">{{ product.description | strip_html }}</p>
+              </div>
+            {%- endif -%}
+            {%- if scent_bestfor != blank -%}
+              <div class="scent-toggle__section scent-toggle__section--bestfor">
+                <p class="scent-toggle__bestfor-text">
+                  <span class="scent-toggle__bestfor-label">Best for:</span>{{ scent_bestfor }}
+                </p>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Size selector — base variants only (no "+" pressurized) -->
+      <div id="size-selector-mount">
+        <div class="size-selector">
+          <p class="size-selector__label">Select Size</p>
+          <div class="size-selector-grid" role="group" aria-label="Select a size">
+            {%- for variant in product.variants -%}
+              {%- unless variant.option1 contains '+' -%}
+                <button
+                  class="size-card"
+                  type="button"
+                  data-variant-id="{{ variant.id }}"
+                  data-size="{{ variant.option1 | downcase }}"
+                  data-price="{{ variant.price }}"
+                  data-available="{{ variant.available }}"
+                  aria-pressed="false"
+                >
+                  {%- if variant.featured_image -%}
+                    <img
+                      class="size-card__img"
+                      src="{{ variant.featured_image | image_url: width: 80 }}"
+                      alt="{{ variant.option1 }}"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div class="size-card__img-placeholder"></div>
+                  {%- endif -%}
+                  <span class="size-card__label">{{ variant.option1 }}</span>
+                  {%- assign spray_val = variant.metafields.custom.sprays.value -%}
+                  {%- if spray_val != blank -%}
+                    <span class="size-card__sub">~{{ spray_val }} sprays</span>
+                  {%- endif -%}
+                  <span class="size-card__price">{{ variant.price | money }}</span>
+                  {%- assign badge_val = variant.metafields.custom.size_label.value -%}
+                  {%- if badge_val != blank -%}
+                    <span class="size-card__badge">{{ badge_val }}</span>
+                  {%- endif -%}
+                </button>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Pressurized toggle — revealed by JS when applicable -->
+      <div class="pressurized-toggle" id="pressurized-toggle" aria-hidden="true">
+        <div class="pressurized-toggle__inner">
+          <div class="pressurized-toggle__info">
+            <span class="pressurized-toggle__name">Pressurized Bottle</span>
+            <span class="pressurized-toggle__sub">Finer mist &middot; ~<span id="pressurized-sprays"></span> sprays</span>
+          </div>
+          <div class="pressurized-toggle__right">
+            <span class="pressurized-toggle__price" id="pressurized-price"></span>
+            <button
+              class="pressurized-toggle__btn"
+              id="pressurized-btn"
+              type="button"
+              aria-pressed="false"
+              aria-label="Upgrade to pressurized bottle"
+            >
+              <span class="pressurized-toggle__track">
+                <span class="pressurized-toggle__thumb-pill"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add to cart -->
+      <div class="product-actions">
+        <form id="product-form" method="post" action="/cart/add">
+          <input type="hidden" name="id" id="selected-variant-id" value="{{ product.variants.first.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button
+            class="btn-add-to-cart"
+            type="submit"
+            id="btn-add-to-cart"
+            disabled
+          >Select a Size</button>
+        </form>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="product-trust" aria-label="Purchase guarantees">
+        <div class="product-trust__item">
+          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="product-trust__label">100% Authentic</span>
+          <span class="product-trust__sub">From real bottles</span>
+        </div>
+        <div class="product-trust__item">
+          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span class="product-trust__label">Ships 1–2 Days</span>
+          <span class="product-trust__sub">Secure packaging</span>
+        </div>
+        <div class="product-trust__item">
+          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span class="product-trust__label">Hand Packed</span>
+          <span class="product-trust__sub">Every order checked</span>
+        </div>
+      </div>
+
+    </div><!-- .product-details -->
+  </div><!-- .product-layout -->
+
+  <!-- Social Proof Swiper — only renders if blocks are added in theme editor -->
+  {%- if section.blocks.size > 0 -%}
+    <div class="social-proof">
+      <div class="social-proof__header">
+        <svg class="social-proof__tiktok-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
+        </svg>
+        <div>
+          <h2 class="social-proof__title">{{ section.settings.social_title | default: 'As seen on TikTok' }}</h2>
+          <p class="social-proof__sub">{{ section.settings.social_sub | default: 'Real reactions from real collectors.' }}</p>
+        </div>
+      </div>
+      <div class="swiper social-proof-swiper" id="social-proof-swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'social_image' and block.settings.image != blank -%}
+              <div class="swiper-slide social-proof__slide" {{ block.shopify_attributes }}>
+                <img
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  alt="{{ block.settings.caption | default: 'Customer review' | escape }}"
+                  loading="lazy"
+                >
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="swiper-pagination social-proof__pagination"></div>
+      </div>
+    </div>
+  {%- endif -%}
+
+</div>
+
+<!-- Variant data for product-page.js -->
+<script>
+window.SG_VARIANTS = {{ product.variants | json }};
+</script>
+
+<script src="{{ 'product-page.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "social_title",
+      "label": "Social proof heading",
+      "default": "As seen on TikTok"
+    },
+    {
+      "type": "text",
+      "id": "social_sub",
+      "label": "Social proof subtext",
+      "default": "Real reactions from real collectors."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_image",
+      "name": "Social Proof Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (TikTok screenshot, review, etc.)"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Alt text / caption"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Product Main" }
+  ]
+}
+{% endschema %}
