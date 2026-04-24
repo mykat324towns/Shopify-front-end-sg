@@ -433,6 +433,27 @@
     obs.observe(section);
   }());
 
+  // ── What's in the Box toggle ──────────────────────────────────────
+  (function () {
+    const toggle  = document.getElementById('witb-toggle');
+    const diagram = document.getElementById('witb-diagram');
+    const panel   = document.getElementById('box-panel');
+    const textEl  = toggle && toggle.querySelector('.witb__toggle-text');
+    if (!toggle || !diagram || !panel) return;
+    let isOpen = false;
+    toggle.addEventListener('click', () => {
+      isOpen = !isOpen;
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      diagram.classList.toggle('is-open', isOpen);
+      if (textEl) textEl.textContent = isOpen ? 'Close' : "What's in the box?";
+      panel.classList.toggle('is-expanded', isOpen);
+      if (isOpen) {
+        panel.classList.add('is-releasing');
+        panel.addEventListener('animationend', () => panel.classList.remove('is-releasing'), { once: true });
+      }
+    });
+  }());
+
 }());
 
 // ── Cart Drawer (Shopify Cart API) ───────────────────────────────────────────

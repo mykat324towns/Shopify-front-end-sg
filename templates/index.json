@@ -116,10 +116,69 @@
     "faq": {
       "type": "faq",
       "settings": {
-        "overline": "Common Questions",
-        "title": "Everything you need to know.",
-        "subtitle": "Quick answers before you start your rotation."
-      }
+        "overline": "Everything you need to know",
+        "title": "Quick Answers",
+        "subtitle": "Luxury fragrance samples, packaged carefully and explained simply."
+      },
+      "blocks": {
+        "faq-1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many sprays does each vial contain?",
+            "answer": "1ML — 18+ sprays · 2ML — 35+ sprays · 5ML — 85+ sprays · 10ML — 170+ sprays · 30ML — 500+ sprays. Note: 1ML orders arrive in a 2ML vial filled halfway."
+          }
+        },
+        "faq-2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are your fragrances authentic?",
+            "answer": "Yes — every fragrance is 100% authentic, sourced from trusted authorized retailers or directly from the brand. We never sell clones, fakes, or dupes."
+          }
+        },
+        "faq-3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "Most orders are processed within 24 hours and delivered within 2–6 business days depending on your location. You'll receive a tracking number as soon as your order ships."
+          }
+        },
+        "faq-4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I track my order?",
+            "answer": "Tracking numbers are sent by email after shipment. Enter your tracking number on USPS.com to follow your order in real time."
+          }
+        },
+        "faq-5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer international shipping?",
+            "answer": "At this time, we ship within the United States only. We're actively working to expand internationally."
+          }
+        },
+        "faq-6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How are the decants packaged?",
+            "answer": "Each decant is carefully hand-filled and sealed in a premium glass atomizer with a secure cap, then labeled with the fragrance name. Orders ship in padded protective packaging."
+          }
+        },
+        "faq-7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do decants come in the original bottle? What is a decant?",
+            "answer": "Decants are hand-poured from the original bottle into new glass atomizers — you're receiving the exact same fragrance, simply in a smaller and more affordable size. The original retail bottle is not included."
+          }
+        },
+        "faq-8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I contact support?",
+            "answer": "Reach us on TikTok @scentgallery_ or by email. We typically respond within 24 hours."
+          }
+        }
+      },
+      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7", "faq-8"]
     }
   },
   "order": [

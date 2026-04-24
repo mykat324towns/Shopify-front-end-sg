@@ -19,7 +19,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-primary-light);
   margin-bottom: var(--space-3);
 }
 

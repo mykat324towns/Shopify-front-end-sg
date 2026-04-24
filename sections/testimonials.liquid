@@ -41,15 +41,106 @@
             src="{{ section.settings.photo | image_url: width: 800 }}"
             alt="{{ section.settings.photo.alt | default: 'Scent Gallery order' | escape }}"
             loading="lazy"
+            width="673"
+            height="636"
           >
         {%- else -%}
           <img
             class="testimonials__order-photo"
             src="{{ 'order-box.png' | asset_url }}"
-            alt="Scent Gallery order"
+            alt="Scent Gallery luxury order — sealed shipping box ready for dispatch"
             loading="lazy"
+            width="673"
+            height="636"
           >
         {%- endif -%}
+
+        <button
+          class="witb__toggle"
+          id="witb-toggle"
+          aria-expanded="false"
+          aria-controls="witb-diagram"
+          type="button"
+        >
+          <span class="witb__toggle-text">What's in the box?</span>
+          <svg class="witb__toggle-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <polyline points="4,6 8,10 12,6" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </button>
+
+        <div class="witb__diagram-outer" id="witb-diagram" role="region" aria-label="Box contents">
+          <div class="witb__diagram-inner">
+
+            <div class="witb__section">
+              <span class="witb__section-label">Packaging</span>
+              <div class="witb__grid witb__grid--packaging">
+                <div class="witb__item" style="--item-delay:0ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bubble-mailer.png' | asset_url }}" alt="Bubble Mailer" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">Bubble Mailer</span>
+                </div>
+                <div class="witb__item" style="--item-delay:60ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'stretch-wrap.png' | asset_url }}" alt="Stretch Wrap" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">Stretch Wrap</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="witb__section">
+              <span class="witb__section-label">Bottles</span>
+              <div class="witb__grid witb__grid--bottles">
+                <div class="witb__item" style="--item-delay:120ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bottle-1ml.avif' | asset_url }}" alt="1 ml bottle" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">1 ml</span>
+                </div>
+                <div class="witb__item" style="--item-delay:175ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bottle-2ml.avif' | asset_url }}" alt="2 ml bottle" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">2 ml</span>
+                </div>
+                <div class="witb__item" style="--item-delay:230ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bottle-5ml.avif' | asset_url }}" alt="5 ml bottle" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">5 ml</span>
+                </div>
+                <div class="witb__item" style="--item-delay:285ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bottle-10ml.avif' | asset_url }}" alt="10 ml bottle" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">10 ml</span>
+                </div>
+                <div class="witb__item" style="--item-delay:340ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bottle-30ml.avif' | asset_url }}" alt="30 ml bottle" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">30 ml</span>
+                </div>
+                <div class="witb__item" style="--item-delay:395ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bottle-10ml-pressurized.avif' | asset_url }}" alt="10 ml pressurized" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">10 ml Pressurized</span>
+                </div>
+                <div class="witb__item" style="--item-delay:450ms">
+                  <div class="witb__item-img-wrap">
+                    <img src="{{ 'bottle-30ml-pressurized.avif' | asset_url }}" alt="30 ml pressurized" loading="lazy" class="witb__item-img">
+                  </div>
+                  <span class="witb__item-label">30 ml Pressurized</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
