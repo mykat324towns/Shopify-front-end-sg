@@ -50,13 +50,17 @@
           fetchpriority="high"
         >
       {%- else -%}
-        <img
+        <video
           class="hero__video"
-          src="{{ 'hero-panel-bg.jpg' | asset_url }}"
-          alt="Scent Gallery fragrance decants"
-          loading="eager"
+          src="{{ 'hero-video.mp4' | asset_url }}"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
           fetchpriority="high"
-        >
+          aria-label="Scent Gallery order packing video"
+        ></video>
       {%- endif -%}
     </div>
   </div>
