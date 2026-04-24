@@ -316,6 +316,7 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
+  .hero { min-height: unset; }
   .hero__inner {
     grid-template-columns: 1fr;
     gap: var(--space-6);

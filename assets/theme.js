@@ -452,6 +452,9 @@
       if (isOpen) {
         panel.classList.add('is-releasing');
         panel.addEventListener('animationend', () => panel.classList.remove('is-releasing'), { once: true });
+        setTimeout(() => {
+          diagram.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 520);
       }
     });
   }());

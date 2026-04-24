@@ -169,9 +169,9 @@
   .collection__swiper .swiper-slide,
   .latest-pickups__swiper .swiper-slide {
     width: auto;
-    flex: 0 0 calc(50vw - 20px);
+    flex: 0 0 calc(44vw - 16px);
   }
-  .swiper-slide:last-child { margin-right: calc(50vw - 40px); }
+  .swiper-slide:last-child { margin-right: calc(44vw - 32px); }
   .swiper-pagination { display: none; }
 }
 @media (min-width: 769px) {
@@ -379,6 +379,13 @@
 @media (max-width: 640px) {
   .witb__grid--bottles { grid-template-columns: repeat(2, 1fr); }
   .witb__toggle { font-size: var(--text-caption); padding: 12px var(--space-4); }
+  .witb__item-img-wrap { height: 44px; }
+  .witb__grid--packaging .witb__item-img-wrap { height: 42px; }
+  .witb__item { padding: 6px var(--space-1); gap: 3px; }
+  .witb__diagram-inner { padding-top: var(--space-3); gap: var(--space-3); }
+  .witb__grid { gap: var(--space-1); }
+  .witb__section { gap: var(--space-1); }
+  .witb__item-label { font-size: 10px; }
 }
 
 /* ── Below-fold performance ── */
@@ -388,6 +395,11 @@
 
 /* ── Mobile spacing overrides ── */
 @media (max-width: 640px) {
+  /* Product card carousel: slightly smaller on mobile */
+  .carousel-track .product-card__image-wrap { aspect-ratio: 4/5; }
+  .carousel-track .product-card__info { padding: var(--space-3); gap: var(--space-1); }
+  .carousel-track .product-card__cta { min-height: 40px; padding: 10px 14px; font-size: var(--text-caption); }
+
   .comparison      { padding-block: var(--space-4) var(--space-6); }
   .comparison__headline { margin-bottom: var(--space-4); }
   .latest-pickups  { padding-block: var(--space-3) var(--space-4); }

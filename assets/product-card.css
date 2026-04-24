@@ -270,3 +270,9 @@
   .product-card:hover { transform: none; box-shadow: none; }
   .size-pill.just-selected { animation: none; }
 }
+
+/* Suppress hover lift on touch devices — prevents stuck elevated state on tap */
+@media (hover: none) {
+  .product-card:hover { transform: none; box-shadow: none; border-color: var(--color-border); }
+  .product-card:hover .product-card__image { transform: none; }
+}

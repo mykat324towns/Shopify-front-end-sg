@@ -201,13 +201,43 @@
   .testimonials__photo-placeholder {
     position: static;
   }
+  /* Put box photo + WITB above reviews on mobile (conversion-funnel order) */
+  .testimonials__cards-wrap { order: 2; }
+  .testimonials__photo-placeholder { order: 1; }
+  .testimonials__order-photo { max-height: 260px; object-fit: cover; object-position: center top; }
 }
 
 @media (max-width: 640px) {
   .testimonials { padding-block: var(--space-6); }
+  .testimonials__header { margin-bottom: var(--space-4); }
+
   .testimonials__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: var(--space-3);
+    /* bleed to screen edge, first card aligns with page content */
+    margin-inline: calc(-1 * var(--padding-x-mobile));
+    padding-inline: var(--padding-x-mobile);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .testimonial-card { min-width: 0; }
+  .testimonials__grid::-webkit-scrollbar { display: none; }
+
+  .testimonial-card {
+    flex: 0 0 78vw;
+    max-width: 300px;
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+}
+
+/* Suppress hover lift on touch devices */
+@media (hover: none) {
+  .testimonial-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--color-border);
+  }
 }
