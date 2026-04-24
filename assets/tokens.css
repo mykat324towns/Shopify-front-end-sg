@@ -30,6 +30,10 @@
   --color-clay:            #9B6B52;
   --color-clay-light:      rgba(155, 107, 82, 0.06);
 
+  /* ── Aliases (match golden reference variable names) ── */
+  --color-text:       #141414;
+  --color-text-muted: #6B6B6B;
+
   /* ── Typography ── */
   --font-display: 'Bodoni Moda', Georgia, serif;
   --font-body:    'Figtree', system-ui, sans-serif;

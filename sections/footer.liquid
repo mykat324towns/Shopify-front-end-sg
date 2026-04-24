@@ -7,20 +7,18 @@
         <span class="footer__brand-name">{{ section.settings.brand_name | default: shop.name }}</span>
         <p class="footer__brand-desc">{{ section.settings.brand_desc }}</p>
         <div class="footer__social">
-          {% if section.settings.tiktok_url != blank %}
-            <a class="footer__social-link" href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg class="footer__social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
-              </svg>
-            </a>
-          {% endif %}
-          {% if section.settings.instagram_url != blank %}
-            <a class="footer__social-link" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg class="footer__social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"/>
-              </svg>
-            </a>
-          {% endif %}
+          {%- assign tiktok_href = section.settings.tiktok_url | default: 'https://www.tiktok.com/@scentgallery_' -%}
+          {%- assign instagram_href = section.settings.instagram_url | default: '#' -%}
+          <a class="footer__social-link" href="{{ tiktok_href }}" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg class="footer__social-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
+            </svg>
+          </a>
+          <a class="footer__social-link" href="{{ instagram_href }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg class="footer__social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
         </div>
       </div>
 
@@ -28,9 +26,16 @@
       <div>
         <span class="footer__col-title">Shop</span>
         <nav class="footer__nav" aria-label="Shop navigation">
-          {% for link in linklists[section.settings.menu_shop].links %}
-            <a class="footer__nav-link" href="{{ link.url }}">{{ link.title }}</a>
-          {% endfor %}
+          {% if linklists[section.settings.menu_shop].links.size > 0 %}
+            {% for link in linklists[section.settings.menu_shop].links %}
+              <a class="footer__nav-link" href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+          {% else %}
+            <a class="footer__nav-link" href="/collections/all">All Fragrances</a>
+            <a class="footer__nav-link" href="/collections/latest-picks">New Arrivals</a>
+            <a class="footer__nav-link" href="/collections/best-sellers">Best Sellers</a>
+            <a class="footer__nav-link" href="/collections/gift-sets">Gift Sets</a>
+          {% endif %}
         </nav>
       </div>
 
@@ -38,9 +43,16 @@
       <div>
         <span class="footer__col-title">Support</span>
         <nav class="footer__nav" aria-label="Support navigation">
-          {% for link in linklists[section.settings.menu_support].links %}
-            <a class="footer__nav-link" href="{{ link.url }}">{{ link.title }}</a>
-          {% endfor %}
+          {% if linklists[section.settings.menu_support].links.size > 0 %}
+            {% for link in linklists[section.settings.menu_support].links %}
+              <a class="footer__nav-link" href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+          {% else %}
+            <a class="footer__nav-link" href="#how-it-works">How It Works</a>
+            <a class="footer__nav-link" href="/pages/shipping">Shipping &amp; Returns</a>
+            <a class="footer__nav-link" href="#faq">FAQ</a>
+            <a class="footer__nav-link" href="/pages/contact">Contact</a>
+          {% endif %}
         </nav>
       </div>
 
@@ -68,9 +80,14 @@
     <div class="footer__bottom">
       <p class="footer__legal">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
       <div class="footer__legal-links">
-        {% for link in linklists[section.settings.menu_legal].links %}
-          <a class="footer__legal-link" href="{{ link.url }}">{{ link.title }}</a>
-        {% endfor %}
+        {% if linklists[section.settings.menu_legal].links.size > 0 %}
+          {% for link in linklists[section.settings.menu_legal].links %}
+            <a class="footer__legal-link" href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        {% else %}
+          <a class="footer__legal-link" href="/policies/privacy-policy">Privacy Policy</a>
+          <a class="footer__legal-link" href="/policies/terms-of-service">Terms of Service</a>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -90,7 +107,7 @@
       "type": "textarea",
       "id": "brand_desc",
       "label": "Brand description",
-      "default": "Luxury fragrance decants. Try before you commit."
+      "default": "Luxury fragrance decants from 1ml. Try before you commit. Discover your next signature scent without the full-bottle gamble."
     },
     {
       "type": "url",

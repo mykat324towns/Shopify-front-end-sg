@@ -31,12 +31,38 @@
       "settings": {
         "headline": "$300 locks you into one.<br>Or it builds your rotation.",
         "old_label": "One full bottle",
+        "old_item_1": "$300 up front",
+        "old_item_2": "Locked into one fragrance",
+        "old_item_3": "No way to try first",
+        "old_item_4": "Stuck with buyer's remorse",
         "new_label": "Scent Gallery",
+        "new_item_1": "From $4 per scent",
+        "new_item_2": "10+ fragrances for the same price",
+        "new_item_3": "Try before you ever commit",
+        "new_item_4": "Rotate. Explore. Own your collection.",
         "tagline": "→ The math is obvious. The collection is waiting.",
         "cta_text": "Build Your Rotation — From $4",
         "cta_url": "/collections/best-sellers",
         "receipt_eyebrow": "The math",
-        "receipt_subtitle": "6 fragrances vs. 1"
+        "receipt_subtitle": "6 fragrances vs. 1",
+        "receipt_name_1": "Sauvage EDP",
+        "receipt_size_1": "2ml",
+        "receipt_price_1": 7,
+        "receipt_name_2": "Baccarat Rouge 540",
+        "receipt_size_2": "2ml",
+        "receipt_price_2": 11,
+        "receipt_name_3": "Oud Wood",
+        "receipt_size_3": "2ml",
+        "receipt_price_3": 13,
+        "receipt_name_4": "Tobacco Vanille",
+        "receipt_size_4": "2ml",
+        "receipt_price_4": 12,
+        "receipt_name_5": "La Vie Est Belle",
+        "receipt_size_5": "2ml",
+        "receipt_price_5": 9,
+        "receipt_name_6": "Good Girl",
+        "receipt_size_6": "2ml",
+        "receipt_price_6": 9
       }
     },
     "size-guide": {
@@ -99,7 +125,46 @@
       "settings": {
         "overline": "Reviews",
         "title": "What collectors are saying"
-      }
+      },
+      "blocks": {
+        "t-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Fastest shipping I've ever gotten. Packaging was amazing.",
+            "name": "Jacob L.",
+            "initials": "JL",
+            "stars": 5
+          }
+        },
+        "t-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Prices are better than anywhere I've seen. Quality is legit.",
+            "name": "Customer",
+            "initials": "CU",
+            "stars": 5
+          }
+        },
+        "t-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Clean packaging, no leaks, and high-quality bottles.",
+            "name": "Logan M.",
+            "initials": "LM",
+            "stars": 5
+          }
+        },
+        "t-4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Owner kept me updated the whole time. Super reliable.",
+            "name": "Corbin",
+            "initials": "CO",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": ["t-1", "t-2", "t-3", "t-4"]
     },
     "cta-section": {
       "type": "cta-section",

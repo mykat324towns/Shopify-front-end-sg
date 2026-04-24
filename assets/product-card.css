@@ -209,6 +209,11 @@
   margin-top: var(--space-1);
 }
 
+/* Form wrapper is layout-transparent so CTA margin-top:auto works against .product-card__info */
+.product-card__form {
+  display: contents;
+}
+
 /* CTA button with delight */
 .product-card__cta {
   display: flex;
