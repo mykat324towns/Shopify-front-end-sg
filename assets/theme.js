@@ -337,38 +337,40 @@
 
   // ── Comparison receipt animation ──────────────────────────────────
   (function () {
-    const lines    = document.querySelectorAll('.receipt__line');
+    const lines    = [...document.querySelectorAll('.receipt__line')];
     const totalEl  = document.getElementById('receipt-running-total');
     const sep      = document.querySelector('.receipt__sep');
     const totalRow = document.querySelector('.receipt__total');
     const vsRow    = document.querySelector('.receipt__vs-row');
     if (!lines.length || !totalEl) return;
 
-    let runningTotal = 0;
+    let running = 0;
+    const lineGap = 190;
 
-    const revealLine = (index) => {
-      if (index >= lines.length) {
+    const revealLines = () => {
+      lines.forEach((line, i) => {
         setTimeout(() => {
-          if (sep)      { sep.classList.add('line-visible'); }
-          if (totalRow) { totalRow.classList.add('line-visible'); }
-          if (totalEl)  { totalEl.classList.add('is-complete'); }
-          setTimeout(() => { if (vsRow) vsRow.classList.add('line-visible'); }, 300);
-        }, 200);
-        return;
-      }
-      const line  = lines[index];
-      const price = parseInt(line.dataset.price, 10) || 0;
-      runningTotal += price;
-
-      setTimeout(() => {
-        line.classList.add('line-visible');
-        if (totalEl) {
+          line.classList.add('line-visible');
+          const price = parseInt(line.dataset.price, 10) || 0;
+          running += price;
+          totalEl.textContent = '$' + running;
+          totalEl.classList.remove('is-ticking');
+          void totalEl.offsetWidth;
           totalEl.classList.add('is-ticking');
-          totalEl.textContent = '$' + runningTotal;
-          setTimeout(() => totalEl.classList.remove('is-ticking'), 230);
-        }
-        revealLine(index + 1);
-      }, index === 0 ? 300 : 500);
+          totalEl.addEventListener('animationend', () => totalEl.classList.remove('is-ticking'), { once: true });
+        }, i * lineGap);
+      });
+
+      const afterLines = (lines.length - 1) * lineGap + 220;
+      setTimeout(() => { if (sep) sep.classList.add('line-visible'); }, afterLines);
+      setTimeout(() => {
+        if (totalRow) totalRow.classList.add('line-visible');
+        totalEl.classList.remove('is-ticking');
+        void totalEl.offsetWidth;
+        totalEl.classList.add('is-complete');
+        totalEl.addEventListener('animationend', () => totalEl.classList.remove('is-complete'), { once: true });
+      }, afterLines + 180);
+      setTimeout(() => { if (vsRow) vsRow.classList.add('line-visible'); }, afterLines + 700);
     };
 
     if ('IntersectionObserver' in window) {
@@ -379,7 +381,7 @@
           if (entries[0].isIntersecting && !fired) {
             fired = true;
             obs.disconnect();
-            revealLine(0);
+            revealLines();
           }
         }, { threshold: 0.3 });
         obs.observe(receiptEl);
