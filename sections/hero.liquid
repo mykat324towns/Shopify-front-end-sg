@@ -49,6 +49,14 @@
           loading="eager"
           fetchpriority="high"
         >
+      {%- else -%}
+        <img
+          class="hero__video"
+          src="{{ 'hero-panel-bg.jpg' | asset_url }}"
+          alt="Scent Gallery fragrance decants"
+          loading="eager"
+          fetchpriority="high"
+        >
       {%- endif -%}
     </div>
   </div>

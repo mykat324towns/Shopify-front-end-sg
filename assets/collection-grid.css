@@ -92,9 +92,83 @@
   box-shadow: var(--shadow-focus-green);
 }
 
+/* Collection sub + view all */
+.collection__sub {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--color-on-surface-muted);
+  margin-bottom: var(--space-6);
+}
+
+.collection__view-all {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.collection__view-all:hover {
+  opacity: 0.7;
+}
+
+/* Latest pickups section variant */
+.latest-pickups {
+  padding-block: var(--space-4) var(--space-10);
+  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-warm-sage-light) 100%);
+}
+
+/* Carousel (mobile Swiper) */
+.carousel-track {
+  position: relative;
+}
+
+/* Hide swiper on desktop, show grid */
+.carousel-track .swiper {
+  display: none;
+}
+
+.collection__scroll {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* Custom Swiper scrollbar */
+.carousel-scroll-bar {
+  position: relative;
+  height: 2px;
+  background: var(--color-border);
+  border-radius: 2px;
+  margin-top: var(--space-4);
+  overflow: visible;
+}
+
+.carousel-scroll-bar__thumb {
+  position: absolute;
+  top: -2px;
+  height: 6px;
+  min-width: 24px;
+  background: var(--color-primary);
+  border-radius: 3px;
+  transition: left 0.1s linear;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1280px) {
   .collection__grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .collection__scroll { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+}
+
+@media (max-width: 768px) {
+  /* On mobile, hide the desktop grid, show swiper carousel */
+  .carousel-track .swiper {
+    display: block;
+  }
+  .collection__scroll {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {

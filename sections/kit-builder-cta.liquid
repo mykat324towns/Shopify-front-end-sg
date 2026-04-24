@@ -1,31 +1,21 @@
 <section class="kit-builder-cta reveal" aria-label="Build your rotation">
   <div class="container">
     <div class="kit-builder-cta__bottles">
-      {%- if section.settings.bottle_1ml != blank -%}
-        <div class="kit-builder-cta__bottle kit-builder-cta__bottle--sm">
-          <img src="{{ section.settings.bottle_1ml | image_url: width: 80 }}" alt="" aria-hidden="true" width="40">
-        </div>
-      {%- endif -%}
-      {%- if section.settings.bottle_2ml != blank -%}
-        <div class="kit-builder-cta__bottle kit-builder-cta__bottle--md">
-          <img src="{{ section.settings.bottle_2ml | image_url: width: 104 }}" alt="" aria-hidden="true" width="52">
-        </div>
-      {%- endif -%}
-      {%- if section.settings.bottle_5ml != blank -%}
-        <div class="kit-builder-cta__bottle kit-builder-cta__bottle--lg">
-          <img src="{{ section.settings.bottle_5ml | image_url: width: 128 }}" alt="" aria-hidden="true" width="64">
-        </div>
-      {%- endif -%}
-      {%- if section.settings.bottle_10ml != blank -%}
-        <div class="kit-builder-cta__bottle kit-builder-cta__bottle--md">
-          <img src="{{ section.settings.bottle_10ml | image_url: width: 104 }}" alt="" aria-hidden="true" width="52">
-        </div>
-      {%- endif -%}
-      {%- if section.settings.bottle_30ml != blank -%}
-        <div class="kit-builder-cta__bottle kit-builder-cta__bottle--sm">
-          <img src="{{ section.settings.bottle_30ml | image_url: width: 80 }}" alt="" aria-hidden="true" width="40">
-        </div>
-      {%- endif -%}
+      <div class="kit-builder-cta__bottle kit-builder-cta__bottle--sm">
+        <img src="{{ 'bottle-1ml.avif' | asset_url }}" alt="" aria-hidden="true" width="40">
+      </div>
+      <div class="kit-builder-cta__bottle kit-builder-cta__bottle--md">
+        <img src="{{ 'bottle-2ml.avif' | asset_url }}" alt="" aria-hidden="true" width="52">
+      </div>
+      <div class="kit-builder-cta__bottle kit-builder-cta__bottle--lg">
+        <img src="{{ 'bottle-5ml.avif' | asset_url }}" alt="" aria-hidden="true" width="64">
+      </div>
+      <div class="kit-builder-cta__bottle kit-builder-cta__bottle--md">
+        <img src="{{ 'bottle-10ml.avif' | asset_url }}" alt="" aria-hidden="true" width="52">
+      </div>
+      <div class="kit-builder-cta__bottle kit-builder-cta__bottle--sm">
+        <img src="{{ 'bottle-30ml.avif' | asset_url }}" alt="" aria-hidden="true" width="40">
+      </div>
     </div>
 
     <p class="kit-builder-cta__overline">{{ section.settings.overline }}</p>
@@ -75,31 +65,6 @@
       "id": "trust_line",
       "label": "Trust line",
       "default": "100% authentic · Ships in 1–2 days · From $4"
-    },
-    {
-      "type": "image_picker",
-      "id": "bottle_1ml",
-      "label": "1ml bottle image"
-    },
-    {
-      "type": "image_picker",
-      "id": "bottle_2ml",
-      "label": "2ml bottle image"
-    },
-    {
-      "type": "image_picker",
-      "id": "bottle_5ml",
-      "label": "5ml bottle image"
-    },
-    {
-      "type": "image_picker",
-      "id": "bottle_10ml",
-      "label": "10ml bottle image"
-    },
-    {
-      "type": "image_picker",
-      "id": "bottle_30ml",
-      "label": "30ml bottle image"
     }
   ],
   "presets": [
