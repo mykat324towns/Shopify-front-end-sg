@@ -34,16 +34,23 @@
         </div>
       </div>
 
-      {%- if section.settings.photo != blank -%}
-        <div class="testimonials__photo-placeholder" id="box-panel">
+      <div class="testimonials__photo-placeholder" id="box-panel">
+        {%- if section.settings.photo != blank -%}
           <img
             class="testimonials__order-photo"
             src="{{ section.settings.photo | image_url: width: 800 }}"
             alt="{{ section.settings.photo.alt | default: 'Scent Gallery order' | escape }}"
             loading="lazy"
           >
-        </div>
-      {%- endif -%}
+        {%- else -%}
+          <img
+            class="testimonials__order-photo"
+            src="{{ 'order-box.png' | asset_url }}"
+            alt="Scent Gallery order"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>

@@ -1,3 +1,17 @@
+{%- assign gallery_fallback = 'bottle-10ml.avif' -%}
+{%- for _v in product.variants -%}
+  {%- unless _v.option1 contains '+' -%}
+    {%- assign _fs = _v.option1 | downcase -%}
+    {%- if _fs == '1ml' -%}{%- assign gallery_fallback = 'bottle-1ml.avif' -%}
+    {%- elsif _fs == '2ml' -%}{%- assign gallery_fallback = 'bottle-2ml.avif' -%}
+    {%- elsif _fs == '5ml' -%}{%- assign gallery_fallback = 'bottle-5ml.avif' -%}
+    {%- elsif _fs == '10ml' -%}{%- assign gallery_fallback = 'bottle-10ml.avif' -%}
+    {%- elsif _fs == '30ml' -%}{%- assign gallery_fallback = 'bottle-30ml.avif' -%}
+    {%- endif -%}
+    {%- break -%}
+  {%- endunless -%}
+{%- endfor -%}
+
 <div class="container" id="product-content">
 
   <nav class="product-breadcrumb" aria-label="Breadcrumb">
@@ -21,7 +35,13 @@
               fetchpriority="high"
             >
           {%- else -%}
-            <div class="product-gallery__empty">No image uploaded</div>
+            <img
+              id="product-gallery-main-img"
+              src="{{ gallery_fallback | asset_url }}"
+              alt="{{ product.title | escape }}"
+              loading="eager"
+              fetchpriority="high"
+            >
           {%- endif -%}
         </div>
         {%- if product.images.size > 1 -%}
@@ -101,6 +121,14 @@
           <div class="size-selector-grid" role="group" aria-label="Select a size">
             {%- for variant in product.variants -%}
               {%- unless variant.option1 contains '+' -%}
+                {%- assign v_size = variant.option1 | downcase -%}
+                {%- if v_size == '1ml' -%}{%- assign v_bottle = 'bottle-1ml.avif' -%}
+                {%- elsif v_size == '2ml' -%}{%- assign v_bottle = 'bottle-2ml.avif' -%}
+                {%- elsif v_size == '5ml' -%}{%- assign v_bottle = 'bottle-5ml.avif' -%}
+                {%- elsif v_size == '10ml' -%}{%- assign v_bottle = 'bottle-10ml.avif' -%}
+                {%- elsif v_size == '30ml' -%}{%- assign v_bottle = 'bottle-30ml.avif' -%}
+                {%- else -%}{%- assign v_bottle = 'bottle-10ml.avif' -%}
+                {%- endif -%}
                 <button
                   class="size-card"
                   type="button"
@@ -108,6 +136,7 @@
                   data-size="{{ variant.option1 | downcase }}"
                   data-price="{{ variant.price }}"
                   data-available="{{ variant.available }}"
+                  data-bottle="{{ v_bottle | asset_url }}"
                   aria-pressed="false"
                 >
                   {%- if variant.featured_image -%}
@@ -118,7 +147,12 @@
                       loading="lazy"
                     >
                   {%- else -%}
-                    <div class="size-card__img-placeholder"></div>
+                    <img
+                      class="size-card__img"
+                      src="{{ v_bottle | asset_url }}"
+                      alt="{{ variant.option1 }}"
+                      loading="lazy"
+                    >
                   {%- endif -%}
                   <span class="size-card__label">{{ variant.option1 }}</span>
                   {%- assign spray_val = variant.metafields.custom.sprays.value -%}

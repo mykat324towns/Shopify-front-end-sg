@@ -126,6 +126,15 @@
       setActiveCard(card);
       applyVariant(variantId);
       updatePressurizedToggle(sizeLower);
+
+      var mainImg = document.getElementById('product-gallery-main-img');
+      if (mainImg) {
+        var sv = variantById[variantId];
+        var newSrc = (sv && sv.featured_image && sv.featured_image.src)
+          ? sv.featured_image.src
+          : card.dataset.bottle;
+        if (newSrc) mainImg.src = newSrc;
+      }
     });
   }
 
