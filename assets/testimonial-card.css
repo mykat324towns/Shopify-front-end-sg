@@ -25,7 +25,6 @@
   font-family: var(--font-display);
   font-size: var(--text-h2);
   font-weight: 400;
-  font-style: italic;
   letter-spacing: -0.01em;
   color: var(--color-on-surface);
   font-feature-settings: "kern" 1;
@@ -111,9 +110,8 @@
 
 .testimonial-card__quote {
   font-family: var(--font-display);
-  font-style: italic;
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.55;
   color: var(--color-on-surface);
   font-feature-settings: "kern" 1;
@@ -149,7 +147,7 @@
   align-items: center;
   justify-content: center;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-warm-sage);
   flex-shrink: 0;
   font-family: var(--font-body);

@@ -14,7 +14,6 @@
 .size-guide__title {
   font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 48px);
-  font-style: italic;
   font-weight: 400;
   color: var(--color-on-surface);
   line-height: 1.1;
@@ -69,13 +68,13 @@
   font-family: var(--font-body);
   font-size: 11px;
   color: var(--color-warm-amber);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .size-guide__type {
   font-family: var(--font-body);
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-warm-amber);

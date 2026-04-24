@@ -357,7 +357,7 @@
 .witb__diagram-outer.is-open .witb__item:hover .witb__item-img { transform: scale(1.09); }
 .witb__item-label {
   font-family: var(--font-body);
-  font-size: 11px; font-weight: 500;
+  font-size: 11px; font-weight: 600;
   color: var(--color-on-surface-muted);
   line-height: 1.2;
   transition: color 0.2s ease;

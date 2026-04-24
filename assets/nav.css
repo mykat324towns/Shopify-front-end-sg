@@ -45,7 +45,7 @@
 .nav__link {
   font-family: var(--font-body);
   font-size: var(--text-body-sm);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-on-surface);
   text-decoration: none;
   position: relative;
@@ -115,7 +115,7 @@
   background-color: var(--color-accent);
   color: #FFFFFF;
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 600;
   min-width: 16px;
   height: 16px;
   border-radius: var(--radius-pill);
@@ -233,7 +233,7 @@
 .nav__drawer-link {
   font-family: var(--font-body);
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-on-surface);
   padding-block: var(--space-3);
   border-bottom: 1px solid var(--color-border);

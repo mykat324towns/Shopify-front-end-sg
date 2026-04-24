@@ -29,7 +29,6 @@
   font-family: var(--font-display);
   font-size: var(--text-h1);
   font-weight: 400;
-  font-style: italic;
   line-height: 1.08;
   letter-spacing: -0.015em;
   color: var(--color-on-surface);

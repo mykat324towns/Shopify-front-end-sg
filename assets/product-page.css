@@ -199,7 +199,7 @@
 .size-selector__label {
   font-family: var(--font-body);
   font-size: var(--text-label);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--color-on-surface-muted);
   margin: 0;
@@ -274,7 +274,7 @@
 .size-card__label {
   font-family: var(--font-body);
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.07em;
   color: var(--color-on-surface);
   line-height: 1.2;
@@ -304,7 +304,7 @@
   color: white;
   font-family: var(--font-body);
   font-size: 7px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 2px 6px;
@@ -656,7 +656,7 @@
 }
 
 .scent-toggle__bestfor-label {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-primary);
   margin-right: 4px;
 }
@@ -689,7 +689,6 @@
 
 .social-proof__title {
   font-family: var(--font-display);
-  font-style: italic;
   font-size: var(--text-h3);
   color: var(--color-on-surface);
   margin: 0;

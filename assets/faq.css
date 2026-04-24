@@ -25,7 +25,6 @@
 
 .faq__title {
   font-family: var(--font-display);
-  font-style: italic;
   font-size: var(--text-h2);
   font-weight: 400;
   color: var(--color-on-surface);
@@ -83,7 +82,7 @@
   content: '+';
   flex-shrink: 0;
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-primary);
   line-height: 1;
 }
