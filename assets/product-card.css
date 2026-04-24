@@ -1,4 +1,4 @@
-/* Product Card */
+/* Product Card — golden reference: index.html */
 
 .product-card {
   background-color: var(--color-surface);
@@ -8,19 +8,21 @@
   display: flex;
   flex-direction: column;
   transition:
-    transform var(--duration-normal) var(--ease-standard),
-    box-shadow var(--duration-normal) var(--ease-standard);
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-raised);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+  border-color: rgba(28,64,50,0.20);
 }
 
 .product-card__image-wrap {
   position: relative;
   aspect-ratio: 3 / 4;
-  background-color: var(--color-surface-muted);
+  background-color: var(--color-warm-sage-light);
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   overflow: hidden;
 }
@@ -48,7 +50,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-accent);
-  background-color: var(--color-accent-light);
+  background-color: var(--color-warm-amber-light);
   border-radius: var(--radius-pill);
   padding: 4px 10px;
   line-height: 1.4;
@@ -67,18 +69,35 @@
   flex: 1;
 }
 
+/* Brand label */
+.product-card__brand {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-muted);
+  margin-bottom: 2px;
+}
+
+/* Italic serif product name */
 .product-card__name {
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 400;
+  font-style: italic;
   line-height: 1.2;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
   color: var(--color-on-surface);
   font-feature-settings: "kern" 1;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .product-card__name { font-size: 15px; }
 }
 
 .product-card__meta {
@@ -100,73 +119,85 @@
 .star {
   width: 13px;
   height: 13px;
-  fill: var(--color-accent);
+  fill: var(--color-primary-light);
 }
 
 .star--empty {
-  fill: var(--color-border);
+  fill: var(--color-border-strong);
 }
 
 .product-card__review-count {
   font-family: var(--font-body);
-  font-size: var(--text-caption);
+  font-size: 10px;
   color: var(--color-on-surface-muted);
+  letter-spacing: 0.03em;
   margin-left: 2px;
 }
 
-/* Size pills on card */
+/* Size pills */
 .product-card__sizes {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1);
-  margin-top: var(--space-1);
+  gap: 6px;
+  margin: var(--space-3) 0 var(--space-1);
 }
 
 .size-pill {
   font-family: var(--font-body);
-  font-size: var(--text-label);
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-on-surface-muted);
-  background: var(--color-surface-muted);
-  border: 1px solid var(--color-border);
+  letter-spacing: 0.06em;
+  padding: 4px 9px;
   border-radius: var(--radius-pill);
-  padding: 3px 8px;
+  border: 1px solid var(--color-border-strong);
+  background: transparent;
+  color: var(--color-on-surface-muted);
   cursor: pointer;
-  transition:
-    color var(--duration-fast) var(--ease-standard),
-    background var(--duration-fast) var(--ease-standard),
-    border-color var(--duration-fast) var(--ease-standard);
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 .size-pill--active {
-  color: var(--color-accent);
-  background: var(--color-accent-light);
-  border-color: var(--color-accent);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
 }
 
-@keyframes pill-spring {
+.size-pill:hover:not(.size-pill--active) {
+  border-color: var(--color-on-surface-muted);
+  color: var(--color-on-surface);
+}
+
+@keyframes pill-select {
   0%   { transform: scale(1); }
-  30%  { transform: scale(1.15); }
-  60%  { transform: scale(0.95); }
+  45%  { transform: scale(1.18); }
   100% { transform: scale(1); }
 }
 
 .size-pill.just-selected {
-  animation: pill-spring 0.25s var(--ease-reveal);
+  animation: pill-select 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Pill info line */
 .pill-info {
   font-family: var(--font-body);
-  font-size: var(--text-caption);
+  font-size: 10px;
   color: var(--color-on-surface-muted);
-  min-height: 18px;
-  margin-top: 2px;
+  margin: 2px 0 var(--space-2);
+  min-height: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .pill-badge {
-  font-weight: 700;
-  color: var(--color-accent);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-warm-amber);
+  background: var(--color-warm-amber-light);
+  padding: 1px 5px;
+  border-radius: 3px;
 }
 
 .product-card__price {
@@ -178,6 +209,7 @@
   margin-top: var(--space-1);
 }
 
+/* CTA button with delight */
 .product-card__cta {
   display: flex;
   align-items: center;
@@ -195,17 +227,21 @@
   padding: 12px 20px;
   cursor: pointer;
   margin-top: auto;
+  box-shadow: 0 2px 8px rgba(28,64,50,0.24), 0 1px 3px rgba(28,64,50,0.12);
   transition:
-    background-color var(--duration-fast) var(--ease-standard),
-    transform var(--duration-normal) var(--ease-standard),
-    box-shadow var(--duration-normal) var(--ease-standard);
+    background-color 0.22s ease,
+    transform 0.08s ease,
+    letter-spacing 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .product-card__cta:hover {
   background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-raised);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(28,64,50,0.30), 0 3px 8px rgba(28,64,50,0.18);
 }
+
+.product-card__cta:active { transform: scale(0.96); }
 
 .product-card__cta:focus-visible {
   outline: none;
@@ -213,7 +249,7 @@
 }
 
 .product-card__cta.is-added {
-  background-color: var(--color-warm-sage);
+  background-color: var(--color-primary-hover);
 }
 
 .product-card--sold-out .product-card__image {
@@ -223,4 +259,10 @@
 .product-card--sold-out .product-card__cta {
   opacity: 0.4;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card { transition: none; }
+  .product-card:hover { transform: none; box-shadow: none; }
+  .size-pill.just-selected { animation: none; }
 }

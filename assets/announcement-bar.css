@@ -1,8 +1,9 @@
 /* Announcement Bar */
 
 .announcement-bar {
-  background-color: var(--color-accent);
-  color: #FFFFFF;
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  color: var(--color-on-surface);
   height: 36px;
   display: flex;
   align-items: center;
@@ -31,9 +32,13 @@
   padding-inline: 40px;
 }
 
+.announcement-bar__text,
+.announcement-bar__dismiss { color: var(--color-on-surface); }
+
 .announcement-bar__text strong {
   font-weight: 700;
   letter-spacing: 0.05em;
+  color: var(--color-primary);
 }
 
 .announcement-bar__dismiss {
@@ -46,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.7);
+  color: var(--color-on-surface-muted);
   cursor: pointer;
   border: none;
   background: none;
@@ -56,5 +61,5 @@
 }
 
 .announcement-bar__dismiss:hover {
-  color: #FFFFFF;
+  color: var(--color-on-surface);
 }
