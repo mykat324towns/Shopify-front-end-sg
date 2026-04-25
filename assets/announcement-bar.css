@@ -2,9 +2,9 @@
 
 .announcement-bar {
   background: var(--color-bg-alt);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid var(--color-border);
   color: var(--color-on-surface);
-  height: 36px;
+  height: 40px;
   display: flex;
   align-items: center;
   position: relative;
@@ -25,11 +25,11 @@
 
 .announcement-bar__text {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: var(--text-body-sm);
   font-weight: 400;
   letter-spacing: 0.01em;
   text-align: center;
-  padding-inline: 40px;
+  padding-inline: var(--space-10);
 }
 
 .announcement-bar__text,
@@ -46,8 +46,8 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,11 +55,29 @@
   cursor: pointer;
   border: none;
   background: none;
-  font-size: 18px;
+  font-size: var(--text-body);
   line-height: 1;
   transition: color var(--duration-fast) var(--ease-standard);
+  border-radius: var(--radius-sm);
 }
 
 .announcement-bar__dismiss:hover {
   color: var(--color-on-surface);
+}
+
+.announcement-bar__dismiss:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-green);
+}
+
+.announcement-bar__dismiss:active {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .announcement-bar__text {
+    font-size: var(--text-caption);
+    padding-inline: var(--space-10);
+    letter-spacing: 0.02em;
+  }
 }
