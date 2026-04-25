@@ -25,7 +25,7 @@
 .comparison__columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2px;
+  gap: var(--space-1);
   border-radius: 12px;
   overflow: hidden;
   max-width: 680px;
@@ -78,7 +78,7 @@
   line-height: 1.5;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .comparison__list li svg {
@@ -320,15 +320,28 @@
 
 @media (max-width: 480px) {
   .comparison {
-    padding-block: var(--space-4) var(--space-6);
+    padding-block: var(--space-6) var(--space-10);
   }
   .comparison__headline {
-    margin-bottom: var(--space-4);
+    text-align: left;
+    margin-bottom: var(--space-6);
   }
   .comparison__columns {
     grid-template-columns: 1fr;
+    gap: var(--space-1);
   }
   .comparison__col--new {
     order: -1;
+  }
+  /* Receipt: reduce top gap on mobile — section already has generous bottom padding */
+  .comparison__receipt {
+    margin-top: var(--space-6);
+  }
+  /* Tagline and CTA: left-align to match headline on mobile */
+  .comparison__tagline {
+    text-align: left;
+  }
+  .comparison__cta {
+    margin: 0;
   }
 }

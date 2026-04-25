@@ -330,6 +330,24 @@
 }
 
 @media (max-width: 640px) {
-  .hero { padding-block: var(--space-3) var(--space-6); min-height: unset; }
+  .hero { padding-block: var(--space-6) var(--space-8); min-height: unset; }
   .hero__inner { gap: var(--space-4); }
+
+  /* Trust strip: stack on narrow mobile instead of wrapping mid-line */
+  .hero__trust {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    width: 100%;
+  }
+  .hero__trust-sep { display: none; }
+
+  /* Video: 4/3 on mobile — less vertical dominance, cleaner crop */
+  .hero__video {
+    aspect-ratio: 4 / 3;
+    max-height: 220px;
+  }
+
+  /* Proof: tighten bottom margin so it doesn't orphan */
+  .hero__proof { margin-bottom: var(--space-2); }
 }
