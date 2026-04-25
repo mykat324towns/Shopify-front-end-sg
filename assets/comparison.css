@@ -26,7 +26,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-1);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   max-width: 680px;
   margin: 0 auto var(--space-8);
@@ -97,12 +97,15 @@
 .comparison__tagline {
   font-family: var(--font-display);
   font-size: var(--text-body);
+  font-style: italic;
   color: var(--color-on-surface-muted);
   text-align: center;
   margin-bottom: var(--space-6);
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+  transition:
+    opacity var(--duration-slow) var(--ease-enter) 200ms,
+    transform var(--duration-slow) var(--ease-enter) 200ms;
 }
 
 .comparison__tagline.tag-visible {
@@ -116,7 +119,9 @@
   margin: 0 auto;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s;
+  transition:
+    opacity var(--duration-slow) var(--ease-enter) 350ms,
+    transform var(--duration-slow) var(--ease-enter) 350ms;
 }
 
 .comparison__cta.cta-visible {
@@ -128,11 +133,11 @@
 .comparison__receipt {
   background: var(--color-surface);
   border: 1px solid var(--color-border-strong);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   padding: var(--space-8);
   font-family: var(--font-body);
   position: sticky;
-  top: 90px;
+  top: var(--space-24);
 }
 
 .receipt__header {
@@ -152,11 +157,11 @@
 .receipt__subtitle {
   display: block;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: var(--text-body-lg);
   font-style: normal;
   font-weight: 400;
   color: var(--color-on-surface);
-  line-height: 1.2;
+  line-height: 1.25;
   margin: 0;
 }
 
@@ -197,10 +202,10 @@
 }
 
 .receipt__size {
-  font-size: 11px;
+  font-size: var(--text-label);
   font-weight: 400;
   color: var(--color-on-surface-muted);
-  margin-left: 3px;
+  margin-left: var(--space-1);
 }
 
 .receipt__price {
@@ -217,7 +222,7 @@
   background: var(--color-border-strong);
   margin: var(--space-4) 0;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--duration-normal) var(--ease-enter);
 }
 
 .receipt__sep.line-visible {
@@ -230,8 +235,10 @@
   align-items: baseline;
   padding-bottom: var(--space-4);
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(var(--space-1));
+  transition:
+    opacity var(--duration-slow) var(--ease-enter),
+    transform var(--duration-slow) var(--ease-enter);
 }
 
 .receipt__total.line-visible {
@@ -249,11 +256,11 @@
 
 .receipt__total-value {
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: var(--text-price-lg);
   font-weight: 400;
   color: var(--color-primary);
   font-variant-numeric: tabular-nums;
-  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--duration-fast) var(--ease-reveal);
 }
 
 @keyframes total-tick {
@@ -283,8 +290,10 @@
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s;
+  transform: translateY(var(--space-1));
+  transition:
+    opacity var(--duration-slow) var(--ease-enter) 150ms,
+    transform var(--duration-slow) var(--ease-enter) 150ms;
 }
 
 .receipt__vs-row.line-visible {
@@ -300,11 +309,11 @@
 
 .receipt__vs-price {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: var(--text-h3);
   font-weight: 400;
-  color: rgba(0,0,0,0.20);
+  color: var(--color-surface-muted);
   text-decoration: line-through;
-  text-decoration-color: rgba(192,57,43,0.5);
+  text-decoration-color: var(--color-error);
   font-variant-numeric: tabular-nums;
 }
 
