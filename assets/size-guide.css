@@ -85,6 +85,24 @@
   margin-top: var(--space-1);
 }
 
+.size-guide__item--recommended {
+  position: relative;
+}
+
+.size-guide__tag {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-primary);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+  white-space: nowrap;
+}
+
 /* Fade hint: indicates scrollability */
 .size-guide__fade-hint {
   display: none;

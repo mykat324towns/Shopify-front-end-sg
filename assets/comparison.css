@@ -63,6 +63,19 @@
   color: var(--color-primary);
 }
 
+.comparison__col-sublabel {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  font-style: italic;
+  color: var(--color-on-surface-muted);
+  margin-top: calc(var(--space-4) * -1);
+  margin-bottom: var(--space-4);
+}
+
 .comparison__list {
   list-style: none;
   padding: 0;

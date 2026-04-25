@@ -9,10 +9,14 @@
       <h1 class="hero__headline">{{ section.settings.headline }}</h1>
       <p class="hero__sub">{{ section.settings.subtext }}</p>
 
-      <div class="hero__proof">
-        <span class="hero__proof-num" id="hero-order-count">{{ section.settings.proof_count }}</span>
-        <span class="hero__proof-label">orders packed</span>
-      </div>
+      {%- if section.settings.proof_text != blank -%}
+        <p class="hero__proof hero__proof--text">{{ section.settings.proof_text }}</p>
+      {%- elsif section.settings.proof_count != blank -%}
+        <div class="hero__proof">
+          <span class="hero__proof-num" id="hero-order-count">{{ section.settings.proof_count }}</span>
+          <span class="hero__proof-label">orders packed</span>
+        </div>
+      {%- endif -%}
 
       <div class="hero__actions">
         <a href="{{ section.settings.cta_primary_url }}" class="btn-primary">{{ section.settings.cta_primary_text }}</a>
@@ -75,31 +79,38 @@
       "type": "text",
       "id": "overline",
       "label": "Overline",
-      "default": "Fragrance Decants"
+      "default": "Authentic. Decanted. From $4."
     },
     {
       "type": "text",
       "id": "headline",
       "label": "Headline",
-      "default": "Don't lock into one.<br>Explore the rest."
+      "default": "Ten scents.<br>One bottle's price."
     },
     {
       "type": "text",
       "id": "subtext",
       "label": "Subtext",
-      "default": "That $300 bottle locks you into one scent — heard of it or not. Try six fragrances on your list instead, from $4 each."
+      "default": "Decants from $4. Skip the $300 blind-buy regret. Try ten before you commit to one."
+    },
+    {
+      "type": "text",
+      "id": "proof_text",
+      "label": "Proof line (authority/curation statement)",
+      "info": "Use this for a static authority statement (e.g. founder/curation/authenticity). Leave the orders-packed count below blank if this is set.",
+      "default": "Hand-poured in Arizona. Authentic-only — no clones, no dupes, no oils."
     },
     {
       "type": "number",
       "id": "proof_count",
-      "label": "Orders packed count",
-      "default": 846
+      "label": "Orders packed count (fallback only)",
+      "info": "Renders only if the proof line above is empty. Don't surface a static number unless it's a live counter."
     },
     {
       "type": "text",
       "id": "cta_primary_text",
       "label": "Primary CTA text",
-      "default": "Build Your Collection"
+      "default": "Browse Best Sellers"
     },
     {
       "type": "url",
@@ -110,7 +121,7 @@
       "type": "text",
       "id": "cta_secondary_text",
       "label": "Secondary CTA text",
-      "default": "See how it works →"
+      "default": "How it works →"
     },
     {
       "type": "url",
@@ -121,7 +132,7 @@
       "type": "text",
       "id": "trust_1",
       "label": "Trust item 1",
-      "default": "Authentic decants"
+      "default": "Poured from authentic bottles"
     },
     {
       "type": "text",
@@ -133,13 +144,13 @@
       "type": "text",
       "id": "trust_3",
       "label": "Trust item 3",
-      "default": "Hand packed, Gilbert AZ"
+      "default": "Hand-packed in Arizona"
     },
     {
       "type": "text",
       "id": "sidebar_text",
       "label": "Sidebar rotated text",
-      "default": "Luxury Decants · Try Before You Commit"
+      "default": "Decants · Try before you commit"
     },
     {
       "type": "text",

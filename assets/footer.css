@@ -188,6 +188,14 @@
   box-shadow: var(--shadow-focus-green);
 }
 
+.footer__newsletter-note {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--color-on-surface-muted);
+  margin-top: var(--space-2);
+  letter-spacing: 0.02em;
+}
+
 /* Bottom bar */
 .footer__bottom {
   border-top: 1px solid var(--color-border);

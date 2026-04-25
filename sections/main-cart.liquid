@@ -1,20 +1,20 @@
 <div class="container" style="padding-block: var(--space-12) var(--space-16);">
 
   <header class="page-header" style="margin-bottom: var(--space-8);">
-    <h1 class="page-header__title">Your Cart</h1>
+    <h1 class="page-header__title">Your Rotation</h1>
     {%- if cart.item_count > 0 -%}
-      <p class="page-header__meta">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}</p>
+      <p class="page-header__meta">{{ cart.item_count }} in your rotation</p>
     {%- endif -%}
   </header>
 
   {%- if cart.item_count == 0 -%}
     <div class="listing-empty">
-      <p class="listing-empty__title">Your cart is empty.</p>
-      <p class="listing-empty__sub">Start building your rotation.</p>
+      <p class="listing-empty__title">Your rotation is empty.</p>
+      <p class="listing-empty__sub">Start with a best seller.</p>
       <a
-        href="/collections/all"
+        href="/collections/best-sellers"
         style="display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--color-primary); border-radius: var(--radius-md); min-height: 48px; padding: 12px 28px; text-decoration: none; margin-top: var(--space-6);"
-      >Shop Now</a>
+      >Browse Best Sellers</a>
     </div>
   {%- else -%}
 
@@ -60,16 +60,19 @@
             <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-on-surface-muted);">Subtotal</p>
             <p style="font-family: var(--font-body); font-size: var(--text-h4); font-weight: 600; color: var(--color-on-surface);">{{ cart.total_price | money }}</p>
           </div>
-          <div style="display: flex; gap: var(--space-3);">
-            <button
-              type="submit"
-              name="update"
-              style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--color-on-surface); background: transparent; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); min-height: 48px; padding: 12px 20px; cursor: pointer;"
-            >Update</button>
-            <a
-              href="/checkout"
-              style="display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--color-primary); border-radius: var(--radius-md); min-height: 48px; padding: 12px 28px; text-decoration: none;"
-            >Checkout</a>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2);">
+            <div style="display: flex; gap: var(--space-3);">
+              <button
+                type="submit"
+                name="update"
+                style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--color-on-surface); background: transparent; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); min-height: 48px; padding: 12px 20px; cursor: pointer;"
+              >Update</button>
+              <a
+                href="/checkout"
+                style="display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--color-primary); border-radius: var(--radius-md); min-height: 48px; padding: 12px 28px; text-decoration: none;"
+              >Checkout</a>
+            </div>
+            <p style="font-family: var(--font-body); font-size: var(--text-caption); color: var(--color-on-surface-muted); letter-spacing: 0.04em; margin-top: var(--space-1);">Secure checkout · Klarna · Afterpay · Shop Pay</p>
           </div>
         </div>
 

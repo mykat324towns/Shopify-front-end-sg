@@ -8,6 +8,9 @@
         <div class="comparison__columns">
           <div class="comparison__col comparison__col--old">
             <span class="comparison__col-label">{{ section.settings.old_label }}</span>
+            {%- if section.settings.old_sublabel != blank -%}
+              <span class="comparison__col-sublabel">{{ section.settings.old_sublabel }}</span>
+            {%- endif -%}
             <ul class="comparison__list">
               {%- for i in (1..4) -%}
                 {%- assign item_key = 'old_item_' | append: i -%}
@@ -24,6 +27,9 @@
 
           <div class="comparison__col comparison__col--new">
             <span class="comparison__col-label">{{ section.settings.new_label }}</span>
+            {%- if section.settings.new_sublabel != blank -%}
+              <span class="comparison__col-sublabel">{{ section.settings.new_sublabel }}</span>
+            {%- endif -%}
             <ul class="comparison__list">
               {%- for i in (1..4) -%}
                 {%- assign item_key = 'new_item_' | append: i -%}
@@ -93,13 +99,20 @@
       "type": "text",
       "id": "headline",
       "label": "Headline",
-      "default": "$300 locks you into one.<br>Or you try six."
+      "default": "Ten scents for the price of one."
     },
     {
       "type": "text",
       "id": "old_label",
       "label": "Old column label",
-      "default": "One full bottle"
+      "default": "Blind Buy"
+    },
+    {
+      "type": "text",
+      "id": "old_sublabel",
+      "label": "Old column sub-label",
+      "info": "Small caption under the column label (e.g. plain-language clarification).",
+      "default": "one full bottle"
     },
     {
       "type": "text",
@@ -133,6 +146,13 @@
     },
     {
       "type": "text",
+      "id": "new_sublabel",
+      "label": "New column sub-label",
+      "info": "Optional small caption under the column label. Leave blank to match the brand-name treatment.",
+      "default": ""
+    },
+    {
+      "type": "text",
       "id": "new_item_1",
       "label": "New item 1",
       "default": "From $4 per scent"
@@ -159,13 +179,13 @@
       "type": "text",
       "id": "tagline",
       "label": "Tagline",
-      "default": "The math is simple. The hard part is picking which six."
+      "default": "→ The math is obvious."
     },
     {
       "type": "text",
       "id": "cta_text",
       "label": "CTA text",
-      "default": "Start Exploring — From $4"
+      "default": "Build Your Rotation — From $4"
     },
     {
       "type": "url",

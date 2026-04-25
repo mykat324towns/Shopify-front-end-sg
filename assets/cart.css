@@ -180,6 +180,15 @@
   color: var(--color-on-surface);
 }
 
+.cart-drawer__bnpl {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--color-on-surface-muted);
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin: var(--space-2) 0 var(--space-3);
+}
+
 .cart-drawer__checkout-btn {
   display: block;
   width: 100%;

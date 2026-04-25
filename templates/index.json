@@ -12,35 +12,37 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "overline": "Authentic decants. From $4.",
-        "headline": "Try ten.<br>Don't bet on one.",
-        "subtext": "$300 buys one full bottle and the regret if it's wrong. Or it builds a rotation you'll actually wear.",
-        "proof_count": 846,
-        "cta_primary_text": "Build Your Rotation",
+        "overline": "Authentic. Decanted. From $4.",
+        "headline": "Ten scents.<br>One bottle's price.",
+        "subtext": "Decants from $4. Skip the $300 blind-buy regret. Try ten before you commit to one.",
+        "proof_text": "Hand-poured in Arizona. Authentic-only — no clones, no dupes, no oils.",
+        "cta_primary_text": "Browse Best Sellers",
         "cta_primary_url": "/collections/best-sellers",
         "cta_secondary_text": "How it works →",
         "cta_secondary_url": "#how-it-works",
-        "trust_1": "100% authentic",
+        "trust_1": "Poured from authentic bottles",
         "trust_2": "Ships in 1–2 days",
-        "trust_3": "Hand packed",
+        "trust_3": "Hand-packed in Arizona",
         "sidebar_text": "Decants · Try before you commit"
       }
     },
     "comparison": {
       "type": "comparison",
       "settings": {
-        "headline": "$300 locks you into one.<br>Or it builds your rotation.",
-        "old_label": "One full bottle",
+        "headline": "Ten scents for the price of one.",
+        "old_label": "Blind Buy",
+        "old_sublabel": "one full bottle",
         "old_item_1": "$300 up front",
         "old_item_2": "Locked into one fragrance",
         "old_item_3": "No way to try first",
         "old_item_4": "Stuck with buyer's remorse",
         "new_label": "Scent Gallery",
+        "new_sublabel": "",
         "new_item_1": "From $4 per scent",
         "new_item_2": "10+ fragrances for the same price",
         "new_item_3": "Try before you ever commit",
         "new_item_4": "Rotate. Explore. Own your collection.",
-        "tagline": "→ The math is obvious. The collection is waiting.",
+        "tagline": "→ The math is obvious.",
         "cta_text": "Build Your Rotation — From $4",
         "cta_url": "/collections/best-sellers",
         "receipt_eyebrow": "The math",
@@ -68,15 +70,15 @@
     "size-guide": {
       "type": "size-guide",
       "settings": {
-        "title": "Every size. Your choice.",
-        "subtitle": "From a quick test to a full rotation. All extracted from authentic bottles."
+        "title": "Pick your test size.",
+        "subtitle": "Start with 5ml — about two weeks of daily wear. Upgrade once you find the one."
       }
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
         "title": "Best Sellers",
-        "subtitle": "The most-explored fragrances in the rotation. Pick one. Try them all.",
+        "subtitle": "The ones collectors keep coming back for. Start here.",
         "collection": "best-sellers",
         "view_all_text": "View All →",
         "view_all_url": "/collections/best-sellers"
@@ -85,10 +87,10 @@
     "latest-collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Latest Pickups",
-        "subtitle": "Just dropped into the rotation.",
+        "title": "Latest Drops",
+        "subtitle": "New this week. Limited stock until the next batch.",
         "collection": "latest-picks",
-        "view_all_text": "View All →",
+        "view_all_text": "See all latest →",
         "view_all_url": "/collections/latest-picks",
         "section_class": "latest-pickups",
         "layout_variant": "spacious"
@@ -97,41 +99,41 @@
     "kit-builder-cta": {
       "type": "kit-builder-cta",
       "settings": {
-        "overline": "Don't commit. Rotate.",
+        "overline": "Build it your way.",
         "headline": "Build Your Rotation",
-        "subtext": "Add the ones you've been putting off. Try ten for less than one bottle. We pack and ship in days.",
+        "subtext": "Pick your sizes. Stack the ones you've been meaning to try. Ship one box, one tracking number.",
         "cta_text": "Start Building →",
         "cta_url": "/collections/best-sellers",
-        "trust_line": "100% authentic · Ships in 1–2 days · From $4"
+        "trust_line": "Klarna · Afterpay · Shop Pay Installments"
       }
     },
     "how-it-works": {
       "type": "how-it-works",
       "settings": {
         "title": "How it works.",
-        "subtitle": "No subscriptions. No commitments. Try everything that's been on your radar.",
+        "subtitle": "No subscriptions. No surprise charges. One order, one box, one tracking number.",
         "step1_num": "01",
-        "step1_title": "Browse by name",
-        "step1_body": "If it's been on your radar, it's here. Pick the one you've been meaning to try.",
+        "step1_title": "Pick the bottle you've been watching",
+        "step1_body": "Le Beau. Greenley. Vibrato. Imagination. The ones everyone's been talking about — all here.",
         "step2_num": "02",
-        "step2_title": "Pick a size",
-        "step2_body": "A quick test or enough to wear all week. Both options are a few bucks.",
+        "step2_title": "Pick a size that fits the risk",
+        "step2_body": "1ml to test. 5ml for two weeks. 30ml when you're sure. From $4.",
         "step3_num": "03",
-        "step3_title": "Know before you commit",
-        "step3_body": "If it's yours, you'll know. If it's not, there are 50 more on the list."
+        "step3_title": "Know before you drop $300",
+        "step3_body": "If it's the one, go full-size. If it's not, the rotation has more waiting."
       }
     },
     "testimonials": {
       "type": "testimonials",
       "settings": {
-        "overline": "Reviews",
-        "title": "From people who wear these"
+        "overline": "From real customers",
+        "title": "What people thought, then what happened."
       },
       "blocks": {
         "t-1": {
           "type": "testimonial",
           "settings": {
-            "quote": "Ordered 6 scents for $42. Found my new signature. Never would've known without trying it first.",
+            "quote": "Was about to drop $280 on Le Beau blind. Tried 6 decants for $42 instead — found my signature wasn't even on my list.",
             "name": "Marcus T.",
             "initials": "MT",
             "stars": 5
@@ -140,7 +142,7 @@
         "t-2": {
           "type": "testimonial",
           "settings": {
-            "quote": "Packaging was surprisingly good. Nothing leaked, everything sealed. Arrived fast.",
+            "quote": "Thought the sprayers would be cheap plastic. The atomizer's nicer than the original Greenley bottle's.",
             "name": "Jacob L.",
             "initials": "JL",
             "stars": 5
@@ -149,7 +151,7 @@
         "t-3": {
           "type": "testimonial",
           "settings": {
-            "quote": "I was skeptical about decants. Not anymore. The 5ml lasted me two full weeks.",
+            "quote": "Thought 5ml wouldn't last a week. Sprayed Vibrato daily for 16 days straight. Still half left.",
             "name": "Logan M.",
             "initials": "LM",
             "stars": 5
@@ -158,7 +160,7 @@
         "t-4": {
           "type": "testimonial",
           "settings": {
-            "quote": "Stopped buying blind after this. My rotation is actually good now.",
+            "quote": "Was sure decants would smell weaker than the bottle. Identical. Got compliments at the office same as Sephora.",
             "name": "Derek S.",
             "initials": "DS",
             "stars": 5
@@ -170,10 +172,10 @@
     "cta-section": {
       "type": "cta-section",
       "settings": {
-        "overline": "Six scents for what one costs",
-        "title": "Stop putting it all on one bottle.",
-        "body": "For what you'd spend on one full bottle, you could have six decants and actually know what you like.",
-        "cta_primary_text": "Browse the Gallery",
+        "overline": "Last call.",
+        "title": "Your signature is in there somewhere.",
+        "body": "One of them is the one you'll wear out. The rest live in the rotation. From $4 to find out.",
+        "cta_primary_text": "Browse Best Sellers",
         "cta_primary_url": "/collections/best-sellers",
         "cta_secondary_text": "See all sizes →",
         "cta_secondary_url": "/collections/all"
@@ -183,57 +185,57 @@
       "type": "faq",
       "settings": {
         "overline": "Common questions",
-        "title": "Everything you need to know.",
-        "subtitle": "Quick answers before you start your rotation."
+        "title": "What everyone asks before their first order.",
+        "subtitle": ""
       },
       "blocks": {
         "faq-1": {
           "type": "faq_item",
           "settings": {
-            "question": "How many sprays does each vial contain?",
-            "answer": "1ML — 18+ sprays · 2ML — 35+ sprays · 5ML — 85+ sprays · 10ML — 170+ sprays · 30ML — 500+ sprays. Note: 1ML orders arrive in a 2ML vial filled halfway."
+            "question": "Are these actually authentic, or are they clones?",
+            "answer": "Every fragrance is poured from a sealed bottle bought directly from authorized retailers or the brand. We don't sell clones, dupes, or oils — ever. Every batch is logged so we can trace it back to the bottle if you ask."
           }
         },
         "faq-2": {
           "type": "faq_item",
           "settings": {
-            "question": "Are your fragrances authentic?",
-            "answer": "Yes — every fragrance is 100% authentic, sourced from trusted authorized retailers or directly from the brand. We never sell clones, fakes, or dupes."
+            "question": "What exactly is a decant?",
+            "answer": "It's a smaller portion of the original fragrance, hand-poured into a glass atomizer. Same liquid, same concentration, same scent — just in a 1ml–30ml bottle instead of a 100ml one. The trade-off: you don't get the original retail bottle. The upside: you spend $4–$20 instead of $250 to find out if you actually like it."
           }
         },
         "faq-3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many sprays do I get?",
+            "answer": "1ml ≈ 18 sprays · 2ml ≈ 35 sprays · <strong>5ml ≈ 90 sprays (about 2 weeks of daily wear)</strong> · 10ml ≈ 170 sprays · 30ml ≈ 500 sprays. Note: 1ml orders ship in a 2ml vial filled halfway."
+          }
+        },
+        "faq-4": {
           "type": "faq_item",
           "settings": {
             "question": "How long does shipping take?",
             "answer": "Most orders are processed within 24 hours and delivered within 2–6 business days depending on your location. You'll receive a tracking number as soon as your order ships."
           }
         },
-        "faq-4": {
+        "faq-5": {
           "type": "faq_item",
           "settings": {
             "question": "Where can I track my order?",
             "answer": "Tracking numbers are sent by email after shipment. Enter your tracking number on USPS.com to follow your order in real time."
           }
         },
-        "faq-5": {
+        "faq-6": {
           "type": "faq_item",
           "settings": {
             "question": "Do you offer international shipping?",
             "answer": "At this time, we ship within the United States only. We're actively working to expand internationally."
           }
         },
-        "faq-6": {
+        "faq-7": {
           "type": "faq_item",
           "settings": {
             "question": "How are the decants packaged?",
             "answer": "Each decant is carefully hand-filled and sealed in a premium glass atomizer with a secure cap, then labeled with the fragrance name. Orders ship in padded protective packaging."
-          }
-        },
-        "faq-7": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Do decants come in the original bottle? What is a decant?",
-            "answer": "Decants are hand-poured from the original bottle into new glass atomizers — you're receiving the exact same fragrance, simply in a smaller and more affordable size. The original retail bottle is not included."
           }
         },
         "faq-8": {

@@ -2,7 +2,7 @@
   <div class="container">
 
     <header class="page-header">
-      <h1 class="page-header__title">Search</h1>
+      <h1 class="page-header__title">Search the gallery</h1>
       {%- if search.performed and search.results_count > 0 -%}
         <p class="page-header__meta">
           {{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms | escape }}&rdquo;
@@ -19,7 +19,7 @@
           type="search"
           name="q"
           value="{{ search.terms | escape }}"
-          placeholder="Search fragrances…"
+          placeholder="Try &ldquo;Le Beau&rdquo; or &ldquo;Greenley&rdquo;…"
           aria-label="Search fragrances"
           autocomplete="off"
           spellcheck="false"
@@ -38,14 +38,14 @@
         </div>
       {%- else -%}
         <div class="listing-empty">
-          <p class="listing-empty__title">No results for &ldquo;{{ search.terms | escape }}&rdquo;</p>
-          <p class="listing-empty__sub">Try a different name, house, or scent profile.</p>
+          <p class="listing-empty__title">No &ldquo;{{ search.terms | escape }}&rdquo; yet.</p>
+          <p class="listing-empty__sub">Try a different name, or browse the full catalog.</p>
         </div>
       {%- endif -%}
     {%- else -%}
       <div class="listing-empty">
         <p class="listing-empty__title">What are you looking for?</p>
-        <p class="listing-empty__sub">Search by fragrance name or house.</p>
+        <p class="listing-empty__sub">Search by fragrance name, house, or note. (Le Beau, Parfums de Marly, vanilla, woody…)</p>
       </div>
     {%- endif -%}
 
