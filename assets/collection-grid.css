@@ -15,10 +15,11 @@
 .collection__title {
   font-family: var(--font-display);
   font-size: var(--text-h2);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--color-on-surface);
   font-feature-settings: "kern" 1;
+  line-height: 1.1;
 }
 
 .collection__count {
@@ -106,11 +107,21 @@
   font-weight: 600;
   color: var(--color-primary);
   text-decoration: none;
+  border-radius: var(--radius-sm);
   transition: opacity var(--duration-fast) var(--ease-standard);
 }
 
 .collection__view-all:hover {
   opacity: 0.7;
+}
+
+.collection__view-all:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-green);
+}
+
+.collection__view-all:active {
+  opacity: 0.5;
 }
 
 /* Latest pickups section variant */
@@ -171,8 +182,8 @@
   height: 6px;
   min-width: 24px;
   background: var(--color-primary);
-  border-radius: 3px;
-  transition: left 0.1s linear;
+  border-radius: var(--radius-sm);
+  transition: left var(--duration-instant) linear;
 }
 
 /* ── Responsive ── */

@@ -4,8 +4,8 @@
   padding-block: var(--space-12);
   background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-clay-light) 100%);
   text-align: center;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   content-visibility: auto;
   contain-intrinsic-size: auto 500px;
 }
@@ -20,13 +20,10 @@
 
 .kit-builder-cta__bottle {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.kit-builder-cta__bottle:hover {
-  opacity: 1;
+  transform: translateY(16px);
+  transition:
+    opacity var(--duration-slow) var(--ease-reveal),
+    transform var(--duration-slow) var(--ease-reveal);
 }
 
 .kit-builder-cta__bottle img {
@@ -49,19 +46,25 @@
 }
 
 .kit-builder-cta.is-visible .kit-builder-cta__bottle {
-  opacity: 0.75;
+  opacity: 0.72;
   transform: translateY(0);
 }
 
-.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(2) { transition-delay: 70ms; }
-.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(3) { transition-delay: 140ms; }
-.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(4) { transition-delay: 210ms; }
-.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(5) { transition-delay: 280ms; }
-.kit-builder-cta.is-visible .kit-builder-cta__bottle:hover { opacity: 1; }
+.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(2) { transition-delay: 60ms; }
+.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(3) { transition-delay: 120ms; }
+.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(4) { transition-delay: 180ms; }
+.kit-builder-cta.is-visible .kit-builder-cta__bottle:nth-child(5) { transition-delay: 240ms; }
+
+@media (hover: hover) {
+  .kit-builder-cta.is-visible .kit-builder-cta__bottle:hover {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
 
 .kit-builder-cta__overline {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -88,8 +91,9 @@
 }
 
 .kit-cta__trust {
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-on-surface-muted);
   margin-top: var(--space-2);

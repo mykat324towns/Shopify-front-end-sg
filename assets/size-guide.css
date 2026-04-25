@@ -9,6 +9,7 @@
 .size-guide__header {
   text-align: center;
   margin-bottom: var(--space-8);
+  padding-inline: var(--padding-x-mobile);
 }
 
 .size-guide__title {
@@ -24,6 +25,9 @@
   font-size: var(--text-body-sm);
   color: var(--color-on-surface-muted);
   margin-top: var(--space-3);
+  max-width: 52ch;
+  margin-inline: auto;
+  line-height: 1.6;
 }
 
 .size-guide__row {
@@ -57,7 +61,7 @@
 
 .size-guide__label {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -66,19 +70,24 @@
 
 .size-guide__price {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-warm-amber);
   font-weight: 400;
 }
 
 .size-guide__type {
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-warm-amber);
-  margin-top: 1px;
+  margin-top: var(--space-1);
+}
+
+/* Fade hint: indicates scrollability */
+.size-guide__fade-hint {
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -95,9 +104,9 @@
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     justify-content: flex-start;
-    gap: var(--space-8);
+    gap: var(--space-6);
     padding-inline: var(--padding-x-mobile);
-    padding-bottom: var(--space-3);
+    padding-bottom: var(--space-4);
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
@@ -112,9 +121,14 @@
   /* Scale bottle heights down proportionally for mobile */
   .size-guide__item:nth-child(1) img { height: 36px; }
   .size-guide__item:nth-child(2) img { height: 48px; }
-  .size-guide__item:nth-child(3) img { height: 62px; }
-  .size-guide__item:nth-child(4) img { height: 76px; }
-  .size-guide__item:nth-child(5) img { height: 82px; }
-  .size-guide__item:nth-child(6) img { height: 96px; }
-  .size-guide__item:nth-child(7) img { height: 104px; }
+  .size-guide__item:nth-child(3) img { height: 64px; }
+  .size-guide__item:nth-child(4) img { height: 80px; }
+  .size-guide__item:nth-child(5) img { height: 88px; }
+  .size-guide__item:nth-child(6) img { height: 100px; }
+  .size-guide__item:nth-child(7) img { height: 112px; }
+
+  /* Scroll hint: last item gets right padding so it's obviously scrollable */
+  .size-guide__item:last-child {
+    padding-right: var(--padding-x-mobile);
+  }
 }

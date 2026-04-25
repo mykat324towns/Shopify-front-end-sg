@@ -8,15 +8,13 @@
   display: flex;
   flex-direction: column;
   transition:
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.25s ease;
+    transform var(--duration-slow) var(--ease-reveal),
+    border-color var(--duration-normal) var(--ease-standard);
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
-  border-color: rgba(28,64,50,0.20);
+  transform: translateY(-3px);
+  border-color: var(--color-border-strong);
 }
 
 .product-card__image-wrap {
@@ -77,13 +75,12 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-on-surface-muted);
-  margin-bottom: 2px;
 }
 
 /* Serif product name */
 .product-card__name {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: var(--text-body-lg);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -96,7 +93,7 @@
 }
 
 @media (max-width: 640px) {
-  .product-card__name { font-size: 15px; }
+  .product-card__name { font-size: var(--text-body); }
 }
 
 .product-card__meta {
@@ -127,43 +124,56 @@
 
 .product-card__review-count {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-on-surface-muted);
   letter-spacing: 0.03em;
-  margin-left: 2px;
+  margin-left: var(--space-1);
 }
 
 /* Size pills */
 .product-card__sizes {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: var(--space-2);
   margin: var(--space-3) 0 var(--space-1);
 }
 
 .size-pill {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.06em;
-  padding: 4px 9px;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border-strong);
   background: transparent;
   color: var(--color-on-surface-muted);
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-standard);
+  min-height: 28px;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
 }
 
 .size-pill--active {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  color: #FFFFFF;
+  color: var(--color-bg);
 }
 
 .size-pill:hover:not(.size-pill--active) {
   border-color: var(--color-on-surface-muted);
   color: var(--color-on-surface);
+}
+
+.size-pill:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-green);
+}
+
+.size-pill:active {
+  opacity: 0.8;
 }
 
 @keyframes pill-select {
@@ -179,24 +189,24 @@
 /* Pill info line */
 .pill-info {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-on-surface-muted);
-  margin: 2px 0 var(--space-2);
-  min-height: 14px;
+  margin: var(--space-1) 0 var(--space-2);
+  min-height: var(--space-4);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 
 .pill-badge {
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-warm-amber);
   background: var(--color-warm-amber-light);
-  padding: 1px 5px;
-  border-radius: 3px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
 }
 
 .product-card__price {
@@ -213,7 +223,7 @@
   display: contents;
 }
 
-/* CTA button with delight */
+/* CTA button */
 .product-card__cta {
   display: flex;
   align-items: center;
@@ -228,24 +238,22 @@
   border: none;
   border-radius: var(--radius-md);
   min-height: 48px;
-  padding: 12px 20px;
+  padding: var(--space-3) var(--space-6);
   cursor: pointer;
   margin-top: auto;
-  box-shadow: 0 2px 8px rgba(28,64,50,0.24), 0 1px 3px rgba(28,64,50,0.12);
   transition:
-    background-color 0.22s ease,
-    transform 0.08s ease,
-    letter-spacing 0.22s ease,
-    box-shadow 0.22s ease;
+    background-color var(--duration-normal) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
 
 .product-card__cta:hover {
   background-color: var(--color-primary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(28,64,50,0.30), 0 3px 8px rgba(28,64,50,0.18);
+  transform: translateY(-1px);
 }
 
-.product-card__cta:active { transform: scale(0.96); }
+.product-card__cta:active {
+  transform: scale(0.97);
+}
 
 .product-card__cta:focus-visible {
   outline: none;
