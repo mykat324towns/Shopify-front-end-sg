@@ -121,29 +121,16 @@
 }
 
 /* Spacious layout variant — used on Latest Pickups mobile carousel */
-/* Shows ~1.2 cards at a time so each card gets more breathing room */
+/* slidesPerView: 1.2 is handled in theme.js via data-slides-per-view attribute */
 @media (max-width: 768px) {
-  .latest-pickups--spacious .swiper {
-    overflow: visible;
+  /* Slightly taller card images on the spacious variant */
+  .latest-pickups--spacious .swiper-slide .product-card__image-wrap {
+    aspect-ratio: 3 / 4;
   }
-  .latest-pickups--spacious .swiper-wrapper {
-    /* each slide is ~78vw, so the next card peeks at ~22vw */
-  }
-  .latest-pickups--spacious .swiper-slide {
-    width: 78vw !important;
-    max-width: 310px;
-  }
-  .latest-pickups--spacious .carousel-track {
-    overflow: hidden;
-  }
-  /* Deeper padding for the headline to signal a tonal shift */
-  .latest-pickups--spacious .latest-pickups__header,
-  .latest-pickups--spacious .collection__header {
-    padding-top: var(--space-4);
-  }
-  /* Dimmer sub text to feel editorially distinct from Best Sellers */
+  /* Italic subtitle to signal editorial/new-arrival tone vs Best Sellers */
   .latest-pickups--spacious .collection__sub {
     font-style: italic;
+    letter-spacing: 0.01em;
   }
 }
 

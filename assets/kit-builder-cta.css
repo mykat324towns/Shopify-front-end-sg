@@ -96,7 +96,7 @@
   text-align: center;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .kit-builder-cta {
     padding-block: var(--space-10);
   }

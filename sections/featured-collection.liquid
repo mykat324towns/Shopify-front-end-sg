@@ -14,8 +14,10 @@
     {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
 
       <!-- Mobile Swiper -->
+      {%- assign slides_per_view = '2.5' -%}
+      {%- if layout_variant == 'spacious' -%}{%- assign slides_per_view = '1.2' -%}{%- endif -%}
       <div class="carousel-track {{ section_class }}__swiper">
-        <div class="swiper" id="{{ section.id }}-swiper">
+        <div class="swiper" id="{{ section.id }}-swiper" data-slides-per-view="{{ slides_per_view }}">
           <div class="swiper-wrapper">
             {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
               <div class="swiper-slide">

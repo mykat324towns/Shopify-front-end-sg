@@ -214,9 +214,10 @@
     const initCarousel = (swiperEl, scrollbarEl, thumbEl) => {
       if (!swiperEl || !scrollbarEl || !thumbEl) return;
 
+      const spv = parseFloat(swiperEl.dataset.slidesPerView) || 2.5;
       const swiper = new Swiper(swiperEl, {
-        spaceBetween: 14,
-        slidesPerView: 2.5,
+        spaceBetween: spv < 2 ? 20 : 14,
+        slidesPerView: spv,
         freeMode: true,
         grabCursor: true,
         simulateTouch: true,

@@ -81,7 +81,7 @@
   margin-top: 1px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .size-guide {
     padding-block: var(--space-8) var(--space-10);
   }
