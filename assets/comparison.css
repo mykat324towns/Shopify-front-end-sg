@@ -102,7 +102,7 @@
   text-align: center;
   margin-bottom: var(--space-6);
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(var(--space-3));
   transition:
     opacity var(--duration-slow) var(--ease-enter) 200ms,
     transform var(--duration-slow) var(--ease-enter) 200ms;
@@ -118,7 +118,7 @@
   width: fit-content;
   margin: 0 auto;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(var(--space-3));
   transition:
     opacity var(--duration-slow) var(--ease-enter) 350ms,
     transform var(--duration-slow) var(--ease-enter) 350ms;
@@ -137,7 +137,8 @@
   padding: var(--space-8);
   font-family: var(--font-body);
   position: sticky;
-  top: var(--space-24);
+  /* nav (64px) + announcement bar (40px) + breathing room (8px) */
+  top: calc(var(--space-16) + var(--space-10) + var(--space-2));
 }
 
 .receipt__header {
@@ -185,7 +186,7 @@
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--color-border);
   opacity: 0;
-  transform: translateX(14px);
+  transform: translateX(var(--space-4));
   transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -270,7 +271,7 @@
 }
 
 .receipt__total-value.is-ticking {
-  animation: total-tick 0.22s ease;
+  animation: total-tick var(--duration-normal) var(--ease-standard);
 }
 
 @keyframes total-complete-flash {
@@ -280,7 +281,7 @@
 }
 
 .receipt__total-value.is-complete {
-  animation: total-complete-flash 0.7s ease;
+  animation: total-complete-flash var(--duration-reveal) var(--ease-standard);
 }
 
 .receipt__vs-row {
