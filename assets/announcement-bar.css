@@ -4,7 +4,7 @@
   background: var(--color-bg-alt);
   border-bottom: 1px solid var(--color-border);
   color: var(--color-on-surface);
-  height: 40px;
+  height: var(--space-10);
   display: flex;
   align-items: center;
   position: relative;
@@ -46,8 +46,8 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  width: var(--space-10);
+  height: var(--space-10);
   display: flex;
   align-items: center;
   justify-content: center;
