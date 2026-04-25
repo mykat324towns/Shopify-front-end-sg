@@ -125,31 +125,31 @@
       "type": "testimonials",
       "settings": {
         "overline": "Reviews",
-        "title": "What collectors are saying"
+        "title": "From people who actually wear these"
       },
       "blocks": {
         "t-1": {
           "type": "testimonial",
           "settings": {
-            "quote": "Fastest shipping I've ever gotten. Packaging was amazing.",
-            "name": "Jacob L.",
-            "initials": "JL",
+            "quote": "Ordered 6 scents for $42. Found my new signature. Never would've known without trying it first.",
+            "name": "Marcus T.",
+            "initials": "MT",
             "stars": 5
           }
         },
         "t-2": {
           "type": "testimonial",
           "settings": {
-            "quote": "Prices are better than anywhere I've seen. Quality is legit.",
-            "name": "Customer",
-            "initials": "CU",
+            "quote": "Packaging was surprisingly good. Nothing leaked, everything sealed. Arrived fast.",
+            "name": "Jacob L.",
+            "initials": "JL",
             "stars": 5
           }
         },
         "t-3": {
           "type": "testimonial",
           "settings": {
-            "quote": "Clean packaging, no leaks, and high-quality bottles.",
+            "quote": "I was skeptical about decants. Not anymore. The 5ml lasted me two full weeks.",
             "name": "Logan M.",
             "initials": "LM",
             "stars": 5
@@ -158,9 +158,9 @@
         "t-4": {
           "type": "testimonial",
           "settings": {
-            "quote": "Owner kept me updated the whole time. Super reliable.",
-            "name": "Corbin",
-            "initials": "CO",
+            "quote": "Stopped buying blind after this. My rotation is actually good now.",
+            "name": "Derek S.",
+            "initials": "DS",
             "stars": 5
           }
         }
@@ -170,21 +170,21 @@
     "cta-section": {
       "type": "cta-section",
       "settings": {
-        "overline": "Start your rotation",
-        "title": "Try before you ever commit.",
-        "body": "From $4 a scent. Hundreds of fragrances. No regrets.",
-        "cta_primary_text": "Shop Now",
+        "overline": "Six scents for what one costs",
+        "title": "Stop putting it all on one bottle.",
+        "body": "For what you'd spend on one full bottle, you could have six decants and actually know what you like.",
+        "cta_primary_text": "Browse the Gallery",
         "cta_primary_url": "/collections/best-sellers",
-        "cta_secondary_text": "View All Sizes →",
+        "cta_secondary_text": "See all sizes →",
         "cta_secondary_url": "/collections/all"
       }
     },
     "faq": {
       "type": "faq",
       "settings": {
-        "overline": "Everything you need to know",
-        "title": "Quick Answers",
-        "subtitle": "Luxury fragrance samples, packaged carefully and explained simply."
+        "overline": "Common questions",
+        "title": "Everything you need to know.",
+        "subtitle": "Quick answers before you start your rotation."
       },
       "blocks": {
         "faq-1": {

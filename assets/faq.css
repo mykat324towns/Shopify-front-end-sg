@@ -15,11 +15,11 @@
 .faq__overline {
   display: block;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: var(--text-label);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-primary-light);
+  color: var(--color-on-surface-muted);
   margin-bottom: var(--space-3);
 }
 
@@ -66,6 +66,7 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-6);
+  min-height: 44px;
   width: 100%;
   font-family: var(--font-body);
   font-size: var(--text-body);
@@ -76,6 +77,17 @@
   border: none;
   text-align: left;
   user-select: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.faq__question:hover {
+  color: var(--color-primary);
+}
+
+.faq__question:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+  border-radius: var(--radius-md);
 }
 
 .faq__question::after {
@@ -95,7 +107,7 @@
 .faq__answer-wrap {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: grid-template-rows var(--duration-normal) var(--ease-reveal);
 }
 
 .faq__item.is-open .faq__answer-wrap {
@@ -109,10 +121,11 @@
 
 .faq__answer {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: var(--text-body-sm);
   color: var(--color-on-surface-muted);
   line-height: 1.65;
   padding: 0 var(--space-6) var(--space-6);
+  max-width: 65ch;
 }
 
 .faq__answer p {
@@ -121,9 +134,24 @@
 
 @media (max-width: 768px) {
   .faq {
-    padding-block: var(--space-10); /* was --space-6; section needs air matching peers */
+    padding-block: var(--space-10);
   }
   .faq__header {
-    margin-bottom: var(--space-6); /* was --space-3; too tight before accordion list */
+    margin-bottom: var(--space-6);
+  }
+  .faq__answer {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__answer-wrap {
+    transition: none;
+  }
+  .faq__item {
+    transition: none;
+  }
+  .faq__question {
+    transition: none;
   }
 }
