@@ -12,18 +12,18 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "overline": "Fragrance Decants",
-        "headline": "Try the hype.<br>Keep what hits.",
-        "subtext": "Stop putting all your money into one bottle. Try everything on your list — from $4.",
+        "overline": "Authentic decants. From $4.",
+        "headline": "Try ten.<br>Don't bet on one.",
+        "subtext": "$300 buys one full bottle and the regret if it's wrong. Or it builds a rotation you'll actually wear.",
         "proof_count": 846,
-        "cta_primary_text": "Build Your Collection",
+        "cta_primary_text": "Build Your Rotation",
         "cta_primary_url": "/collections/best-sellers",
-        "cta_secondary_text": "See how it works →",
+        "cta_secondary_text": "How it works →",
         "cta_secondary_url": "#how-it-works",
         "trust_1": "100% authentic",
         "trust_2": "Ships in 1–2 days",
         "trust_3": "Hand packed",
-        "sidebar_text": "Luxury Decants · Try Before You Commit"
+        "sidebar_text": "Decants · Try before you commit"
       }
     },
     "comparison": {

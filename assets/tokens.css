@@ -104,6 +104,22 @@
   --padding-x-mobile:  20px;
   --padding-x-tablet:  40px;
   --padding-x-desktop: 64px;
+
+  /* ── Icon sizes ── */
+  --size-icon-sm:      20px;
+  --size-icon-md:      22px;
+  --size-icon-lg:      24px;
+
+  /* ── Touch target minimum (WCAG 2.5.5) ── */
+  --size-touch-target: 44px;
+
+  /* ── Drawer / sheet sizes ── */
+  --size-drawer:       min(320px, 85vw);
+
+  /* ── Component-specific surfaces ── */
+  --color-bg-nav-scrolled:    rgba(20, 20, 20, 0.92);
+  --shadow-btn-primary:       0 4px 14px rgba(28, 64, 50, 0.24);
+  --shadow-btn-primary-hover: 0 6px 20px rgba(28, 64, 50, 0.30);
 }
 
 @media (prefers-reduced-motion: reduce) {
