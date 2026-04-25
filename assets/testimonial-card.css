@@ -13,7 +13,7 @@
 .testimonials__overline {
   display: block;
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: var(--text-caption); /* was 10px off-token; 12px */
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -210,8 +210,8 @@
 }
 
 @media (max-width: 640px) {
-  .testimonials { padding-block: var(--space-6); }
-  .testimonials__header { margin-bottom: var(--space-4); }
+  .testimonials { padding-block: var(--space-10); } /* was --space-6; more section air on mobile */
+  .testimonials__header { margin-bottom: var(--space-6); } /* was --space-4; more gap before carousel */
 
   .testimonials__grid {
     display: flex;

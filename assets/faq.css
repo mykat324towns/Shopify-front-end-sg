@@ -121,9 +121,9 @@
 
 @media (max-width: 640px) {
   .faq {
-    padding-block: var(--space-6);
+    padding-block: var(--space-10); /* was --space-6; section needs air matching peers */
   }
   .faq__header {
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-6); /* was --space-3; too tight before accordion list */
   }
 }

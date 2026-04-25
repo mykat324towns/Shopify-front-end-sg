@@ -124,8 +124,13 @@
 .btn-ghost--white:active { transform: scale(0.97); }
 
 @media (max-width: 640px) {
-  .cta-section { padding-block: var(--space-6); }
+  .cta-section { padding-block: var(--space-10); } /* was --space-6; needs breathing room */
+  .cta-section .container { gap: var(--space-4); } /* tighter internal rhythm on mobile; was --space-6 uniform */
   .cta-section__title { font-size: var(--text-h2); }
-  .cta-section__actions { flex-direction: column; align-items: stretch; }
+  .cta-section__actions {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: var(--space-6); /* extra separation from body text before CTA button */
+  }
   .btn-primary--white, .btn-ghost--white { justify-content: center; }
 }

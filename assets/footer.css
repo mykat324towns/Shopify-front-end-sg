@@ -201,13 +201,22 @@
 }
 
 @media (max-width: 640px) {
+  .footer {
+    padding-top: var(--space-12); /* was --space-20 (80px) desktop value; 48px is right for mobile */
+  }
+
   .footer__top {
     grid-template-columns: 1fr;
     gap: var(--space-8);
+    padding-bottom: var(--space-10); /* reduce bottom padding proportionally */
   }
 
   .footer__form {
     flex-direction: column;
+  }
+
+  .footer__subscribe-btn {
+    height: 48px; /* maintain tap target */
   }
 
   .footer__bottom {
