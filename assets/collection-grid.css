@@ -74,7 +74,7 @@
   border: 1.5px solid var(--color-primary);
   border-radius: var(--radius-md);
   min-height: 52px;
-  padding: 14px 32px;
+  padding: var(--space-3) var(--space-8);
   cursor: pointer;
   transition:
     background-color var(--duration-fast) var(--ease-standard),
@@ -171,7 +171,7 @@
   position: relative;
   height: 2px;
   background: var(--color-border);
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   margin-top: var(--space-4);
   overflow: visible;
 }
