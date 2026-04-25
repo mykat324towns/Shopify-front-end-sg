@@ -67,7 +67,7 @@
   line-height: 1.65;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .how-it-works {
     padding-block: var(--space-10); /* 40px — more section air on mobile */
   }
@@ -77,5 +77,8 @@
   .how-it-works__grid {
     flex-direction: column;
     gap: var(--space-4); /* tighter vertical gap between stacked cards */
+  }
+  .hiw-step {
+    padding: var(--space-8); /* 32px — more interior air when cards are full-width */
   }
 }

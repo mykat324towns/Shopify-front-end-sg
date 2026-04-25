@@ -119,7 +119,7 @@
   margin: 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .faq {
     padding-block: var(--space-10); /* was --space-6; section needs air matching peers */
   }

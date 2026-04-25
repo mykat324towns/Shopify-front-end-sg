@@ -209,7 +209,7 @@
   .testimonials__order-photo { max-width: 85%; margin-inline: auto; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .testimonials { padding-block: var(--space-10); } /* was --space-6; more section air on mobile */
   .testimonials__header { margin-bottom: var(--space-6); } /* was --space-4; more gap before carousel */
 

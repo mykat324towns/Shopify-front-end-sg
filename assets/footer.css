@@ -200,7 +200,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .footer {
     padding-top: var(--space-12); /* was --space-20 (80px) desktop value; 48px is right for mobile */
   }

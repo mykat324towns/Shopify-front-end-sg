@@ -123,7 +123,7 @@
 
 .btn-ghost--white:active { transform: scale(0.97); }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .cta-section { padding-block: var(--space-10); } /* was --space-6; needs breathing room */
   .cta-section .container { gap: var(--space-4); } /* tighter internal rhythm on mobile; was --space-6 uniform */
   .cta-section__title { font-size: var(--text-h2); }
