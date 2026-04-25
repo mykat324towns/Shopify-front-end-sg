@@ -33,6 +33,7 @@
   letter-spacing: -0.015em;
   color: var(--color-on-surface);
   font-feature-settings: "kern" 1;
+  text-wrap: balance;
 }
 
 .cta-section__body {

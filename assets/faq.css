@@ -29,6 +29,7 @@
   font-weight: 400;
   color: var(--color-on-surface);
   margin: 0 0 var(--space-3);
+  text-wrap: balance;
 }
 
 .faq__sub {

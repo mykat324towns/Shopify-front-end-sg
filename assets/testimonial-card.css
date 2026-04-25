@@ -28,6 +28,7 @@
   letter-spacing: -0.01em;
   color: var(--color-on-surface);
   font-feature-settings: "kern" 1;
+  text-wrap: balance;
 }
 
 /* 2-column grid (matches golden reference) */
