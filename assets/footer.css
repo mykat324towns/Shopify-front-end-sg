@@ -15,7 +15,7 @@
 /* Brand column */
 .footer__brand-name {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -42,11 +42,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  color: var(--color-on-surface);
+  color: var(--color-on-surface-muted);
   transition:
     border-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard),
@@ -58,10 +58,26 @@
   color: var(--color-accent);
 }
 
+.footer__social-link:active {
+  background-color: var(--color-accent-light);
+}
+
+.footer__social-link:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-green);
+}
+
 .footer__social-icon {
   width: 18px;
   height: 18px;
   fill: currentColor;
+}
+
+/* Instagram-style icons use stroke, not fill */
+.footer__social-icon--stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
 }
 
 /* Nav columns */
@@ -87,9 +103,17 @@
   font-size: var(--text-body-sm);
   color: var(--color-on-surface-muted);
   transition: color var(--duration-fast) var(--ease-standard);
+  padding-block: var(--space-1);
 }
 
 .footer__nav-link:hover {
+  color: var(--color-on-surface);
+}
+
+.footer__nav-link:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-focus-green);
   color: var(--color-on-surface);
 }
 
@@ -137,7 +161,7 @@
   font-family: var(--font-body);
   font-size: var(--text-body-sm);
   font-weight: 600;
-  color: #FFFFFF;
+  color: var(--color-bg);
   background-color: var(--color-accent);
   border: none;
   border-radius: var(--radius-md);
@@ -152,6 +176,11 @@
 .footer__subscribe-btn:hover {
   background-color: var(--color-accent-hover);
   transform: translateY(-1px);
+}
+
+.footer__subscribe-btn:active {
+  transform: scale(0.97);
+  background-color: var(--color-accent-hover);
 }
 
 .footer__subscribe-btn:focus-visible {
@@ -189,6 +218,13 @@
 }
 
 .footer__legal-link:hover {
+  color: var(--color-on-surface);
+}
+
+.footer__legal-link:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-focus-green);
   color: var(--color-on-surface);
 }
 
