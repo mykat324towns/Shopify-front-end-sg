@@ -120,17 +120,22 @@
   border-top: 1px solid var(--color-border);
 }
 
-/* Spacious layout variant — used on Latest Pickups mobile carousel */
-/* slidesPerView: 1.2 is handled in theme.js via data-slides-per-view attribute */
+/* Latest Pickups mobile visual differentiation (no JS dependency) */
 @media (max-width: 768px) {
-  /* Slightly taller card images on the spacious variant */
-  .latest-pickups--spacious .swiper-slide .product-card__image-wrap {
-    aspect-ratio: 3 / 4;
-  }
-  /* Italic subtitle to signal editorial/new-arrival tone vs Best Sellers */
-  .latest-pickups--spacious .collection__sub {
+  /* Italic subtitle — editorial / new-arrival tone vs Best Sellers */
+  .latest-pickups .collection__sub {
     font-style: italic;
     letter-spacing: 0.01em;
+  }
+  /* Accent rule under the header to create a visual break */
+  .latest-pickups .collection__header {
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-4);
+  }
+  /* Slightly more card padding so the gradient background breathes */
+  .latest-pickups .carousel-track {
+    padding-top: var(--space-2);
   }
 }
 
