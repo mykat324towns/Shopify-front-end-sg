@@ -48,7 +48,7 @@
 .comparison__col-label {
   display: block;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: var(--text-label);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -146,9 +146,9 @@
 
 .receipt__eyebrow {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-label);
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-primary);
   margin-bottom: var(--space-2);
@@ -196,7 +196,7 @@
 }
 
 .receipt__name {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
   color: var(--color-on-surface);
 }
@@ -209,7 +209,7 @@
 }
 
 .receipt__price {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
   color: var(--color-primary);
   font-variant-numeric: tabular-nums;
@@ -247,7 +247,7 @@
 }
 
 .receipt__total-label {
-  font-size: 11px;
+  font-size: var(--text-label);
   font-weight: 600;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -302,7 +302,7 @@
 }
 
 .receipt__vs-label {
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-style: italic;
   color: var(--color-on-surface-muted);
 }
