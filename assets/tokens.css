@@ -1,7 +1,6 @@
 /* Scent Gallery — Design System Tokens v2 */
 /* All hex values live here. Never hardcode hex in components. */
-/* polish-sync-probe: 2026-04-24-1717 */
-:root { --polish-probe-1717: 1; }
+/* layout-sync-probe: 2026-04-24 */
 
 :root {
   /* ── Color ── */
