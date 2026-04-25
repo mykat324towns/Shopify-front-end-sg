@@ -2,6 +2,25 @@
 {%- assign featured_collection = collections[collection_handle] -%}
 {%- assign section_class = section.settings.section_class | default: 'collection' -%}
 {%- assign layout_variant = section.settings.layout_variant | default: 'default' -%}
+{%- assign is_latest = false -%}
+{%- if section_class == 'latest-pickups' -%}{%- assign is_latest = true -%}{%- endif -%}
+
+{%- if is_latest -%}
+<style>
+  /* Latest Pickups inline overrides — bypasses CDN CSS cache */
+  #latest-pickups .collection__header {
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-4);
+  }
+  #latest-pickups .collection__sub {
+    font-style: italic;
+  }
+  #latest-pickups .carousel-track {
+    padding-top: var(--space-2);
+  }
+</style>
+{%- endif -%}
 
 <section class="{{ section_class }} {{ section_class }}--{{ layout_variant }}" aria-label="{{ section.settings.title | escape }}" id="{{ section_class }}">
   <div class="container">
@@ -15,7 +34,7 @@
 
       <!-- Mobile Swiper -->
       {%- assign slides_per_view = '2.5' -%}
-      {%- if layout_variant == 'spacious' or section_class == 'latest-pickups' -%}{%- assign slides_per_view = '1.2' -%}{%- endif -%}
+      {%- if is_latest -%}{%- assign slides_per_view = '1.2' -%}{%- endif -%}
       <div class="carousel-track {{ section_class }}__swiper">
         <div class="swiper" id="{{ section.id }}-swiper" data-slides-per-view="{{ slides_per_view }}">
           <div class="swiper-wrapper">
