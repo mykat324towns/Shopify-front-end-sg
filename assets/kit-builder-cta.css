@@ -98,14 +98,18 @@
 
 @media (max-width: 640px) {
   .kit-builder-cta {
-    padding-block: var(--space-6);
+    padding-block: var(--space-10);
   }
   .kit-builder-cta__headline {
     font-size: clamp(24px, 7vw, 36px);
   }
   .kit-builder-cta__bottles {
-    gap: var(--space-2);
-    margin-bottom: var(--space-3);
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+  .kit-builder-cta__sub {
+    font-size: var(--text-body-sm);
+    margin-bottom: var(--space-8);
   }
 }
 

@@ -1,8 +1,9 @@
 {%- assign collection_handle = section.settings.collection -%}
 {%- assign featured_collection = collections[collection_handle] -%}
 {%- assign section_class = section.settings.section_class | default: 'collection' -%}
+{%- assign layout_variant = section.settings.layout_variant | default: 'default' -%}
 
-<section class="{{ section_class }}" aria-label="{{ section.settings.title | escape }}" id="{{ section_class }}">
+<section class="{{ section_class }} {{ section_class }}--{{ layout_variant }}" aria-label="{{ section.settings.title | escape }}" id="{{ section_class }}">
   <div class="container">
     <header class="{{ section_class }}__header collection__header">
       <h2 class="collection__title">{{ section.settings.title }}</h2>
@@ -92,6 +93,17 @@
       "label": "CSS section class",
       "info": "Use 'collection' for Best Sellers, 'latest-pickups' for Latest Picks. Controls CSS scoping.",
       "default": "collection"
+    },
+    {
+      "type": "select",
+      "id": "layout_variant",
+      "label": "Layout variant",
+      "info": "Controls visual density. 'default' = standard 2-up carousel. 'spacious' = single-card scroll with larger images.",
+      "options": [
+        { "value": "default", "label": "Default (dense)" },
+        { "value": "spacious", "label": "Spacious (single card)" }
+      ],
+      "default": "default"
     }
   ],
   "presets": [

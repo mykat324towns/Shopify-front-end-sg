@@ -90,7 +90,8 @@
         "collection": "latest-picks",
         "view_all_text": "View All →",
         "view_all_url": "/collections/latest-picks",
-        "section_class": "latest-pickups"
+        "section_class": "latest-pickups",
+        "layout_variant": "spacious"
       }
     },
     "kit-builder-cta": {
