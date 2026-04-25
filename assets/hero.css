@@ -354,14 +354,26 @@
   .hero { padding-block: var(--space-6) var(--space-8); min-height: unset; }
   .hero__inner { gap: var(--space-4); }
 
-  /* Trust strip: stack on narrow mobile instead of wrapping mid-line */
+  /* Trust strip: keep horizontal on mobile, tighter to fit */
   .hero__trust {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 6px;
     width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
-  .hero__trust-sep { display: none; }
+  .hero__trust::-webkit-scrollbar { display: none; }
+  .hero__trust-item {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .hero__trust-sep {
+    font-size: 10px;
+    color: var(--color-border-strong);
+  }
 
   /* Video: 4/3 on mobile — less vertical dominance, cleaner crop */
   .hero__video {

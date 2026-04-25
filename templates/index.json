@@ -20,9 +20,9 @@
         "cta_primary_url": "/collections/best-sellers",
         "cta_secondary_text": "How it works →",
         "cta_secondary_url": "#how-it-works",
-        "trust_1": "Poured from authentic bottles",
-        "trust_2": "Ships in 1–2 days",
-        "trust_3": "Hand-packed in Arizona",
+        "trust_1": "100% authentic",
+        "trust_2": "Ships 1–2 days",
+        "trust_3": "Hand-packed in AZ",
         "sidebar_text": "Decants · Try before you commit"
       }
     },
@@ -126,14 +126,14 @@
     "testimonials": {
       "type": "testimonials",
       "settings": {
-        "overline": "From real customers",
-        "title": "What people thought, then what happened."
+        "overline": "Reviews",
+        "title": "From people who wear these"
       },
       "blocks": {
         "t-1": {
           "type": "testimonial",
           "settings": {
-            "quote": "Was about to drop $280 on Le Beau blind. Tried 6 decants for $42 instead — found my signature wasn't even on my list.",
+            "quote": "Ordered 6 scents for $42. Found my new signature. Never would've known without trying it first.",
             "name": "Marcus T.",
             "initials": "MT",
             "stars": 5
@@ -142,7 +142,7 @@
         "t-2": {
           "type": "testimonial",
           "settings": {
-            "quote": "Thought the sprayers would be cheap plastic. The atomizer's nicer than the original Greenley bottle's.",
+            "quote": "Packaging was surprisingly good. Nothing leaked, everything sealed. Arrived fast.",
             "name": "Jacob L.",
             "initials": "JL",
             "stars": 5
@@ -151,7 +151,7 @@
         "t-3": {
           "type": "testimonial",
           "settings": {
-            "quote": "Thought 5ml wouldn't last a week. Sprayed Vibrato daily for 16 days straight. Still half left.",
+            "quote": "I was skeptical about decants. Not anymore. The 5ml lasted me two full weeks.",
             "name": "Logan M.",
             "initials": "LM",
             "stars": 5
@@ -160,7 +160,7 @@
         "t-4": {
           "type": "testimonial",
           "settings": {
-            "quote": "Was sure decants would smell weaker than the bottle. Identical. Got compliments at the office same as Sephora.",
+            "quote": "Stopped buying blind after this. My rotation is actually good now.",
             "name": "Derek S.",
             "initials": "DS",
             "stars": 5
@@ -207,7 +207,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How many sprays do I get?",
-            "answer": "1ml ≈ 18 sprays · 2ml ≈ 35 sprays · <strong>5ml ≈ 90 sprays (about 2 weeks of daily wear)</strong> · 10ml ≈ 170 sprays · 30ml ≈ 500 sprays. Note: 1ml orders ship in a 2ml vial filled halfway."
+            "answer": "1ml ≈ 18 sprays · 2ml ≈ 36 sprays · <strong>5ml ≈ 90 sprays (about 2 weeks of daily wear)</strong> · 10ml ≈ 180 sprays · 30ml ≈ 540 sprays · 10ml Pressurized ≈ 130 sprays · 30ml Pressurized ≈ 390 sprays. Note: 1ml orders ship in a 2ml vial filled halfway."
           }
         },
         "faq-4": {

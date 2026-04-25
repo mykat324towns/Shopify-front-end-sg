@@ -90,20 +90,29 @@
 }
 
 .size-guide__tag {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-bg);
   background: var(--color-primary);
-  padding: 4px 8px;
+  padding: 3px 7px;
   border-radius: var(--radius-sm);
-  margin-bottom: var(--space-2);
   white-space: nowrap;
+  pointer-events: none;
 }
 
-/* Fade hint: indicates scrollability */
+/* Make the row a positioning context so the absolute tag floats above */
+.size-guide__row {
+  position: relative;
+}
+
+/* Fade hint: indicates scrollability on mobile */
 .size-guide__fade-hint {
   display: none;
 }
@@ -124,12 +133,23 @@
     justify-content: flex-start;
     gap: var(--space-6);
     padding-inline: var(--padding-x-mobile);
+    padding-top: var(--space-6);
     padding-bottom: var(--space-4);
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    /* Fade gradient on right edge signals scrollability */
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
   }
   .size-guide__row::-webkit-scrollbar {
     display: none;
+  }
+  /* Mobile tag: smaller and absolute */
+  .size-guide__tag {
+    top: -16px;
+    font-size: 8px;
+    padding: 2px 6px;
+    letter-spacing: 0.06em;
   }
   .size-guide__item {
     flex-shrink: 0;
