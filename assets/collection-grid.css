@@ -97,8 +97,10 @@
 .collection__sub {
   font-family: var(--font-body);
   font-size: var(--text-body-sm);
+  line-height: 1.6;
   color: var(--color-on-surface-muted);
   margin-bottom: var(--space-6);
+  max-width: 60ch;
 }
 
 .collection__view-all {

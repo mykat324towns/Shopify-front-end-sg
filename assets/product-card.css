@@ -183,7 +183,7 @@
 }
 
 .size-pill.just-selected {
-  animation: pill-select 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: pill-select var(--duration-normal) var(--ease-reveal);
 }
 
 /* Pill info line */

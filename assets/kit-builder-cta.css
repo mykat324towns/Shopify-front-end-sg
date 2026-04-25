@@ -84,6 +84,7 @@
 .kit-builder-cta__sub {
   font-family: var(--font-body);
   font-size: var(--text-body);
+  line-height: 1.65;
   color: var(--color-on-surface-muted);
   margin-bottom: var(--space-6);
   max-width: 440px;
@@ -119,7 +120,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .kit-builder-cta__bottle {
-    transition: opacity 0.01s;
+    transition: opacity var(--duration-instant);
     transform: none !important;
   }
 }
