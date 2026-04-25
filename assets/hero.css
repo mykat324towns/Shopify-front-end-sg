@@ -59,7 +59,6 @@
   display: flex;
   align-items: baseline;
   gap: var(--space-2);
-  margin-bottom: var(--space-4);
 }
 
 .hero__proof-num {
@@ -84,7 +83,6 @@
   align-items: center;
   gap: var(--space-6);
   flex-wrap: wrap;
-  margin-top: var(--space-4);
 }
 
 /* Trust strip */
@@ -125,7 +123,7 @@
   width: 100%;
   min-height: 360px;
   aspect-ratio: 9 / 16;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
   display: block;
   object-fit: cover;
@@ -255,13 +253,14 @@
   border: none;
   border-radius: var(--radius-md);
   min-height: 52px;
-  padding: 14px 28px;
+  padding: var(--space-3) var(--space-8);
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(28,64,50,0.24), 0 1px 3px rgba(28,64,50,0.12);
   transition:
     background-color var(--duration-fast) var(--ease-standard),
-    transform 0.08s ease,
-    box-shadow 0.22s var(--ease-standard);
+    transform var(--duration-instant) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard);
+  text-decoration: none;
 }
 
 .btn-primary:hover {
@@ -292,11 +291,15 @@
   color: var(--color-on-surface);
   background: none;
   border: none;
-  padding: 0;
+  padding: var(--space-1) 0;
+  padding-bottom: var(--space-1);
   cursor: pointer;
   position: relative;
-  padding-bottom: 3px;
-  transition: transform 0.08s ease;
+  transition:
+    transform var(--duration-instant) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
 }
 
 .btn-ghost::after {
@@ -308,11 +311,18 @@
   transition: background-color var(--duration-fast) var(--ease-standard);
 }
 
+.btn-ghost:hover { color: var(--color-primary); }
+
 .btn-ghost:hover::after {
   background-color: var(--color-primary);
 }
 
 .btn-ghost:active { transform: scale(0.97); }
+
+.btn-ghost:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-green);
+}
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
@@ -347,7 +357,4 @@
     aspect-ratio: 4 / 3;
     max-height: 220px;
   }
-
-  /* Proof: tighten bottom margin so it doesn't orphan */
-  .hero__proof { margin-bottom: var(--space-2); }
 }
