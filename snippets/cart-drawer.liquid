@@ -18,7 +18,9 @@
       </div>
       {%- render 'cta-trust-cue', icon: 'lock', label: 'Secure checkout · 100% authentic' -%}
       <a href="/checkout" class="cart-drawer__checkout-btn">Checkout</a>
-      <p class="cart-drawer__bnpl">Klarna · Afterpay · Shop Pay</p>
+      <div class="cart-drawer__bnpl">
+        {%- render 'cta-trust-cue', label: '', payment_marks: 'apple_pay,shop_pay' -%}
+      </div>
     </div>
 
   </div>

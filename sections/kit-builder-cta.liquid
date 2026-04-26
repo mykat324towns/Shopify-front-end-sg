@@ -25,7 +25,9 @@
       {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
     {%- endif -%}
     <a href="{{ section.settings.cta_url }}" class="btn-primary">{{ section.settings.cta_text }}</a>
-    <p class="kit-cta__trust">{{ section.settings.trust_line }}</p>
+    <p class="kit-cta__trust">
+      {%- render 'cta-trust-cue', label: '', payment_marks: 'apple_pay,shop_pay' -%}
+    </p>
   </div>
 </section>
 
@@ -74,7 +76,7 @@
       "type": "text",
       "id": "trust_line",
       "label": "Trust line",
-      "default": "Klarna · Afterpay · Shop Pay Installments"
+      "info": "Replaced by hardcoded Apple Pay + Shop Pay payment marks in the section render — leaving here for compatibility."
     }
   ],
   "presets": [

@@ -269,6 +269,27 @@
     window.addEventListener('resize', initAll, { passive: true });
   });
 
+  // ── Social Wall (homepage TikTok comments swiper) ───────────────────
+  document.addEventListener('DOMContentLoaded', function () {
+    const swEl = document.getElementById('social-wall-swiper');
+    if (!swEl || typeof Swiper === 'undefined') return;
+    new Swiper(swEl, {
+      slidesPerView: 1.4,
+      spaceBetween: 16,
+      grabCursor: true,
+      centeredSlides: false,
+      pagination: {
+        el: '.social-wall__pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        640: { slidesPerView: 2.4, spaceBetween: 20 },
+        1024: { slidesPerView: 3.4, spaceBetween: 24 },
+        1440: { slidesPerView: 4.2, spaceBetween: 28 },
+      },
+    });
+  });
+
   // ── Add-to-cart: intercept product card forms ─────────────────────
   document.addEventListener('submit', async function (e) {
     const form = e.target.closest('.product-card__form');

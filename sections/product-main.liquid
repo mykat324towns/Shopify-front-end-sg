@@ -229,7 +229,7 @@
         </div>
       {%- endif -%}
 
-      {%- render 'cta-trust-cue', icon: 'shield', label: '100% authentic · Klarna · Afterpay · Shop Pay' -%}
+      {%- render 'cta-trust-cue', icon: 'shield', label: '100% authentic', payment_marks: 'apple_pay,shop_pay' -%}
 
       <!-- Add to cart -->
       <div class="product-actions">
@@ -267,31 +267,50 @@
     </div><!-- .product-details -->
   </div><!-- .product-layout -->
 
-  <!-- Social Proof Swiper — only renders if blocks are added in theme editor -->
-  {%- if section.blocks.size > 0 -%}
+  <!-- Social Proof Swiper — admin-uploaded blocks take priority; falls back to bundled comment-NN.png assets -->
+  {%- assign has_blocks = false -%}
+  {%- if section.blocks.size > 0 -%}{%- assign has_blocks = true -%}{%- endif -%}
+  {%- assign asset_count = section.settings.asset_image_count | default: 12 -%}
+
+  {%- if has_blocks or asset_count > 0 -%}
     <div class="social-proof">
       <div class="social-proof__header">
         <svg class="social-proof__tiktok-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
         </svg>
         <div>
+          <span class="social-proof__overline">{{ section.settings.social_overline | default: 'From the @scentgallery_ TikTok community' }}</span>
           <h2 class="social-proof__title">{{ section.settings.social_title | default: 'As seen on TikTok' }}</h2>
           <p class="social-proof__sub">{{ section.settings.social_sub | default: 'Real reactions from real collectors.' }}</p>
         </div>
       </div>
       <div class="swiper social-proof-swiper" id="social-proof-swiper">
         <div class="swiper-wrapper">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'social_image' and block.settings.image != blank -%}
-              <div class="swiper-slide social-proof__slide" {{ block.shopify_attributes }}>
+          {%- if has_blocks -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'social_image' and block.settings.image != blank -%}
+                <div class="swiper-slide social-proof__slide" {{ block.shopify_attributes }}>
+                  <img
+                    src="{{ block.settings.image | image_url: width: 400 }}"
+                    alt="{{ block.settings.caption | default: 'Customer review' | escape }}"
+                    loading="lazy"
+                  >
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..asset_count) -%}
+              {%- assign n = i | prepend: '0' | slice: -2, 2 -%}
+              {%- assign filename = 'comment-' | append: n | append: '.png' -%}
+              <div class="swiper-slide social-proof__slide">
                 <img
-                  src="{{ block.settings.image | image_url: width: 400 }}"
-                  alt="{{ block.settings.caption | default: 'Customer review' | escape }}"
+                  src="{{ filename | asset_url }}"
+                  alt="Customer comment screenshot"
                   loading="lazy"
                 >
               </div>
-            {%- endif -%}
-          {%- endfor -%}
+            {%- endfor -%}
+          {%- endif -%}
         </div>
         <div class="swiper-pagination social-proof__pagination"></div>
       </div>
@@ -318,6 +337,12 @@ window.SG_BUNDLE_COMPONENT_REMAINING = [{%- for ref in product.metafields.scent_
   "settings": [
     {
       "type": "text",
+      "id": "social_overline",
+      "label": "Social proof overline",
+      "default": "From the @scentgallery_ TikTok community"
+    },
+    {
+      "type": "text",
       "id": "social_title",
       "label": "Social proof heading",
       "default": "As seen on TikTok"
@@ -327,6 +352,16 @@ window.SG_BUNDLE_COMPONENT_REMAINING = [{%- for ref in product.metafields.scent_
       "id": "social_sub",
       "label": "Social proof subtext",
       "default": "Real reactions from real collectors."
+    },
+    {
+      "type": "range",
+      "id": "asset_image_count",
+      "label": "Bundled comment screenshots to show",
+      "info": "Renders comment-01.png through comment-NN.png from theme assets when no admin blocks are uploaded.",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 12
     }
   ],
   "blocks": [

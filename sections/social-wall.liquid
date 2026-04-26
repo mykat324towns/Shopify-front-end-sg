@@ -1,0 +1,85 @@
+{%- comment -%}
+  Homepage TikTok social wall — same comment screenshots as the PDP swiper,
+  rendered as a wall above testimonials. Honest day-one social proof.
+{%- endcomment -%}
+
+{%- assign asset_count = section.settings.asset_image_count | default: 12 -%}
+
+{%- if asset_count > 0 -%}
+  <section class="social-wall" aria-label="TikTok community comments">
+    <div class="container social-wall__inner">
+      <header class="social-wall__header reveal">
+        <svg class="social-wall__tiktok-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
+        </svg>
+        <div class="social-wall__heading">
+          <span class="social-wall__overline">{{ section.settings.overline }}</span>
+          <h2 class="social-wall__title">{{ section.settings.title }}</h2>
+          {%- if section.settings.subtext != blank -%}
+            <p class="social-wall__sub">{{ section.settings.subtext }}</p>
+          {%- endif -%}
+        </div>
+      </header>
+
+      <div class="swiper social-wall__swiper" id="social-wall-swiper">
+        <div class="swiper-wrapper">
+          {%- for i in (1..asset_count) -%}
+            {%- assign n = i | prepend: '0' | slice: -2, 2 -%}
+            {%- assign filename = 'comment-' | append: n | append: '.png' -%}
+            <div class="swiper-slide social-wall__slide">
+              <img
+                src="{{ filename | asset_url }}"
+                alt="TikTok community comment screenshot"
+                loading="lazy"
+              >
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="swiper-pagination social-wall__pagination"></div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Social Wall",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "From the @scentgallery_ TikTok community"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What collectors are actually saying."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "info": "Optional.",
+      "default": "Real comments. Real fragheads. No filters, no edits."
+    },
+    {
+      "type": "range",
+      "id": "asset_image_count",
+      "label": "Bundled comment screenshots to show",
+      "info": "Renders comment-01.png through comment-NN.png from theme assets.",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Wall"
+    }
+  ]
+}
+{% endschema %}

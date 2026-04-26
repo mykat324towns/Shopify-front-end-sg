@@ -73,7 +73,9 @@
                 style="display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--color-primary); border-radius: var(--radius-md); min-height: 48px; padding: 12px 28px; text-decoration: none;"
               >Checkout</a>
             </div>
-            <p style="font-family: var(--font-body); font-size: var(--text-caption); color: var(--color-on-surface-muted); letter-spacing: 0.04em; margin-top: var(--space-1);">Klarna · Afterpay · Shop Pay</p>
+            <div style="margin-top: var(--space-1);">
+              {%- render 'cta-trust-cue', label: '', payment_marks: 'apple_pay,shop_pay' -%}
+            </div>
           </div>
         </div>
 

@@ -19,7 +19,7 @@
       {%- endif -%}
 
       {%- if section.settings.trust_cue != blank -%}
-        {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
+        {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue, payment_marks: 'apple_pay,shop_pay' -%}
       {%- endif -%}
 
       <div class="hero__actions">
@@ -124,7 +124,7 @@
       "id": "trust_cue",
       "label": "Inline trust cue (above CTAs)",
       "info": "Small uppercase microbadge that primes the click. Keep short.",
-      "default": "100% authentic · Klarna · Afterpay · Shop Pay"
+      "default": "100% authentic"
     },
     {
       "type": "text",

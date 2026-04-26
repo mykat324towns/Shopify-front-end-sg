@@ -4,7 +4,7 @@
     <h2 class="cta-section__title">{{ section.settings.title }}</h2>
     <p class="cta-section__body">{{ section.settings.body }}</p>
     {%- if section.settings.trust_cue != blank -%}
-      {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
+      {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue, payment_marks: 'apple_pay,shop_pay' -%}
     {%- endif -%}
     <div class="cta-section__actions">
       {%- if section.settings.cta_primary_text != blank -%}
@@ -48,7 +48,7 @@
       "id": "trust_cue",
       "label": "Inline trust cue (above CTAs)",
       "info": "Small uppercase microbadge that primes the click. Keep short.",
-      "default": "100% authentic · Klarna · Afterpay"
+      "default": "100% authentic"
     },
     {
       "type": "text",

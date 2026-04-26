@@ -47,7 +47,7 @@
 
         <p class="comparison__tagline">{{ section.settings.tagline }}</p>
         {%- if section.settings.trust_cue != blank -%}
-          {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
+          {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue, payment_marks: 'apple_pay,shop_pay' -%}
         {%- endif -%}
         <a href="{{ section.settings.cta_url }}" class="btn-primary comparison__cta">{{ section.settings.cta_text }}</a>
         {%- if section.settings.reassurance != blank -%}
@@ -191,7 +191,7 @@
       "id": "trust_cue",
       "label": "Inline trust cue (above CTA)",
       "info": "Small uppercase microbadge that primes the click. Keep short.",
-      "default": "100% authentic decants · Klarna · Afterpay"
+      "default": "100% authentic decants"
     },
     {
       "type": "text",

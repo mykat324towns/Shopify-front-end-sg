@@ -1,0 +1,124 @@
+/* Homepage TikTok Social Wall — comment screenshots carousel */
+
+.social-wall {
+  padding-block: var(--space-12) var(--space-16);
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+}
+
+.social-wall__inner {
+  /* container handles max-width + padding */
+}
+
+.social-wall__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  text-align: left;
+}
+
+.social-wall__tiktok-icon {
+  flex: 0 0 22px;
+  color: var(--color-on-surface);
+  margin-top: 4px;
+}
+
+.social-wall__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.social-wall__overline {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-warm-sage);
+}
+
+.social-wall__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 400;
+  color: var(--color-on-surface);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.social-wall__sub {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--color-on-surface-muted);
+  line-height: 1.5;
+  margin: var(--space-2) 0 0;
+  max-width: 52ch;
+}
+
+/* Swiper */
+.social-wall__swiper {
+  overflow: visible;
+  position: relative;
+}
+
+.social-wall__slide {
+  width: clamp(220px, 22vw, 280px);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-wall__slide img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
+  transition: transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+  display: block;
+}
+
+.social-wall__slide:hover img {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-floating);
+}
+
+.social-wall__pagination {
+  margin-top: var(--space-6);
+  text-align: center;
+  position: relative !important;
+  bottom: auto !important;
+}
+
+.social-wall__pagination .swiper-pagination-bullet {
+  background: var(--color-border-strong);
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  transition: background var(--duration-fast);
+}
+
+.social-wall__pagination .swiper-pagination-bullet-active {
+  background: var(--color-primary);
+  width: 22px;
+  border-radius: 4px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .social-wall {
+    padding-block: var(--space-8) var(--space-12);
+  }
+
+  .social-wall__header {
+    margin-bottom: var(--space-6);
+  }
+
+  .social-wall__slide {
+    width: clamp(200px, 65vw, 240px);
+  }
+}

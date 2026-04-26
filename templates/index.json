@@ -16,7 +16,7 @@
         "headline": "Ten scents.<br>One bottle's price.",
         "subtext": "Decants from $4. Skip the $300 blind-buy regret. Try ten before you commit to one.",
         "proof_text": "Hand-poured in Arizona. Authentic-only — no clones, no dupes, no oils.",
-        "trust_cue": "100% authentic · Klarna · Afterpay · Shop Pay",
+        "trust_cue": "100% authentic",
         "cta_primary_text": "Browse Best Sellers",
         "cta_primary_url": "/collections/best-sellers",
         "cta_secondary_text": "How it works →",
@@ -52,7 +52,7 @@
         "new_item_3": "Try before you ever commit",
         "new_item_4": "Rotate. Explore. Own your collection.",
         "tagline": "→ The math is obvious.",
-        "trust_cue": "100% authentic decants · Klarna · Afterpay",
+        "trust_cue": "100% authentic decants",
         "cta_text": "Build Your Rotation — From $4",
         "cta_url": "/collections/best-sellers",
         "reassurance": "Free U.S. shipping over $35",
@@ -181,13 +181,22 @@
       },
       "block_order": ["t-1", "t-2", "t-3", "t-4"]
     },
+    "social-wall": {
+      "type": "social-wall",
+      "settings": {
+        "overline": "From the @scentgallery_ TikTok community",
+        "title": "What collectors are actually saying.",
+        "subtext": "Real comments. Real fragheads. No filters, no edits.",
+        "asset_image_count": 12
+      }
+    },
     "cta-section": {
       "type": "cta-section",
       "settings": {
         "overline": "Last call.",
         "title": "Your signature is in there somewhere.",
         "body": "One of them is the one you'll wear out. The rest live in the rotation. From $4 to find out.",
-        "trust_cue": "100% authentic · Klarna · Afterpay",
+        "trust_cue": "100% authentic",
         "cta_primary_text": "Browse Best Sellers",
         "cta_primary_url": "/collections/best-sellers",
         "cta_secondary_text": "See all sizes →",
@@ -273,6 +282,7 @@
     "kit-builder-cta",
     "how-it-works",
     "testimonials",
+    "social-wall",
     "cta-section",
     "faq"
   ]

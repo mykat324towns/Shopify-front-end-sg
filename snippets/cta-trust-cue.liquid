@@ -1,36 +1,52 @@
 {%- comment -%}
   Reusable inline trust microbadge — sits directly above any CTA button.
-  Confident-not-loud styling: 14px icon + uppercase microlabel.
+  Confident-not-loud styling: 14px icon + uppercase microlabel + optional payment marks.
 
   Usage:
-    {%- render 'cta-trust-cue', icon: 'shield', label: '100% authentic · Klarna available' -%}
-    {%- render 'cta-trust-cue', icon: 'lock',   label: 'Secure checkout · 100% authentic', variant: 'dark' -%}
+    {%- render 'cta-trust-cue', icon: 'shield', label: '100% authentic' -%}
+    {%- render 'cta-trust-cue', icon: 'shield', label: '100% authentic', payment_marks: 'apple_pay,shop_pay' -%}
+    {%- render 'cta-trust-cue', icon: 'lock',   label: 'Secure checkout · 100% authentic' -%}
 
   Params:
-    icon    — one of: shield | lock | sparkle | package | truck (default: shield)
-    label   — the text (required)
-    variant — '' (default, light bg) or 'dark' (CTA section / dark hero) (optional)
+    icon          — one of: shield | lock | sparkle | package | truck (default: shield)
+    label         — the text (required if no payment_marks; can be omitted if only marks)
+    payment_marks — comma-separated list of Shopify payment types (e.g. 'apple_pay,shop_pay')
+    variant       — '' (default, light bg) or 'dark' (CTA section / dark hero) (optional)
 {%- endcomment -%}
 
-{%- if label != blank -%}
+{%- if label != blank or payment_marks != blank -%}
   {%- assign cue_class = 'cta-trust-cue' -%}
   {%- if variant == 'dark' -%}{%- assign cue_class = 'cta-trust-cue cta-trust-cue--dark' -%}{%- endif -%}
   <span class="{{ cue_class }}">
-    <span class="cta-trust-cue__icon" aria-hidden="true">
-      {%- case icon -%}
-        {%- when 'lock' -%}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-        {%- when 'sparkle' -%}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg>
-        {%- when 'package' -%}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>
-        {%- when 'truck' -%}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="14" height="11" rx="1"/><path d="M15 9h4l3 3v4h-7V9z"/><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="18.5" r="2"/></svg>
-        {%- else -%}
-          {%- comment -%}default: shield{%- endcomment -%}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      {%- endcase -%}
-    </span>
-    <span class="cta-trust-cue__label">{{ label }}</span>
+    {%- if label != blank -%}
+      <span class="cta-trust-cue__icon" aria-hidden="true">
+        {%- case icon -%}
+          {%- when 'lock' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          {%- when 'sparkle' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg>
+          {%- when 'package' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>
+          {%- when 'truck' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="14" height="11" rx="1"/><path d="M15 9h4l3 3v4h-7V9z"/><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="18.5" r="2"/></svg>
+          {%- else -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        {%- endcase -%}
+      </span>
+      <span class="cta-trust-cue__label">{{ label }}</span>
+    {%- endif -%}
+
+    {%- if payment_marks != blank -%}
+      {%- if label != blank -%}<span class="cta-trust-cue__divider" aria-hidden="true">·</span>{%- endif -%}
+      <span class="cta-trust-cue__marks" aria-label="Pay with Apple Pay or Shop Pay">
+        {%- assign types = payment_marks | split: ',' -%}
+        {%- for type in types -%}
+          {%- assign t = type | strip -%}
+          <span class="cta-trust-cue__mark cta-trust-cue__mark--{{ t | replace: '_', '-' }}">
+            {{ t | payment_type_svg_tag: class: 'cta-trust-cue__mark-svg' }}
+          </span>
+        {%- endfor -%}
+      </span>
+    {%- endif -%}
   </span>
 {%- endif -%}

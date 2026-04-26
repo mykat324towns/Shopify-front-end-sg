@@ -50,6 +50,63 @@
   opacity: 0.5;
 }
 
+/* Payment marks inside the microbadge (Apple Pay + Shop Pay official SVGs) */
+.cta-trust-cue__divider {
+  display: inline-block;
+  margin: 0 6px;
+  color: var(--color-border-strong);
+  font-weight: 400;
+}
+
+.cta-trust-cue__marks {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cta-trust-cue__mark {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--color-on-surface);
+  padding: 0 6px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.cta-trust-cue__mark svg,
+.cta-trust-cue__mark-svg {
+  display: block;
+  height: 14px;
+  width: auto;
+  fill: #FFFFFF;
+}
+
+/* Shop Pay needs its brand purple */
+.cta-trust-cue__mark--shop-pay {
+  background: #5A31F4;
+}
+
+/* Apple Pay sits on near-black */
+.cta-trust-cue__mark--apple-pay {
+  background: #000000;
+}
+
+/* Dark variant: invert mark backgrounds for contrast on dark backgrounds */
+.cta-trust-cue--dark .cta-trust-cue__divider {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.cta-trust-cue--dark .cta-trust-cue__mark--apple-pay {
+  background: #FFFFFF;
+}
+
+.cta-trust-cue--dark .cta-trust-cue__mark--apple-pay svg,
+.cta-trust-cue--dark .cta-trust-cue__mark--apple-pay .cta-trust-cue__mark-svg {
+  fill: #000000;
+}
+
 /* ── Refined trust strip below CTA ── */
 /* Generic enough to drop into any section that needs a row of icon+label trust items */
 .cta-trust-strip {
