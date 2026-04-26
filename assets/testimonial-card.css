@@ -41,14 +41,17 @@
 .testimonial-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--space-6) var(--space-6);
   position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  box-shadow: 0 1px 0 var(--color-border-strong);
   transition:
-    border-color var(--duration-normal) var(--ease-standard);
+    border-color var(--duration-normal) var(--ease-standard),
+    transform var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard);
 }
 
 .testimonial-card:hover {
@@ -82,22 +85,29 @@
   display: flex;
   gap: var(--space-1);
   margin-top: var(--space-4);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition:
-    opacity var(--duration-normal) var(--ease-enter) 0.1s,
-    transform var(--duration-normal) var(--ease-reveal) 0.1s;
-}
-
-.testimonial-card.is-visible .testimonial-card__stars {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 .testimonial-card__stars .star {
   width: 14px;
   height: 14px;
   fill: var(--color-accent);
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    fill 200ms var(--ease-standard);
+}
+
+.testimonial-card__stars .star:nth-child(1) { transition-delay: 80ms; }
+.testimonial-card__stars .star:nth-child(2) { transition-delay: 140ms; }
+.testimonial-card__stars .star:nth-child(3) { transition-delay: 200ms; }
+.testimonial-card__stars .star:nth-child(4) { transition-delay: 260ms; }
+.testimonial-card__stars .star:nth-child(5) { transition-delay: 320ms; }
+
+.testimonial-card.is-visible .testimonial-card__stars .star {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .testimonial-card:hover .testimonial-card__stars .star {
@@ -152,6 +162,55 @@
   text-transform: none;
 }
 
+/* ── Delight pass — restrained editorial polish, scoped to .testimonials ── */
+
+/* Card hover (desktop): subtle lift + bottle-green border whisper */
+@media (hover: hover) {
+  .testimonials .testimonial-card {
+    overflow: hidden;
+    will-change: transform, box-shadow;
+  }
+  .testimonials .testimonial-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(28, 64, 50, 0.32);
+    box-shadow: 0 6px 20px rgba(28, 64, 50, 0.08), 0 1px 0 var(--color-border-strong);
+  }
+  /* Quote mark deepens on card hover */
+  .testimonials .testimonial-card:hover .testimonial-card__quote-mark {
+    opacity: 0.34;
+  }
+  /* Avatar warms on card hover */
+  .testimonials .testimonial-card:hover .testimonial-card__avatar {
+    background-color: rgba(28, 64, 50, 0.08);
+    color: var(--color-primary);
+    border-color: rgba(28, 64, 50, 0.24);
+  }
+  /* Single sheen sweep on hover — luxury editorial, fires once per hover */
+  .testimonials .testimonial-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(28, 64, 50, 0.045) 50%,
+      transparent 60%
+    );
+    transform: translateX(-130%);
+    pointer-events: none;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .testimonials .testimonial-card:hover::before {
+    transform: translateX(130%);
+  }
+}
+
+/* Mobile tap feedback — satisfying, not playful */
+.testimonials .testimonial-card:active {
+  transform: scale(0.985);
+  transition: transform 0.08s var(--ease-standard);
+}
+
 /* Testimonials with-photo split layout */
 .testimonials__with-photo {
   display: grid;
@@ -181,13 +240,21 @@
   box-shadow: var(--shadow-floating);
 }
 
-/* Reduced motion */
+/* Reduced motion — strip all transitions, transforms, and the sheen sweep */
 @media (prefers-reduced-motion: reduce) {
-  .testimonial-card { transition: none; }
-  .testimonial-card:hover { transform: none; box-shadow: none; }
-  .testimonial-card__quote-mark { opacity: 0.3; transform: none; transition: none; }
-  .testimonial-card__stars { opacity: 1; transform: none; transition: none; }
-  .testimonials__order-photo { transition: none; }
+  .testimonial-card,
+  .testimonial-card::before,
+  .testimonial-card__quote-mark,
+  .testimonial-card__stars,
+  .testimonial-card__stars .star,
+  .testimonials__order-photo {
+    transition: none !important;
+    transform: none !important;
+  }
+  .testimonial-card:hover { transform: none; box-shadow: 0 1px 0 var(--color-border-strong); }
+  .testimonial-card::before { display: none; }
+  .testimonial-card__quote-mark { opacity: 0.3; }
+  .testimonial-card__stars .star { opacity: 1; transform: none; }
 }
 
 /* ── Responsive ── */
@@ -207,16 +274,15 @@
 }
 
 @media (max-width: 768px) {
-  .testimonials { padding-block: var(--space-10); } /* was --space-6; more section air on mobile */
-  .testimonials__header { margin-bottom: var(--space-6); } /* was --space-4; more gap before carousel */
+  .testimonials { padding-block: var(--space-10); }
+  .testimonials__header { margin-bottom: var(--space-6); }
 
   .testimonials__grid {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 12px;
+    gap: 10px;
     padding-bottom: var(--space-3);
-    /* bleed to screen edge, first card aligns with page content */
     margin-inline: calc(-1 * var(--padding-x-mobile));
     padding-inline: var(--padding-x-mobile);
     scrollbar-width: none;
@@ -225,10 +291,49 @@
   .testimonials__grid::-webkit-scrollbar { display: none; }
 
   .testimonial-card {
-    flex: 0 0 78vw;
-    max-width: 300px;
+    flex: 0 0 calc((100vw - 2 * var(--padding-x-mobile) - 20px) / 3);
     scroll-snap-align: start;
     min-width: 0;
+    padding: var(--space-3);
+    gap: var(--space-2);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: 0 1px 0 var(--color-border-strong);
+  }
+
+  .testimonial-card__quote-mark {
+    font-size: 32px;
+    top: var(--space-2);
+    left: var(--space-3);
+  }
+
+  .testimonial-card__stars {
+    margin-top: var(--space-2);
+    gap: 2px;
+  }
+  .testimonial-card__stars .star { width: 11px; height: 11px; }
+
+  .testimonial-card__quote {
+    font-size: var(--text-body-sm);
+    line-height: 1.45;
+  }
+
+  .testimonial-card__attribution {
+    margin-top: var(--space-2);
+    gap: var(--space-2);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  .testimonial-card__avatar {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .testimonial-card__name {
+    font-size: 11px;
+    letter-spacing: 0.04em;
   }
 }
 
