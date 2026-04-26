@@ -72,47 +72,26 @@
   gap: 6px;
 }
 
+/* Let Shopify's native payment_type_svg_tag SVGs render with their built-in brand
+   colors and wordmarks. Don't override fill or wrap in a colored pill — that
+   crushes the wordmark inside Shop Pay's official artwork. */
 .cta-trust-cue__mark {
   display: inline-flex;
   align-items: center;
-  height: 18px;
-  border-radius: 3px;
-  background: var(--color-on-surface);
-  padding: 0 6px;
-  overflow: hidden;
   line-height: 0;
 }
 
 .cta-trust-cue__mark svg,
 .cta-trust-cue__mark-svg {
   display: block;
-  height: 14px;
+  height: 22px;
   width: auto;
-  fill: #FFFFFF;
+  border-radius: 4px;
 }
 
-/* Shop Pay needs its brand purple */
-.cta-trust-cue__mark--shop-pay {
-  background: #5A31F4;
-}
-
-/* Apple Pay sits on near-black */
-.cta-trust-cue__mark--apple-pay {
-  background: #000000;
-}
-
-/* Dark variant: invert mark backgrounds for contrast on dark backgrounds */
+/* Dark-bg variant: keep divider readable */
 .cta-trust-cue--dark .cta-trust-cue__divider {
   color: rgba(255, 255, 255, 0.35);
-}
-
-.cta-trust-cue--dark .cta-trust-cue__mark--apple-pay {
-  background: #FFFFFF;
-}
-
-.cta-trust-cue--dark .cta-trust-cue__mark--apple-pay svg,
-.cta-trust-cue--dark .cta-trust-cue__mark--apple-pay .cta-trust-cue__mark-svg {
-  fill: #000000;
 }
 
 /* ── Refined trust strip below CTA ── */
