@@ -226,9 +226,19 @@
 }
 
 .collection__scroll {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6);
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: var(--space-2);
+}
+.collection__scroll::-webkit-scrollbar { display: none; }
+.collection__scroll .product-card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
 }
 
 /* Custom Swiper scrollbar */
@@ -254,7 +264,6 @@
 /* ── Responsive ── */
 @media (max-width: 1280px) {
   .collection__grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-  .collection__scroll { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
 }
 
 @media (max-width: 768px) {
