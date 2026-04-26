@@ -1,6 +1,14 @@
 /* CTA Trust — shared component styles */
 /* Sandwich pattern: microbadge above CTA + restyled trust strip below + reassurance lines + PDP scarcity badge */
 
+/* Block-level wrapper that forces the inline-flex microbadge onto its own line above a CTA */
+.cta-trust-cue-line {
+  display: block;
+  margin: 0 0 var(--space-3);
+  text-align: inherit;
+  line-height: 1;
+}
+
 /* ── Inline microbadge above CTA ── */
 .cta-trust-cue {
   display: inline-flex;

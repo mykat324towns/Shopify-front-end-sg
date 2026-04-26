@@ -4,7 +4,9 @@
     <h2 class="cta-section__title">{{ section.settings.title }}</h2>
     <p class="cta-section__body">{{ section.settings.body }}</p>
     {%- if section.settings.trust_cue != blank -%}
-      {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue, payment_marks: 'apple_pay,shop_pay' -%}
+      <div class="cta-trust-cue-line">
+        {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue, payment_marks: 'apple_pay,shop_pay' -%}
+      </div>
     {%- endif -%}
     <div class="cta-section__actions">
       {%- if section.settings.cta_primary_text != blank -%}
