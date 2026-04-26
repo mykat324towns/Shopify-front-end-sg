@@ -3,24 +3,10 @@
 <section class="collection" aria-label="{{ collection.title | escape }}">
   <div class="container">
 
-    <header class="collection-hero{% if collection.image %} collection-hero--with-image{% endif %}">
-      <div class="collection-hero__text">
-        <p class="collection-hero__eyebrow">{{ collection.metafields.scent_gallery.eyebrow | default: 'Collection' }}</p>
-        <h1 class="collection-hero__title">{{ collection.title }}</h1>
-        {%- if collection.description != blank -%}
-          <p class="collection-hero__sub">{{ collection.description }}</p>
-        {%- endif -%}
-      </div>
-      {%- if collection.image -%}
-        <div class="collection-hero__media">
-          <img
-            src="{{ collection.image | image_url: width: 800 }}"
-            alt="{{ collection.image.alt | default: collection.title | escape }}"
-            loading="eager"
-            width="640"
-            height="400"
-          >
-        </div>
+    <header class="page-header">
+      <h1 class="page-header__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p class="page-header__meta">{{ collection.description }}</p>
       {%- endif -%}
     </header>
 
@@ -32,8 +18,8 @@
           id="listing-search"
           class="listing-controls__search"
           type="search"
-          placeholder="Search {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}…"
-          aria-label="Search {{ collection.title | escape }}"
+          placeholder="Filter by name…"
+          aria-label="Filter products"
           autocomplete="off"
           spellcheck="false"
         >
