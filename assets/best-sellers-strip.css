@@ -1,0 +1,128 @@
+/* Best Sellers Strip — teaser preview between hero and comparison */
+
+.bs-strip {
+  padding-block: var(--space-8) var(--space-10);
+  background: var(--color-bg);
+}
+
+.bs-strip__inner {
+  /* Inherits container padding + max-width */
+}
+
+/* Desktop: 3-up grid, equal columns, no header */
+.bs-strip__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bs-strip__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-on-surface);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-4);
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.bs-strip__card:hover,
+.bs-strip__card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  outline: none;
+}
+
+.bs-strip__img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 140px;
+  margin-bottom: var(--space-3);
+}
+
+.bs-strip__img {
+  max-height: 140px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bs-strip__name {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-on-surface);
+  text-align: center;
+  line-height: 1.3;
+  margin: 0 0 var(--space-2);
+  /* Clamp to 2 lines so card heights stay even */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bs-strip__price {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-warm-amber);
+  margin: 0;
+}
+
+/* Mobile: peek pattern — 1.5 cards visible, scroll for the rest */
+@media (max-width: 768px) {
+  .bs-strip {
+    padding-block: var(--space-6) var(--space-8);
+  }
+
+  .bs-strip__row {
+    display: flex;
+    grid-template-columns: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--space-3);
+    padding-inline: var(--padding-x-mobile);
+    padding-bottom: var(--space-3);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* Fade right edge to signal scrollability */
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
+    /* Negate the container's horizontal padding so the strip can extend edge-to-edge */
+    margin-inline: calc(var(--padding-x-mobile) * -1);
+  }
+
+  .bs-strip__row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bs-strip__card {
+    /* Each card takes ~70% of viewport so card 2 peeks at the right edge */
+    flex: 0 0 70%;
+    scroll-snap-align: start;
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .bs-strip__img-wrap {
+    height: 120px;
+  }
+
+  .bs-strip__img {
+    max-height: 120px;
+  }
+}
