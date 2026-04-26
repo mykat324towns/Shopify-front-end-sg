@@ -163,20 +163,21 @@
   .latest-pickups__scroll { display: flex; }
 }
 
-/* ── Equal-height slides so CTAs bottom-align across cards in a carousel ── */
-/* Swiper sets per-slide height to natural content; this overrides so every slide
-   stretches to the tallest sibling and .product-card fills the slide.
-   Excludes social-wall (different card structure that doesn't need equal-height). */
+/* ── Equal-height carousel slides v2 — CTAs bottom-align across cards ── */
+/* Swiper sets per-slide height inline; we override with !important so every
+   slide stretches to the tallest sibling and .product-card fills the slide. */
 .carousel-track .swiper-wrapper {
-  align-items: stretch;
+  align-items: stretch !important;
 }
 .carousel-track .swiper-slide {
-  height: auto;
-  display: flex;
+  height: auto !important;
+  display: flex !important;
 }
 .carousel-track .swiper-slide > .product-card {
   width: 100%;
-  flex: 1;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Latest Pickups ── */
