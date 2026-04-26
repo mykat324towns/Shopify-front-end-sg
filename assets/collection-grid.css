@@ -227,17 +227,18 @@
 
 .collection__scroll {
   display: flex;
-  gap: var(--space-4);
+  align-items: stretch;
+  gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 0;
+  padding-bottom: var(--space-4);
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-bottom: var(--space-2);
 }
 .collection__scroll::-webkit-scrollbar { display: none; }
 .collection__scroll .product-card {
-  flex: 0 0 280px;
+  flex: 0 0 240px;
   scroll-snap-align: start;
 }
 
