@@ -43,7 +43,16 @@
         {%- for type in types -%}
           {%- assign t = type | strip -%}
           <span class="cta-trust-cue__mark cta-trust-cue__mark--{{ t | replace: '_', '-' }}">
-            {{ t | payment_type_svg_tag: class: 'cta-trust-cue__mark-svg' }}
+            {%- if t == 'shop_pay' -%}
+              {%- comment -%}Shopify's payment_type_svg_tag returns a generic placeholder for shop_pay — render a custom mark instead.{%- endcomment -%}
+              <svg class="cta-trust-cue__mark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 22" role="img" aria-labelledby="pi-shop-pay">
+                <title id="pi-shop-pay">Shop Pay</title>
+                <rect width="60" height="22" rx="3" fill="#5A31F4"/>
+                <text x="30" y="15" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF" letter-spacing="0.3">Shop Pay</text>
+              </svg>
+            {%- else -%}
+              {{ t | payment_type_svg_tag: class: 'cta-trust-cue__mark-svg' }}
+            {%- endif -%}
           </span>
         {%- endfor -%}
       </span>
