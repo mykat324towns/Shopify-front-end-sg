@@ -19,9 +19,9 @@
 
 .product-card__image-wrap {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   background-color: var(--color-warm-sage-light);
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   overflow: hidden;
 }
 
@@ -30,7 +30,7 @@
   height: 100%;
   object-fit: contain;
   object-position: center;
-  padding: var(--space-6);
+  padding: var(--space-4);
   transition: transform var(--duration-slow) var(--ease-standard);
 }
 
@@ -60,20 +60,53 @@
 }
 
 .product-card__info {
-  padding: var(--space-4);
+  padding: var(--space-3);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
   flex: 1;
 }
 
-/* Brand label */
+/* Brand + inline rating row */
+.product-card__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
 .product-card__brand {
   font-family: var(--font-body);
-  font-size: var(--text-caption);
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--color-on-surface);
+}
+
+.product-card__stars-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-on-surface-muted);
+  white-space: nowrap;
+}
+
+.star-mini {
+  width: 11px;
+  height: 11px;
+  fill: var(--color-warm-amber);
+}
+
+.product-card__rating-num {
+  color: var(--color-on-surface);
+  font-weight: 700;
+}
+
+.product-card__rating-count {
   color: var(--color-on-surface-muted);
 }
 
@@ -134,8 +167,8 @@
 .product-card__sizes {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin: var(--space-3) 0 var(--space-1);
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
 }
 
 .size-pill {
@@ -143,13 +176,13 @@
   font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.06em;
-  padding: var(--space-1) var(--space-2);
+  padding: 4px var(--space-2);
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border-strong);
   background: transparent;
   color: var(--color-on-surface-muted);
   cursor: pointer;
-  min-height: var(--space-8);
+  min-height: 28px;
   transition:
     background-color var(--duration-fast) var(--ease-standard),
     border-color var(--duration-fast) var(--ease-standard),
@@ -157,8 +190,8 @@
 }
 
 .size-pill--active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+  background: var(--color-on-surface);
+  border-color: var(--color-on-surface);
   color: var(--color-bg);
 }
 
@@ -237,8 +270,8 @@
   background-color: var(--color-primary);
   border: none;
   border-radius: var(--radius-md);
-  min-height: 48px;
-  padding: var(--space-3) var(--space-6);
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
   cursor: pointer;
   margin-top: auto;
   transition:

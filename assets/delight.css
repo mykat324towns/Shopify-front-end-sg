@@ -101,21 +101,7 @@
 }
 .comparison__col--old .comparison__list li.row-visible::after { transform: scaleX(1); }
 
-/* ── Collection grid: desktop scroll / mobile Swiper toggle ── */
-.collection__grid {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: var(--space-4);
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.collection__grid::-webkit-scrollbar { display: none; }
-.collection__grid .product-card {
-  flex: 0 0 200px;
-  scroll-snap-align: start;
-}
+/* ── Latest Pickups carousel only — collection grid is a stacked grid (see collection-grid.css) ── */
 
 .latest-pickups__scroll {
   display: flex;
@@ -158,15 +144,12 @@
   cursor: grabbing;
 }
 
-/* Mobile: hide desktop grids, show Swiper */
+/* Mobile: hide latest-pickups desktop scroll, show Swiper. Collection grid stays a stacked grid. */
 @media (max-width: 768px) {
-  .collection__grid { display: none; }
   .latest-pickups__scroll { display: none; }
-  .collection__swiper,
   .latest-pickups__swiper { display: block; }
   .swiper { overflow: hidden; padding-bottom: 0; }
   .swiper-wrapper { display: flex; gap: 14px; }
-  .collection__swiper .swiper-slide,
   .latest-pickups__swiper .swiper-slide {
     width: auto;
     flex: 0 0 calc(44vw - 16px);
@@ -175,10 +158,8 @@
   .swiper-pagination { display: none; }
 }
 @media (min-width: 769px) {
-  .collection__swiper,
   .latest-pickups__swiper,
   .carousel-scroll-bar { display: none; }
-  .collection__grid,
   .latest-pickups__scroll { display: flex; }
 }
 
