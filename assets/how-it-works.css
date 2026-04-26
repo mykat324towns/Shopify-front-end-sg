@@ -105,6 +105,16 @@
     padding-top: var(--space-6);
   }
   .hiw-step__sub {
-    max-width: none;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    max-width: 32ch;
+  }
+
+  /* Sufficient vertical breathing between stacked steps */
+  .hiw-step {
+    padding: var(--space-6) 0 var(--space-8);
+  }
+  .hiw-step:last-child {
+    padding-bottom: var(--space-4);
   }
 }

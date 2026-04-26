@@ -139,20 +139,86 @@
   transform: translateY(0);
 }
 
-.comparison__cta {
+/* CTA demoted to plain text link — hero owns the primary buy CTA */
+.comparison__cta-link {
   display: block;
   width: fit-content;
   margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-on-surface-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   opacity: 0;
   transform: translateY(var(--space-3));
   transition:
     opacity var(--duration-slow) var(--ease-enter) 350ms,
-    transform var(--duration-slow) var(--ease-enter) 350ms;
+    transform var(--duration-slow) var(--ease-enter) 350ms,
+    color var(--duration-fast) var(--ease-standard);
 }
 
-.comparison__cta.cta-visible {
+.comparison__cta-link:hover {
+  color: var(--color-primary);
+}
+
+.comparison__cta-link.cta-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Receipt overflow disclosure — mobile collapses items 4–6 behind <details> */
+
+/* Desktop: force the <details> open by hiding the summary and always rendering content */
+.receipt__overflow {
+  display: block;
+}
+
+.receipt__overflow > .receipt__overflow-toggle {
+  display: none;
+}
+
+/* Force content visible on desktop regardless of open attribute */
+.receipt__overflow > .receipt__lines--overflow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  /* Restore native <details> collapsed behavior on mobile */
+  .receipt__overflow > .receipt__lines--overflow {
+    display: none;
+  }
+
+  .receipt__overflow[open] > .receipt__lines--overflow {
+    display: flex;
+  }
+
+  .receipt__overflow > .receipt__overflow-toggle {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: var(--space-3) 0;
+    list-style: none;
+    user-select: none;
+  }
+
+  .receipt__overflow > .receipt__overflow-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .receipt__overflow[open] > .receipt__overflow-toggle {
+    content: 'Hide ↑';
+  }
 }
 
 /* Receipt */

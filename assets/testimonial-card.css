@@ -198,10 +198,10 @@
   .testimonials__photo-placeholder {
     position: static;
   }
-  /* Put box photo + WITB above reviews on mobile (conversion-funnel order) */
+  /* Testimonials first, packaging accordion below — social proof leads on mobile */
   /* min-width: 0 prevents grid items from stretching to fit content (horizontal overflow fix) */
-  .testimonials__cards-wrap { order: 2; min-width: 0; }
-  .testimonials__photo-placeholder { order: 1; min-width: 0; }
+  .testimonials__cards-wrap { order: 1; min-width: 0; }
+  .testimonials__photo-placeholder { order: 2; min-width: 0; }
   /* Shrink photo ~15% proportionally without cropping; preserve aspect ratio */
   .testimonials__order-photo { max-width: 85%; margin-inline: auto; }
 }

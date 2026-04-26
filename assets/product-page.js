@@ -37,6 +37,34 @@
   var pressurizedVariantId = null;
   var isPressurized        = false;
 
+  // ── Bundle override ──────────────────────────────────────────────────────────
+  // For bundle products: effective parent_ml = MIN of all component remainders.
+  // Treats null component as 0 so an unconfigured component disables every size.
+  (function applyBundleOverride() {
+    var components = window.SG_BUNDLE_COMPONENT_REMAINING;
+    if (!Array.isArray(components) || components.length === 0) return;
+    var min = Infinity;
+    for (var i = 0; i < components.length; i++) {
+      var v = components[i] === null || components[i] === undefined ? 0 : components[i];
+      if (v < min) min = v;
+    }
+    window.SG_PARENT_ML = min;
+  }());
+
+  // ── Initial parent-ML card state ─────────────────────────────────────────────
+  // Runs once on load: marks cards whose ml_size exceeds remaining parent stock.
+  (function initParentMlCards() {
+    var parentMl = window.SG_PARENT_ML;
+    if (parentMl === null || parentMl === undefined || !sizeGrid) return;
+    sizeGrid.querySelectorAll('.size-card').forEach(function (card) {
+      var cardMl = parseFloat(card.dataset.ml) || 0;
+      if (cardMl > 0 && cardMl > parentMl) {
+        card.classList.add('size-card--unavailable');
+        card.setAttribute('aria-disabled', 'true');
+      }
+    });
+  }());
+
   // ── Helpers ─────────────────────────────────────────────────────────────────
 
   function setActiveCard(btn) {
@@ -53,13 +81,30 @@
     }, { once: true });
   }
 
-  function applyVariant(variantId) {
+  // SG_PARENT_ML: null = metafield not set (fall back to Shopify availability);
+  // 0 = entire bottle sold out; >0 = ml remaining for size comparison.
+  function applyVariant(variantId, activeMlSize) {
     var v = variantById[variantId];
     if (!v) return;
     if (priceEl)      priceEl.textContent  = formatCents(v.price);
     if (variantInput) variantInput.value   = variantId;
+
+    var parentMl    = window.SG_PARENT_ML;
+    var hasParentMl = parentMl !== null && parentMl !== undefined;
+    var mlSize      = (activeMlSize !== undefined && activeMlSize !== null) ? activeMlSize : 0;
+
+    // Determine sold-out state: parent=0 overrides everything; then size check; then Shopify flag.
+    var soldOut;
+    if (!hasParentMl) {
+      soldOut = !v.available;
+    } else if (parentMl === 0) {
+      soldOut = true;
+    } else {
+      soldOut = (mlSize > 0 && mlSize > parentMl) || !v.available;
+    }
+
     if (addBtn) {
-      if (v.available) {
+      if (!soldOut) {
         addBtn.disabled     = false;
         addBtn.textContent  = 'Add to Rotation';
         addBtn.classList.add('btn-add-to-cart--just-enabled');
@@ -68,7 +113,7 @@
         }, { once: true });
       } else {
         addBtn.disabled    = true;
-        addBtn.textContent = 'Sold Out';
+        addBtn.textContent = (hasParentMl && mlSize > 0 && mlSize > parentMl) ? 'Out of Stock for This Size' : 'Sold Out';
       }
     }
   }
@@ -112,6 +157,12 @@
       var card = e.target.closest('.size-card');
       if (!card) return;
 
+      // Block unavailable sizes when parent ML is set
+      var cardMl    = parseFloat(card.dataset.ml) || 0;
+      var parentMl  = window.SG_PARENT_ML;
+      var hasParent = parentMl !== null && parentMl !== undefined;
+      if (hasParent && cardMl > 0 && cardMl > parentMl) return;
+
       var variantId = parseInt(card.dataset.variantId, 10);
       var sizeLower = card.dataset.size; // already lowercased via Liquid filter
 
@@ -124,7 +175,7 @@
 
       selectedBaseId = variantId;
       setActiveCard(card);
-      applyVariant(variantId);
+      applyVariant(variantId, cardMl);
       updatePressurizedToggle(sizeLower);
 
       var mainImg = document.getElementById('product-gallery-main-img');

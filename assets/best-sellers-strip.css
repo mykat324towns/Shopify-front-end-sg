@@ -9,6 +9,17 @@
   /* Inherits container padding + max-width */
 }
 
+/* Strip heading — editorial framing, not a duplicate "Best Sellers" label */
+.bs-strip__heading {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-muted);
+  margin: 0 0 var(--space-5) 0;
+}
+
 /* Desktop: 3-up grid, equal columns, no header */
 .bs-strip__row {
   display: grid;
@@ -100,9 +111,9 @@
     padding-bottom: var(--space-3);
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    /* Fade right edge to signal scrollability */
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
-    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
+    /* Fade right edge to signal scrollability — wider fade zone = stronger cue on 390px viewports */
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
     /* Negate the container's horizontal padding so the strip can extend edge-to-edge */
     margin-inline: calc(var(--padding-x-mobile) * -1);
   }

@@ -21,11 +21,7 @@
     <p class="kit-builder-cta__overline">{{ section.settings.overline }}</p>
     <h2 class="kit-builder-cta__headline">{{ section.settings.headline }}</h2>
     <p class="kit-builder-cta__sub">{{ section.settings.subtext }}</p>
-    {%- if section.settings.trust_cue != blank -%}
-      <div class="cta-trust-cue-line">
-        {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
-      </div>
-    {%- endif -%}
+    {%- comment -%}trust_cue intentionally suppressed here — 3rd instance removed per hierarchy: hero + comparison + final CTA only{%- endcomment -%}
     <a href="{{ section.settings.cta_url }}" class="btn-primary">{{ section.settings.cta_text }}</a>
     <div class="kit-cta__trust">
       {%- render 'cta-trust-cue', label: '', payment_marks: 'apple_pay,shop_pay' -%}

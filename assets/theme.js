@@ -452,7 +452,7 @@
 
     // Tagline + CTA reveal
     const tagline = document.querySelector('.comparison__tagline');
-    const cta     = document.querySelector('.comparison__cta');
+    const cta     = document.querySelector('.comparison__cta-link');
     if ((tagline || cta) && 'IntersectionObserver' in window) {
       const tagsObs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

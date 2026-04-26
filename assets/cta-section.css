@@ -1,7 +1,7 @@
 /* CTA Section — light gradient (golden reference: index.html) */
 
 .cta-section {
-  background: linear-gradient(135deg, var(--color-warm-sage-light) 0%, var(--color-bg-alt) 100%);
+  background: var(--color-bg-alt);
   border-top: 1px solid var(--color-border);
   padding-block: var(--space-12);
 }

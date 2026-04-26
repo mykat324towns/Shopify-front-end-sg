@@ -129,6 +129,12 @@
   .product-card__name { font-size: var(--text-body); }
 }
 
+@media (max-width: 768px) {
+  .size-pill {
+    min-height: 36px;
+  }
+}
+
 .product-card__meta {
   font-family: var(--font-body);
   font-size: var(--text-caption);

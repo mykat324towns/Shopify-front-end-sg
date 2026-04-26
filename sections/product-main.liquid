@@ -321,6 +321,22 @@
 
 </div>
 
+<!-- Sticky Add-to-Cart bar — mobile only, appears after size selection -->
+<div class="sticky-atc" id="sticky-atc" aria-hidden="true">
+  <img
+    class="sticky-atc__thumb"
+    id="sticky-atc-thumb"
+    src="{{ product.featured_image | image_url: width: 48 }}"
+    alt="{{ product.title | escape }}"
+    loading="eager"
+    width="24"
+    height="24"
+  >
+  <span class="sticky-atc__name">{{ product.title | escape }}</span>
+  <span class="sticky-atc__price" id="sticky-atc-price"></span>
+  <button class="sticky-atc__btn" id="sticky-atc-btn" type="button">Add to Rotation</button>
+</div>
+
 <!-- Variant data for product-page.js -->
 <script>
 window.SG_VARIANTS = {{ product.variants | json }};
@@ -331,6 +347,7 @@ window.SG_BUNDLE_COMPONENT_REMAINING = [{%- for ref in product.metafields.scent_
 </script>
 
 <script src="{{ 'product-page.js' | asset_url }}" defer></script>
+<script src="{{ 'sticky-atc.js' | asset_url }}" defer></script>
 
 {% schema %}
 {

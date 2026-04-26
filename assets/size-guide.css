@@ -87,21 +87,44 @@
 
 .size-guide__item--recommended {
   position: relative;
+  transform: scale(1.05);
+  transform-origin: bottom center;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 6px;
+  border-radius: var(--radius-sm);
+}
+
+.size-guide__item--recommended .size-guide__label {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.size-guide__item--recommended .size-guide__price {
+  color: var(--color-primary);
+}
+
+.size-guide__item:not(.size-guide__item--recommended) .size-guide__label {
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.size-guide__item:not(.size-guide__item--recommended) .size-guide__price {
+  opacity: 0.75;
 }
 
 .size-guide__tag {
   position: absolute;
-  top: -22px;
+  top: -24px;
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-bg);
   background: var(--color-primary);
-  padding: 3px 7px;
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
   white-space: nowrap;
   pointer-events: none;
@@ -144,10 +167,10 @@
   .size-guide__row::-webkit-scrollbar {
     display: none;
   }
-  /* Mobile tag: smaller and absolute */
+  /* Mobile tag: keep legible */
   .size-guide__tag {
-    top: -16px;
-    font-size: 8px;
+    top: -18px;
+    font-size: 10px;
     padding: 2px 6px;
     letter-spacing: 0.06em;
   }
@@ -168,5 +191,34 @@
   /* Scroll hint: last item gets right padding so it's obviously scrollable */
   .size-guide__item:last-child {
     padding-right: var(--padding-x-mobile);
+  }
+}
+
+.size-guide__footer {
+  text-align: center;
+  margin-top: var(--space-8);
+}
+
+.size-guide__see-all {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-on-surface-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border-strong);
+  padding-bottom: 2px;
+  transition: color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+
+.size-guide__see-all:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .size-guide__footer {
+    padding-inline: var(--padding-x-mobile);
+    margin-top: var(--space-6);
   }
 }

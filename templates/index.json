@@ -98,8 +98,8 @@
     "latest-collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Latest Drops",
-        "subtitle": "New this week. Limited stock until the next batch.",
+        "title": "Just landed",
+        "subtitle": "Fresh decants poured this week.",
         "collection": "latest-picks",
         "view_all_text": "See all latest →",
         "view_all_url": "/collections/latest-picks",
@@ -283,7 +283,7 @@
     "kit-builder-cta",
     "how-it-works",
     "testimonials",
-    "cta-section",
-    "faq"
+    "faq",
+    "cta-section"
   ]
 }
