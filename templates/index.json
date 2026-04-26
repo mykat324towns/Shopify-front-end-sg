@@ -26,6 +26,13 @@
         "sidebar_text": "Decants · Try before you commit"
       }
     },
+    "best-sellers-strip": {
+      "type": "best-sellers-strip",
+      "settings": {
+        "collection": "best-sellers",
+        "products_to_show": 3
+      }
+    },
     "comparison": {
       "type": "comparison",
       "settings": {
@@ -251,6 +258,7 @@
   },
   "order": [
     "hero",
+    "best-sellers-strip",
     "comparison",
     "size-guide",
     "featured-collection",

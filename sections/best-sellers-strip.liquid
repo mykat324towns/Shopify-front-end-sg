@@ -1,0 +1,66 @@
+{%- comment -%}
+  Best Sellers teaser strip — stripped 3-card preview between hero and comparison.
+  Pulls from a configured collection (default: best-sellers).
+  Mobile: peek pattern (1.5 cards visible, scroll for more).
+  Desktop: 3-up grid, no header, no view-all link.
+{%- endcomment -%}
+
+{%- assign collection_handle = section.settings.collection -%}
+{%- assign source_collection = collections[collection_handle] -%}
+{%- assign max_cards = section.settings.products_to_show | default: 3 -%}
+
+{%- if source_collection != blank and source_collection.products.size > 0 -%}
+  <section class="bs-strip" aria-label="Best sellers preview">
+    <div class="container bs-strip__inner">
+      <div class="bs-strip__row" role="list">
+        {%- for product in source_collection.products limit: max_cards -%}
+          <a href="{{ product.url }}" class="bs-strip__card" role="listitem" aria-label="{{ product.title | escape }}">
+            <div class="bs-strip__img-wrap">
+              {%- if product.featured_image -%}
+                <img
+                  class="bs-strip__img"
+                  src="{{ product.featured_image | image_url: width: 360 }}"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                  loading="lazy"
+                  width="180"
+                  height="240"
+                >
+              {%- endif -%}
+            </div>
+            <p class="bs-strip__name">{{ product.title }}</p>
+            <p class="bs-strip__price">from {{ product.price_min | money_without_trailing_zeros }}</p>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Best Sellers Strip",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Source collection",
+      "info": "Defaults to Best Sellers. The first 3 products in this collection appear in the strip."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Cards to show",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers Strip"
+    }
+  ]
+}
+{% endschema %}
