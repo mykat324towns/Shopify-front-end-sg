@@ -269,25 +269,49 @@
     window.addEventListener('resize', initAll, { passive: true });
   });
 
-  // ── Social Wall (homepage TikTok comments swiper) ───────────────────
+  // ── Social Wall (homepage TikTok comments — marquee or swiper) ──────
   document.addEventListener('DOMContentLoaded', function () {
     const swEl = document.getElementById('social-wall-swiper');
     if (!swEl || typeof Swiper === 'undefined') return;
-    new Swiper(swEl, {
-      slidesPerView: 1.4,
+
+    const layout = swEl.closest('.social-wall')?.dataset.layout || 'swiper';
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const baseConfig = {
       spaceBetween: 16,
       grabCursor: true,
       centeredSlides: false,
-      pagination: {
-        el: '.social-wall__pagination',
-        clickable: true,
-      },
       breakpoints: {
         640: { slidesPerView: 2.4, spaceBetween: 20 },
         1024: { slidesPerView: 3.4, spaceBetween: 24 },
         1440: { slidesPerView: 4.2, spaceBetween: 28 },
       },
-    });
+    };
+
+    if (layout === 'marquee') {
+      new Swiper(swEl, {
+        ...baseConfig,
+        slidesPerView: 'auto',
+        loop: true,
+        allowTouchMove: true,
+        freeMode: true,
+        speed: reduced ? 300 : 6000,
+        autoplay: reduced ? false : {
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        },
+      });
+    } else {
+      new Swiper(swEl, {
+        ...baseConfig,
+        slidesPerView: 1.4,
+        pagination: {
+          el: '.social-wall__pagination',
+          clickable: true,
+        },
+      });
+    }
   });
 
   // ── Add-to-cart: intercept product card forms ─────────────────────

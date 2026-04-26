@@ -4,22 +4,36 @@
 {%- endcomment -%}
 
 {%- assign asset_count = section.settings.asset_image_count | default: 12 -%}
+{%- if section.settings.title == blank -%}
+  {%- assign layout = 'marquee' -%}
+{%- else -%}
+  {%- assign layout = 'swiper' -%}
+{%- endif -%}
 
 {%- if asset_count > 0 -%}
-  <section class="social-wall" aria-label="TikTok community comments">
+  <section class="social-wall" data-layout="{{ layout }}" aria-label="TikTok community comments">
     <div class="container social-wall__inner">
-      <header class="social-wall__header reveal">
-        <svg class="social-wall__tiktok-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
-        </svg>
-        <div class="social-wall__heading">
+      {%- if layout == 'marquee' -%}
+        <div class="social-wall__eyebrow reveal">
+          <svg class="social-wall__tiktok-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
+          </svg>
           <span class="social-wall__overline">{{ section.settings.overline }}</span>
-          <h2 class="social-wall__title">{{ section.settings.title }}</h2>
-          {%- if section.settings.subtext != blank -%}
-            <p class="social-wall__sub">{{ section.settings.subtext }}</p>
-          {%- endif -%}
         </div>
-      </header>
+      {%- else -%}
+        <header class="social-wall__header reveal">
+          <svg class="social-wall__tiktok-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.18 8.18 0 004.78 1.52V6.88a4.85 4.85 0 01-1.01-.19z"/>
+          </svg>
+          <div class="social-wall__heading">
+            <span class="social-wall__overline">{{ section.settings.overline }}</span>
+            <h2 class="social-wall__title">{{ section.settings.title }}</h2>
+            {%- if section.settings.subtext != blank -%}
+              <p class="social-wall__sub">{{ section.settings.subtext }}</p>
+            {%- endif -%}
+          </div>
+        </header>
+      {%- endif -%}
 
       <div class="swiper social-wall__swiper" id="social-wall-swiper">
         <div class="swiper-wrapper">
@@ -35,7 +49,9 @@
             </div>
           {%- endfor -%}
         </div>
-        <div class="swiper-pagination social-wall__pagination"></div>
+        {%- if layout == 'swiper' -%}
+          <div class="swiper-pagination social-wall__pagination"></div>
+        {%- endif -%}
       </div>
     </div>
   </section>

@@ -184,9 +184,9 @@
     "social-wall": {
       "type": "social-wall",
       "settings": {
-        "overline": "From the @scentgallery_ TikTok community",
-        "title": "What collectors are actually saying.",
-        "subtext": "Real comments. Real fragheads. No filters, no edits.",
+        "overline": "Real comments from the @scentgallery_ TikTok community — no edits, no filters",
+        "title": "",
+        "subtext": "",
         "asset_image_count": 12
       }
     },
@@ -274,6 +274,7 @@
   },
   "order": [
     "hero",
+    "social-wall",
     "best-sellers-strip",
     "comparison",
     "size-guide",
@@ -282,7 +283,6 @@
     "kit-builder-cta",
     "how-it-works",
     "testimonials",
-    "social-wall",
     "cta-section",
     "faq"
   ]
