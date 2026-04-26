@@ -149,12 +149,6 @@
   .latest-pickups__scroll { display: none; }
   .latest-pickups__swiper { display: block; }
   .swiper { overflow: hidden; padding-bottom: 0; }
-  .swiper-wrapper { display: flex; gap: 14px; }
-  .latest-pickups__swiper .swiper-slide {
-    width: auto;
-    flex: 0 0 calc(44vw - 16px);
-  }
-  .swiper-slide:last-child { margin-right: calc(44vw - 32px); }
   .swiper-pagination { display: none; }
 }
 @media (min-width: 769px) {
