@@ -155,60 +155,6 @@
   transform: translateY(0);
 }
 
-/* Receipt overflow disclosure — mobile collapses items 4–6 behind <details> */
-
-/* Desktop: force the <details> open by hiding the summary and always rendering content */
-.receipt__overflow {
-  display: block;
-}
-
-.receipt__overflow > .receipt__overflow-toggle {
-  display: none;
-}
-
-/* Force content visible on desktop regardless of open attribute */
-.receipt__overflow > .receipt__lines--overflow {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-@media (max-width: 768px) {
-  /* Restore native <details> collapsed behavior on mobile */
-  .receipt__overflow > .receipt__lines--overflow {
-    display: none;
-  }
-
-  .receipt__overflow[open] > .receipt__lines--overflow {
-    display: flex;
-  }
-
-  .receipt__overflow > .receipt__overflow-toggle {
-    display: flex;
-    align-items: center;
-    font-family: var(--font-body);
-    font-size: var(--text-caption);
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--color-primary);
-    cursor: pointer;
-    padding: var(--space-3) 0;
-    list-style: none;
-    user-select: none;
-  }
-
-  .receipt__overflow > .receipt__overflow-toggle::-webkit-details-marker {
-    display: none;
-  }
-
-  .receipt__overflow[open] > .receipt__overflow-toggle {
-    content: 'Hide ↑';
-  }
-}
-
 /* Receipt */
 .comparison__receipt {
   background: var(--color-surface);

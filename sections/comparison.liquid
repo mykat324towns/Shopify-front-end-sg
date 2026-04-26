@@ -63,7 +63,7 @@
           <h3 class="receipt__subtitle"><em>{{ section.settings.receipt_subtitle }}</em></h3>
         </div>
         <ul class="receipt__lines" role="list">
-          {%- for i in (1..3) -%}
+          {%- for i in (1..6) -%}
             {%- assign name_key = 'receipt_name_' | append: i -%}
             {%- assign size_key = 'receipt_size_' | append: i -%}
             {%- assign price_key = 'receipt_price_' | append: i -%}
@@ -83,33 +83,6 @@
             {%- endif -%}
           {%- endfor -%}
         </ul>
-
-        {{- '' -}}
-        {%- comment -%}Mobile: items 4–6 collapse behind a disclosure. Desktop shows all via CSS.{%- endcomment -%}
-        <details class="receipt__overflow">
-          <summary class="receipt__overflow-toggle">See full receipt ↓</summary>
-          <ul class="receipt__lines receipt__lines--overflow" role="list">
-            {%- for i in (4..6) -%}
-              {%- assign name_key = 'receipt_name_' | append: i -%}
-              {%- assign size_key = 'receipt_size_' | append: i -%}
-              {%- assign price_key = 'receipt_price_' | append: i -%}
-              {%- assign name_val = section.settings[name_key] -%}
-              {%- assign price_val = section.settings[price_key] -%}
-              {%- if name_val != blank -%}
-                <li class="receipt__line" data-price="{{ price_val }}">
-                  <span class="receipt__name">
-                    {{ name_val }}
-                    {%- assign size_val = section.settings[size_key] -%}
-                    {%- if size_val != blank -%}
-                      <span class="receipt__size">{{ size_val }}</span>
-                    {%- endif -%}
-                  </span>
-                  <span class="receipt__price">${{ price_val }}</span>
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        </details>
         <div class="receipt__sep"></div>
         <div class="receipt__total">
           <span class="receipt__total-label">6 fragrances, tried</span>
