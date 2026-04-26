@@ -1,8 +1,8 @@
 /* Testimonial Section + Card — golden reference: index.html */
 
-/* Paper-tone section bg — clear visual break from neighbors without being loud */
+/* Section matches neighboring cream bg (comparison, cta-section use the same token) */
 .testimonials {
-  background: var(--color-surface-muted);
+  background: var(--color-bg-alt);
   padding-block: var(--space-12);
 }
 
@@ -39,9 +39,9 @@
   gap: var(--space-6);
 }
 
-/* Hairline-only outlined cards — editorial restraint, retail-quality */
+/* White cards on cream section — clean retail/editorial pop */
 .testimonial-card {
-  background: transparent;
+  background: var(--color-bg);
   border: 1px solid rgba(28, 64, 50, 0.18);
   border-radius: var(--radius-lg);
   padding: var(--space-6) var(--space-6);
@@ -250,7 +250,7 @@
     padding: var(--space-3) var(--space-4);
     gap: 4px;
     border-radius: var(--radius-lg);
-    background: transparent;
+    background: var(--color-bg);
   }
 
   .testimonial-card__quote-mark {
