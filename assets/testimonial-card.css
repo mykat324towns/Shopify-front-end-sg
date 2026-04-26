@@ -1,7 +1,8 @@
 /* Testimonial Section + Card — golden reference: index.html */
 
+/* Paper-tone section bg — clear visual break from neighbors without being loud */
 .testimonials {
-  background: var(--color-bg);
+  background: var(--color-surface-muted);
   padding-block: var(--space-12);
 }
 
@@ -38,24 +39,17 @@
   gap: var(--space-6);
 }
 
+/* Hairline-only outlined cards — editorial restraint, retail-quality */
 .testimonial-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: transparent;
+  border: 1px solid rgba(28, 64, 50, 0.18);
   border-radius: var(--radius-lg);
   padding: var(--space-6) var(--space-6);
   position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  box-shadow: 0 1px 0 var(--color-border-strong);
-  transition:
-    border-color var(--duration-normal) var(--ease-standard),
-    transform var(--duration-normal) var(--ease-standard),
-    box-shadow var(--duration-normal) var(--ease-standard);
-}
-
-.testimonial-card:hover {
-  border-color: var(--color-border-strong);
+  transition: border-color var(--duration-normal) var(--ease-standard);
 }
 
 .testimonial-card__quote-mark {
@@ -162,53 +156,14 @@
   text-transform: none;
 }
 
-/* ── Delight pass — restrained editorial polish, scoped to .testimonials ── */
-
-/* Card hover (desktop): subtle lift + bottle-green border whisper */
+/* Hover (desktop) — only the border darkens + quote-mark deepens. No lift, no shadow, no sheen */
 @media (hover: hover) {
-  .testimonials .testimonial-card {
-    overflow: hidden;
-    will-change: transform, box-shadow;
-  }
   .testimonials .testimonial-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(28, 64, 50, 0.32);
-    box-shadow: 0 6px 20px rgba(28, 64, 50, 0.08), 0 1px 0 var(--color-border-strong);
+    border-color: rgba(28, 64, 50, 0.36);
   }
-  /* Quote mark deepens on card hover */
   .testimonials .testimonial-card:hover .testimonial-card__quote-mark {
     opacity: 0.34;
   }
-  /* Avatar warms on card hover */
-  .testimonials .testimonial-card:hover .testimonial-card__avatar {
-    background-color: rgba(28, 64, 50, 0.08);
-    color: var(--color-primary);
-    border-color: rgba(28, 64, 50, 0.24);
-  }
-  /* Single sheen sweep on hover — luxury editorial, fires once per hover */
-  .testimonials .testimonial-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 40%,
-      rgba(28, 64, 50, 0.045) 50%,
-      transparent 60%
-    );
-    transform: translateX(-130%);
-    pointer-events: none;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .testimonials .testimonial-card:hover::before {
-    transform: translateX(130%);
-  }
-}
-
-/* Mobile tap feedback — satisfying, not playful */
-.testimonials .testimonial-card:active {
-  transform: scale(0.985);
-  transition: transform 0.08s var(--ease-standard);
 }
 
 /* Testimonials with-photo split layout */
@@ -240,10 +195,9 @@
   box-shadow: var(--shadow-floating);
 }
 
-/* Reduced motion — strip all transitions, transforms, and the sheen sweep */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .testimonial-card,
-  .testimonial-card::before,
   .testimonial-card__quote-mark,
   .testimonial-card__stars,
   .testimonial-card__stars .star,
@@ -251,10 +205,8 @@
     transition: none !important;
     transform: none !important;
   }
-  .testimonial-card:hover { transform: none; box-shadow: 0 1px 0 var(--color-border-strong); }
-  .testimonial-card::before { display: none; }
   .testimonial-card__quote-mark { opacity: 0.3; }
-  .testimonial-card__stars .star { opacity: 1; transform: none; }
+  .testimonial-card__stars .star { opacity: 1; }
 }
 
 /* ── Responsive ── */
@@ -298,8 +250,7 @@
     padding: var(--space-3) var(--space-4);
     gap: 4px;
     border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    box-shadow: 0 1px 0 var(--color-border-strong);
+    background: transparent;
   }
 
   .testimonial-card__quote-mark {
