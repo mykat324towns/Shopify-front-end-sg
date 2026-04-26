@@ -29,8 +29,9 @@
     "best-sellers-strip": {
       "type": "best-sellers-strip",
       "settings": {
-        "collection": "best-sellers",
-        "products_to_show": 3
+        "product_1": "parfums-de-marly-althair",
+        "product_2": "jean-paul-gaultier-le-beau-le-parfum",
+        "product_3": "creed-virgin-island-water"
       }
     },
     "comparison": {

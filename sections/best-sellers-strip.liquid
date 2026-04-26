@@ -1,35 +1,41 @@
 {%- comment -%}
   Best Sellers teaser strip — stripped 3-card preview between hero and comparison.
-  Pulls from a configured collection (default: best-sellers).
+  Hand-picked products via theme settings (full editorial control over Mere Exposure).
   Mobile: peek pattern (1.5 cards visible, scroll for more).
   Desktop: 3-up grid, no header, no view-all link.
 {%- endcomment -%}
 
-{%- assign collection_handle = section.settings.collection -%}
-{%- assign source_collection = collections[collection_handle] -%}
-{%- assign max_cards = section.settings.products_to_show | default: 3 -%}
+{%- assign has_any = false -%}
+{%- for i in (1..3) -%}
+  {%- assign key = 'product_' | append: i -%}
+  {%- if section.settings[key] != blank -%}{%- assign has_any = true -%}{%- endif -%}
+{%- endfor -%}
 
-{%- if source_collection != blank and source_collection.products.size > 0 -%}
-  <section class="bs-strip" aria-label="Best sellers preview">
+{%- if has_any -%}
+  <section class="bs-strip" aria-label="Featured fragrances">
     <div class="container bs-strip__inner">
       <div class="bs-strip__row" role="list">
-        {%- for product in source_collection.products limit: max_cards -%}
-          <a href="{{ product.url }}" class="bs-strip__card" role="listitem" aria-label="{{ product.title | escape }}">
-            <div class="bs-strip__img-wrap">
-              {%- if product.featured_image -%}
-                <img
-                  class="bs-strip__img"
-                  src="{{ product.featured_image | image_url: width: 360 }}"
-                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
-                  loading="lazy"
-                  width="180"
-                  height="240"
-                >
-              {%- endif -%}
-            </div>
-            <p class="bs-strip__name">{{ product.title }}</p>
-            <p class="bs-strip__price">from {{ product.price_min | money_without_trailing_zeros }}</p>
-          </a>
+        {%- for i in (1..3) -%}
+          {%- assign key = 'product_' | append: i -%}
+          {%- assign product = section.settings[key] -%}
+          {%- if product != blank -%}
+            <a href="{{ product.url }}" class="bs-strip__card" role="listitem" aria-label="{{ product.title | escape }}">
+              <div class="bs-strip__img-wrap">
+                {%- if product.featured_image -%}
+                  <img
+                    class="bs-strip__img"
+                    src="{{ product.featured_image | image_url: width: 360 }}"
+                    alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                    loading="lazy"
+                    width="180"
+                    height="240"
+                  >
+                {%- endif -%}
+              </div>
+              <p class="bs-strip__name">{{ product.title }}</p>
+              <p class="bs-strip__price">from {{ product.price_min | money_without_trailing_zeros }}</p>
+            </a>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
@@ -42,19 +48,19 @@
   "tag": "div",
   "settings": [
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Source collection",
-      "info": "Defaults to Best Sellers. The first 3 products in this collection appear in the strip."
+      "type": "product",
+      "id": "product_1",
+      "label": "Card 1 product"
     },
     {
-      "type": "range",
-      "id": "products_to_show",
-      "label": "Cards to show",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "default": 3
+      "type": "product",
+      "id": "product_2",
+      "label": "Card 2 product"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Card 3 product"
     }
   ],
   "presets": [
