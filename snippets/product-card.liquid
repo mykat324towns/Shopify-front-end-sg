@@ -10,14 +10,21 @@
 {%- assign default_index = 0 -%}
 {%- assign default_variant = first_variant -%}
 {%- for variant in product.variants -%}
-  {%- if variant.option1 | downcase == default_size -%}
+  {%- assign variant_size = variant.option1 | downcase -%}
+  {%- if variant_size == default_size -%}
     {%- assign default_index = forloop.index -%}
     {%- assign default_variant = variant -%}
   {%- endif -%}
 {%- endfor -%}
 {%- if default_index == 0 -%}
-  {%- assign default_index = product.variants.size | at_most: 2 -%}
-  {%- assign default_variant = product.variants[default_index | minus: 1] | default: first_variant -%}
+  {%- assign variants_size = product.variants.size -%}
+  {%- if variants_size < 2 -%}
+    {%- assign default_index = variants_size -%}
+  {%- else -%}
+    {%- assign default_index = 2 -%}
+  {%- endif -%}
+  {%- assign fallback_idx = default_index | minus: 1 -%}
+  {%- assign default_variant = product.variants[fallback_idx] | default: first_variant -%}
 {%- endif -%}
 
 <article class="product-card" data-product-id="{{ product.id }}">
