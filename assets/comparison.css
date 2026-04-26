@@ -139,49 +139,18 @@
   transform: translateY(0);
 }
 
-/* Outline-pill CTA — designed but secondary; hero owns the solid-fill primary */
-.comparison__cta-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.comparison__cta {
+  display: block;
   width: fit-content;
   margin: 0 auto;
-  padding: 13px var(--space-7);
-  min-height: 48px;
-  font-family: var(--font-body);
-  font-size: var(--text-body-sm);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-primary);
-  background-color: transparent;
-  border: 1.5px solid var(--color-primary);
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  cursor: pointer;
   opacity: 0;
   transform: translateY(var(--space-3));
   transition:
     opacity var(--duration-slow) var(--ease-enter) 350ms,
-    transform var(--duration-slow) var(--ease-enter) 350ms,
-    background-color var(--duration-fast) var(--ease-standard),
-    color var(--duration-fast) var(--ease-standard);
+    transform var(--duration-slow) var(--ease-enter) 350ms;
 }
 
-.comparison__cta-link:hover {
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-}
-
-.comparison__cta-link:active {
-  transform: scale(0.98);
-}
-
-.comparison__cta-link:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-focus-green);
-}
-
-.comparison__cta-link.cta-visible {
+.comparison__cta.cta-visible {
   opacity: 1;
   transform: translateY(0);
 }
