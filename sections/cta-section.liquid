@@ -3,6 +3,9 @@
     <p class="cta-section__overline">{{ section.settings.overline }}</p>
     <h2 class="cta-section__title">{{ section.settings.title }}</h2>
     <p class="cta-section__body">{{ section.settings.body }}</p>
+    {%- if section.settings.trust_cue != blank -%}
+      {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
+    {%- endif -%}
     <div class="cta-section__actions">
       {%- if section.settings.cta_primary_text != blank -%}
         <a href="{{ section.settings.cta_primary_url }}" class="btn-primary--white">{{ section.settings.cta_primary_text }}</a>
@@ -11,6 +14,9 @@
         <a href="{{ section.settings.cta_secondary_url }}" class="btn-ghost--white">{{ section.settings.cta_secondary_text }}</a>
       {%- endif -%}
     </div>
+    {%- if section.settings.reassurance != blank -%}
+      <span class="cta-trust-reassurance">{{ section.settings.reassurance }}</span>
+    {%- endif -%}
   </div>
 </section>
 
@@ -39,6 +45,13 @@
     },
     {
       "type": "text",
+      "id": "trust_cue",
+      "label": "Inline trust cue (above CTAs)",
+      "info": "Small uppercase microbadge that primes the click. Keep short.",
+      "default": "100% authentic · Klarna · Afterpay"
+    },
+    {
+      "type": "text",
       "id": "cta_primary_text",
       "label": "Primary CTA text",
       "default": "Browse Best Sellers"
@@ -58,6 +71,13 @@
       "type": "url",
       "id": "cta_secondary_url",
       "label": "Secondary CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "reassurance",
+      "label": "Reassurance line (below CTAs)",
+      "info": "Italic, soft. Optional.",
+      "default": "Free U.S. shipping over $35 · Hand-packed in AZ"
     }
   ],
   "presets": [

@@ -136,6 +136,7 @@
                   data-size="{{ variant.option1 | downcase }}"
                   data-price="{{ variant.price }}"
                   data-available="{{ variant.available }}"
+                  data-ml="{{ variant.metafields.scent_gallery.ml_size | default: 0 }}"
                   data-bottle="{{ v_bottle | asset_url }}"
                   aria-pressed="false"
                 >
@@ -171,6 +172,20 @@
         </div>
       </div>
 
+      <!-- Parent ML stock indicator — restyled as a confident-not-loud scarcity badge -->
+      {%- assign parent_ml = product.metafields.scent_gallery.parent_ml_remaining -%}
+      {%- if parent_ml != blank and parent_ml > 0 -%}
+        <p class="pdp-scarcity-badge sg-stock-remaining" data-parent-ml="{{ parent_ml }}">
+          <span class="pdp-scarcity-badge__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg></span>
+          Only {{ parent_ml | round: 1 }} ml left from this bottle
+        </p>
+      {%- elsif parent_ml == 0 -%}
+        <p class="pdp-scarcity-badge pdp-scarcity-badge--out sg-stock-remaining sg-stock-remaining--out">
+          <span class="pdp-scarcity-badge__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+          Sold out — next batch coming soon
+        </p>
+      {%- endif -%}
+
       <!-- Pressurized toggle — revealed by JS when applicable -->
       <div class="pressurized-toggle" id="pressurized-toggle" aria-hidden="true">
         <div class="pressurized-toggle__inner">
@@ -195,6 +210,27 @@
         </div>
       </div>
 
+      <!-- Pre-ATC trust stack: review microbadge (conditional) + inline trust cue -->
+      {%- assign rating = product.metafields.reviews.rating.value -%}
+      {%- assign rating_count = product.metafields.reviews.rating_count.value -%}
+      {%- if rating != blank and rating_count >= 5 -%}
+        <div class="pdp-review-cue" aria-label="{{ rating }} stars from {{ rating_count }} reviews">
+          <span class="pdp-review-cue__stars" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              {%- if i <= rating -%}
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" style="opacity:0.25"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              {%- endif -%}
+            {%- endfor -%}
+          </span>
+          <span class="pdp-review-cue__rating">{{ rating }}</span>
+          <span class="pdp-review-cue__count">· {{ rating_count }} review{% if rating_count != 1 %}s{% endif %}</span>
+        </div>
+      {%- endif -%}
+
+      {%- render 'cta-trust-cue', icon: 'shield', label: '100% authentic · Klarna · Afterpay · Shop Pay' -%}
+
       <!-- Add to cart -->
       <div class="product-actions">
         <form id="product-form" method="post" action="/cart/add">
@@ -212,19 +248,19 @@
       <!-- Trust strip -->
       <div class="product-trust" aria-label="Purchase guarantees">
         <div class="product-trust__item">
-          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
           <span class="product-trust__label">100% Authentic</span>
-          <span class="product-trust__sub">From real bottles</span>
+          <span class="product-trust__sub">Poured from real bottles</span>
         </div>
         <div class="product-trust__item">
-          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>
           <span class="product-trust__label">Ships 1–2 Days</span>
-          <span class="product-trust__sub">Secure packaging</span>
+          <span class="product-trust__sub">Hand-packed in AZ</span>
         </div>
         <div class="product-trust__item">
-          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          <span class="product-trust__label">Hand Packed</span>
-          <span class="product-trust__sub">Every order checked</span>
+          <svg class="product-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12a9 9 0 1115.59 6.34M21 12a9 9 0 01-15.59-6.34"/><path d="M3 12V7M21 12v5"/></svg>
+          <span class="product-trust__label">Free Returns</span>
+          <span class="product-trust__sub">If something's off, we replace it</span>
         </div>
       </div>
 
@@ -267,6 +303,10 @@
 <!-- Variant data for product-page.js -->
 <script>
 window.SG_VARIANTS = {{ product.variants | json }};
+window.SG_PARENT_ML = {{ product.metafields.scent_gallery.parent_ml_remaining | default: 'null' }};
+{%- if product.metafields.scent_gallery.bundle_component_ids -%}
+window.SG_BUNDLE_COMPONENT_REMAINING = [{%- for ref in product.metafields.scent_gallery.bundle_component_ids.value -%}{{ ref.metafields.scent_gallery.parent_ml_remaining | default: 'null' }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}];
+{%- endif -%}
 </script>
 
 <script src="{{ 'product-page.js' | asset_url }}" defer></script>

@@ -186,7 +186,13 @@
   color: var(--color-on-surface-muted);
   letter-spacing: 0.04em;
   text-align: center;
-  margin: var(--space-2) 0 var(--space-3);
+  margin: var(--space-2) 0 0;
+}
+
+/* Microbadge inside cart drawer footer: center it above the checkout button */
+.cart-drawer__footer .cta-trust-cue {
+  align-self: center;
+  margin-bottom: 0;
 }
 
 .cart-drawer__checkout-btn {

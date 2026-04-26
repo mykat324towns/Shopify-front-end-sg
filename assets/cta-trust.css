@@ -1,0 +1,237 @@
+/* CTA Trust — shared component styles */
+/* Sandwich pattern: microbadge above CTA + restyled trust strip below + reassurance lines + PDP scarcity badge */
+
+/* ── Inline microbadge above CTA ── */
+.cta-trust-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-warm-sage);
+  margin-bottom: var(--space-3);
+  line-height: 1.2;
+}
+
+.cta-trust-cue__icon {
+  display: inline-flex;
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--color-primary);
+}
+
+.cta-trust-cue__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cta-trust-cue__label {
+  display: inline-block;
+}
+
+/* Variant: dark backgrounds (CTA section, etc.) */
+.cta-trust-cue--dark {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.cta-trust-cue--dark .cta-trust-cue__icon {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Optional separator dot inside the label (kept for future use) */
+.cta-trust-cue__sep {
+  display: inline-block;
+  margin: 0 4px;
+  opacity: 0.5;
+}
+
+/* ── Refined trust strip below CTA ── */
+/* Generic enough to drop into any section that needs a row of icon+label trust items */
+.cta-trust-strip {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-warm-sage);
+  margin-top: var(--space-4);
+  line-height: 1.2;
+}
+
+.cta-trust-strip__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cta-trust-strip__icon {
+  display: inline-flex;
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--color-primary);
+}
+
+.cta-trust-strip__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cta-trust-strip__sep {
+  display: inline-block;
+  color: var(--color-border-strong);
+  font-size: 11px;
+}
+
+/* Dark-bg variant for cta-section */
+.cta-trust-strip--dark {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.cta-trust-strip--dark .cta-trust-strip__icon {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.cta-trust-strip--dark .cta-trust-strip__sep {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Reassurance line below CTA (italic, soft) ── */
+.cta-trust-reassurance {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-on-surface-muted);
+  margin-top: var(--space-3);
+  letter-spacing: 0.02em;
+}
+
+.cta-trust-reassurance--dark {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── PDP parent-ML scarcity badge ── */
+.pdp-scarcity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-accent-light);
+  border: 1px solid rgba(28, 64, 50, 0.20);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  margin: var(--space-3) 0;
+  width: fit-content;
+}
+
+.pdp-scarcity-badge__icon {
+  display: inline-flex;
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--color-primary);
+}
+
+.pdp-scarcity-badge__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pdp-scarcity-badge--out {
+  background: rgba(185, 64, 64, 0.08);
+  border-color: rgba(185, 64, 64, 0.25);
+  color: var(--color-error);
+}
+
+.pdp-scarcity-badge--out .pdp-scarcity-badge__icon {
+  color: var(--color-error);
+}
+
+/* ── PDP review microbadge above ATC ── */
+.pdp-review-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-body);
+}
+
+.pdp-review-cue__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-warm-amber);
+}
+
+.pdp-review-cue__stars svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  fill: currentColor;
+}
+
+.pdp-review-cue__rating {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+
+.pdp-review-cue__count {
+  font-size: var(--text-caption);
+  color: var(--color-on-surface-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ── Mobile adjustments ── */
+@media (max-width: 768px) {
+  .cta-trust-cue {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-2);
+  }
+
+  .cta-trust-cue__icon {
+    width: 12px;
+    height: 12px;
+    flex-basis: 12px;
+  }
+
+  .cta-trust-strip {
+    font-size: 10px;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  .cta-trust-strip__icon {
+    width: 12px;
+    height: 12px;
+    flex-basis: 12px;
+  }
+
+  .cta-trust-reassurance {
+    font-size: 11px;
+    margin-top: var(--space-2);
+  }
+
+  .pdp-scarcity-badge {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}

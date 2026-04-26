@@ -21,6 +21,9 @@
     <p class="kit-builder-cta__overline">{{ section.settings.overline }}</p>
     <h2 class="kit-builder-cta__headline">{{ section.settings.headline }}</h2>
     <p class="kit-builder-cta__sub">{{ section.settings.subtext }}</p>
+    {%- if section.settings.trust_cue != blank -%}
+      {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
+    {%- endif -%}
     <a href="{{ section.settings.cta_url }}" class="btn-primary">{{ section.settings.cta_text }}</a>
     <p class="kit-cta__trust">{{ section.settings.trust_line }}</p>
   </div>
@@ -48,6 +51,13 @@
       "id": "subtext",
       "label": "Subtext",
       "default": "Pick your sizes. Stack the ones you've been meaning to try. Ship one box, one tracking number."
+    },
+    {
+      "type": "text",
+      "id": "trust_cue",
+      "label": "Inline trust cue (above CTA)",
+      "info": "Small uppercase microbadge that primes the click. Keep short.",
+      "default": "100% authentic · Hand-packed in AZ"
     },
     {
       "type": "text",

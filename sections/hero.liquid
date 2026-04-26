@@ -18,17 +18,30 @@
         </div>
       {%- endif -%}
 
+      {%- if section.settings.trust_cue != blank -%}
+        {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue -%}
+      {%- endif -%}
+
       <div class="hero__actions">
         <a href="{{ section.settings.cta_primary_url }}" class="btn-primary">{{ section.settings.cta_primary_text }}</a>
         <a href="{{ section.settings.cta_secondary_url }}" class="btn-ghost">{{ section.settings.cta_secondary_text }}</a>
       </div>
 
-      <div class="hero__trust" aria-label="Trust signals">
-        <span class="hero__trust-item">{{ section.settings.trust_1 }}</span>
-        <span class="hero__trust-sep" aria-hidden="true">·</span>
-        <span class="hero__trust-item">{{ section.settings.trust_2 }}</span>
-        <span class="hero__trust-sep" aria-hidden="true">·</span>
-        <span class="hero__trust-item">{{ section.settings.trust_3 }}</span>
+      <div class="cta-trust-strip" aria-label="Trust signals">
+        <span class="cta-trust-strip__item">
+          <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          {{ section.settings.trust_1 }}
+        </span>
+        <span class="cta-trust-strip__sep" aria-hidden="true">·</span>
+        <span class="cta-trust-strip__item">
+          <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></span>
+          {{ section.settings.trust_2 }}
+        </span>
+        <span class="cta-trust-strip__sep" aria-hidden="true">·</span>
+        <span class="cta-trust-strip__item">
+          <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></span>
+          {{ section.settings.trust_3 }}
+        </span>
       </div>
     </div>
 
@@ -105,6 +118,13 @@
       "id": "proof_count",
       "label": "Orders packed count (fallback only)",
       "info": "Renders only if the proof line above is empty. Don't surface a static number unless it's a live counter."
+    },
+    {
+      "type": "text",
+      "id": "trust_cue",
+      "label": "Inline trust cue (above CTAs)",
+      "info": "Small uppercase microbadge that primes the click. Keep short.",
+      "default": "100% authentic · Klarna · Afterpay · Shop Pay"
     },
     {
       "type": "text",
