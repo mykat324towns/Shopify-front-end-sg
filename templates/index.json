@@ -145,36 +145,36 @@
         "t-1": {
           "type": "testimonial",
           "settings": {
-            "quote": "Ordered 6 scents for $42. Found my new signature. Never would've known without trying it first.",
-            "name": "Marcus T.",
-            "initials": "MT",
+            "quote": "Delivered fast. High-quality packing, came in great condition. Free samples with every order over $10.",
+            "name": "Logan M.",
+            "initials": "LM",
             "stars": 5
           }
         },
         "t-2": {
           "type": "testimonial",
           "settings": {
-            "quote": "Packaging was surprisingly good. Nothing leaked, everything sealed. Arrived fast.",
-            "name": "Jacob L.",
-            "initials": "JL",
+            "quote": "Fast shipping, high quality, and a quality-over-quantity selection. Doesn't get much better.",
+            "name": "Alessio D.",
+            "initials": "AD",
             "stars": 5
           }
         },
         "t-3": {
           "type": "testimonial",
           "settings": {
-            "quote": "I was skeptical about decants. Not anymore. The 5ml lasted me two full weeks.",
-            "name": "Logan M.",
-            "initials": "LM",
+            "quote": "Packaging was great and it came right when he said it would. Honest too.",
+            "name": "Brandon H.",
+            "initials": "BH",
             "stars": 5
           }
         },
         "t-4": {
           "type": "testimonial",
           "settings": {
-            "quote": "Stopped buying blind after this. My rotation is actually good now.",
-            "name": "Derek S.",
-            "initials": "DS",
+            "quote": "Fabulous shipping. Amazing scents, thoughtful packaging, and the best customer service.",
+            "name": "Aldo L.",
+            "initials": "AL",
             "stars": 5
           }
         }
