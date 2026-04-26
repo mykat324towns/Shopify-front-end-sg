@@ -63,6 +63,19 @@
   color: var(--color-primary);
 }
 
+/* Center the trust microbadge + reassurance line to match the tagline + CTA alignment */
+.comparison__card-wrap .cta-trust-cue-line,
+.comparison__card-wrap .cta-trust-reassurance {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .comparison__card-wrap .cta-trust-cue-line,
+  .comparison__card-wrap .cta-trust-reassurance {
+    text-align: left;
+  }
+}
+
 .comparison__col-sublabel {
   display: block;
   font-family: var(--font-body);
