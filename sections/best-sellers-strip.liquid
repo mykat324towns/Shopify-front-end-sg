@@ -15,7 +15,7 @@
   <section class="bs-strip" aria-label="Featured fragrances">
     <div class="container bs-strip__inner">
       {%- if section.settings.heading != blank -%}
-        <p class="bs-strip__heading">{{ section.settings.heading }}</p>
+        <h2 class="bs-strip__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
       <div class="bs-strip__row" role="list">
         {%- for i in (1..3) -%}

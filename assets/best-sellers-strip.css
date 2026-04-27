@@ -9,22 +9,22 @@
   /* Inherits container padding + max-width */
 }
 
-/* Strip heading — editorial framing, not a duplicate "Best Sellers" label */
+/* Strip heading — promoted to serif statement headline (matches comparison + featured-collection) */
 .bs-strip__heading {
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-on-surface-muted);
-  margin: 0 0 var(--space-5) 0;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-on-surface);
+  margin: 0 0 var(--space-6) 0;
 }
 
-/* Desktop: 3-up grid, equal columns, no header */
+/* Desktop: 3-up grid, equal columns */
 .bs-strip__row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
+  gap: var(--space-4);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -33,13 +33,12 @@
 .bs-strip__card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-decoration: none;
   color: var(--color-on-surface);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
   transition:
     transform var(--duration-fast) var(--ease-standard),
     border-color var(--duration-fast) var(--ease-standard),
@@ -49,34 +48,45 @@
 .bs-strip__card:hover,
 .bs-strip__card:focus-visible {
   transform: translateY(-2px);
-  border-color: var(--color-primary);
+  border-color: var(--color-border-strong);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
   outline: none;
 }
 
+/* Image panel — matches .product-card framing (warm-sage-light tinted square) */
 .bs-strip__img-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 140px;
-  margin-bottom: var(--space-3);
+  aspect-ratio: 1 / 1;
+  background: var(--color-warm-sage-light);
+  padding: var(--space-3);
+  margin: 0;
 }
 
 .bs-strip__img {
-  max-height: 140px;
-  width: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  object-position: center;
+}
+
+/* Info area below image */
+.bs-strip__card > .bs-strip__name,
+.bs-strip__card > .bs-strip__price {
+  padding-inline: var(--space-3);
 }
 
 .bs-strip__name {
-  font-family: var(--font-body);
-  font-size: var(--text-body-sm);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: var(--text-body-lg);
+  font-weight: 400;
   color: var(--color-on-surface);
-  text-align: center;
-  line-height: 1.3;
-  margin: 0 0 var(--space-2);
+  text-align: left;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: var(--space-3) 0 var(--space-1);
   /* Clamp to 2 lines so card heights stay even */
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -86,54 +96,45 @@
 
 .bs-strip__price {
   font-family: var(--font-body);
-  font-size: var(--text-caption);
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.04em;
   color: var(--color-warm-amber);
-  margin: 0;
+  margin: 0 0 var(--space-3);
+  font-variant-numeric: tabular-nums;
 }
 
-/* Mobile: peek pattern — 1.5 cards visible, scroll for the rest */
+/* Mobile: 3-up grid (curation claim, not browse module) */
 @media (max-width: 768px) {
   .bs-strip {
     padding-block: var(--space-6) var(--space-8);
   }
 
+  .bs-strip__heading {
+    margin-bottom: var(--space-4);
+  }
+
   .bs-strip__row {
-    display: flex;
-    grid-template-columns: none;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    gap: var(--space-3);
-    padding-inline: var(--padding-x-mobile);
-    padding-bottom: var(--space-3);
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    /* Fade right edge to signal scrollability — wider fade zone = stronger cue on 390px viewports */
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
-    mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent 100%);
-    /* Negate the container's horizontal padding so the strip can extend edge-to-edge */
-    margin-inline: calc(var(--padding-x-mobile) * -1);
-  }
-
-  .bs-strip__row::-webkit-scrollbar {
-    display: none;
-  }
-
-  .bs-strip__card {
-    /* Each card takes ~70% of viewport so card 2 peeks at the right edge */
-    flex: 0 0 70%;
-    scroll-snap-align: start;
-    padding: var(--space-4) var(--space-3);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
   }
 
   .bs-strip__img-wrap {
-    height: 120px;
+    padding: var(--space-2);
   }
 
-  .bs-strip__img {
-    max-height: 120px;
+  .bs-strip__name {
+    font-size: var(--text-body-sm);
+    margin: var(--space-2) 0 2px;
+    line-height: 1.25;
+  }
+
+  .bs-strip__card > .bs-strip__name,
+  .bs-strip__card > .bs-strip__price {
+    padding-inline: var(--space-2);
+  }
+
+  .bs-strip__price {
+    font-size: var(--text-body-sm);
+    margin-bottom: var(--space-2);
   }
 }
