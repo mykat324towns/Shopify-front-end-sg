@@ -1,6 +1,7 @@
 /* Back-to-top — floating action button, all viewports, all long-scroll pages */
 /* Designed to NOT blend with the bottle-green primary CTAs that dominate the site:
    white surface + dark icon + crisp border + lifted shadow. */
+/* sync-bump: 2026-04-26-r2 */
 
 .back-to-top {
   position: fixed;
