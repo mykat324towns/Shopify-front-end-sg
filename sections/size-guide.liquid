@@ -4,7 +4,7 @@
       <h2 class="size-guide__title">{{ section.settings.title }}</h2>
       <p class="size-guide__sub">{{ section.settings.subtitle }}</p>
     </div>
-    <div class="size-guide__row">
+    <div class="size-guide__row" data-scroll-container="size-guide-{{ section.id }}">
 
       <div class="size-guide__item">
         <img src="{{ 'bottle-1ml.avif' | asset_url }}" alt="1ml decant bottle" loading="lazy" width="24" height="48">
@@ -52,6 +52,12 @@
       </div>
 
     </div>
+
+    {%- render 'scroll-indicator',
+        id: 'size-guide-' | append: section.id,
+        mode: 'native',
+        target: '.size-guide__row' -%}
+
     <div class="size-guide__footer">
       <a href="#shopify-section-faq" class="size-guide__see-all">See all sizes →</a>
     </div>

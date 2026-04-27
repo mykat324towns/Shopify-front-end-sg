@@ -242,25 +242,8 @@
   scroll-snap-align: start;
 }
 
-/* Custom Swiper scrollbar */
-.carousel-scroll-bar {
-  position: relative;
-  height: 2px;
-  background: var(--color-border);
-  border-radius: var(--radius-sm);
-  margin-top: var(--space-4);
-  overflow: visible;
-}
-
-.carousel-scroll-bar__thumb {
-  position: absolute;
-  top: -2px;
-  height: 6px;
-  min-width: 24px;
-  background: var(--color-primary);
-  border-radius: var(--radius-sm);
-  transition: left var(--duration-instant) linear;
-}
+/* Scroll indicator (.carousel-scroll-bar / .carousel-scroll-bar__thumb)
+   moved to assets/scroll-indicator.css for cross-section reuse. */
 
 /* ── Responsive ── */
 @media (max-width: 1280px) {

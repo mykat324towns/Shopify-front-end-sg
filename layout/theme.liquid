@@ -38,6 +38,7 @@
   {{ 'cta-trust.css' | asset_url | stylesheet_tag }}
   {{ 'best-sellers-strip.css' | asset_url | stylesheet_tag }}
   {{ 'collection-grid.css' | asset_url | stylesheet_tag }}
+  {{ 'scroll-indicator.css' | asset_url | stylesheet_tag }}
   {{ 'listing-controls.css' | asset_url | stylesheet_tag }}
   {{ 'product-page.css' | asset_url | stylesheet_tag }}
   {{ 'size-guide.css' | asset_url | stylesheet_tag }}
@@ -48,10 +49,11 @@
   {{ 'cta-section.css' | asset_url | stylesheet_tag }}
   {{ 'testimonial-card.css' | asset_url | stylesheet_tag }}
   {{ 'social-wall.css' | asset_url | stylesheet_tag }}
+  {{ 'back-to-top.css' | asset_url | stylesheet_tag }}
   {{ 'delight.css' | asset_url | stylesheet_tag }}
 </head>
 
-<body>
+<body data-template="{{ template | replace: '.', '-' }}">
   {% section 'announcement-bar' %}
   {% section 'header' %}
 
@@ -62,10 +64,13 @@
   {% section 'footer' %}
 
   {% render 'cart-drawer' %}
+  {% render 'back-to-top' %}
 
   <!-- Swiper -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
   <!-- Theme JS -->
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'scroll-indicator.js' | asset_url }}" defer></script>
+  <script src="{{ 'back-to-top.js' | asset_url }}" defer></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
           <h2 class="testimonials__title">{{ section.settings.title }}</h2>
         </header>
 
-        <div class="testimonials__grid">
+        <div class="testimonials__grid" data-scroll-container="testimonials-{{ section.id }}">
           {%- for block in section.blocks -%}
             {%- if block.type == 'testimonial' -%}
               <article class="testimonial-card reveal" {% if forloop.index > 1 %}style="transition-delay:{{ forloop.index0 | times: 80 }}ms"{% endif %} {{ block.shopify_attributes }}>
@@ -32,6 +32,11 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
+
+        {%- render 'scroll-indicator',
+            id: 'testimonials-' | append: section.id,
+            mode: 'native',
+            target: '.testimonials__grid' -%}
       </div>
 
       <div class="testimonials__photo-placeholder" id="box-panel">

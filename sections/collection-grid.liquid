@@ -27,6 +27,7 @@
     {%- if collection.products_count > 0 -%}
       {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
 
+      <div class="listing-controls-sentinel" aria-hidden="true"></div>
       <div class="listing-controls">
         <input
           id="listing-search"
@@ -107,6 +108,17 @@
       countEl.textContent = (q ? visible + ' of ' + total : total) + ' fragrance' + (total === 1 ? '' : 's');
     }
   });
+
+  // Sticky state — toggle .is-stuck on .listing-controls when the sentinel scrolls out of view.
+  var sentinel = document.querySelector('.listing-controls-sentinel');
+  var controls = document.querySelector('.listing-controls');
+  if (sentinel && controls && 'IntersectionObserver' in window) {
+    var navOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--space-16') || '64', 10);
+    var io = new IntersectionObserver(function (entries) {
+      controls.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }, { rootMargin: '-' + navOffset + 'px 0px 0px 0px', threshold: [0, 1] });
+    io.observe(sentinel);
+  }
 }());
 </script>
 

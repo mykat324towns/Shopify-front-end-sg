@@ -303,6 +303,10 @@
 
 .nav__drawer-link:hover { color: var(--color-primary); }
 
+.nav__drawer-link[aria-current="page"] {
+  color: var(--color-primary);
+}
+
 .nav__drawer-link:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus-green);

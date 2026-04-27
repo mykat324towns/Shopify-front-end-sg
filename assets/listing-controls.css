@@ -6,6 +6,27 @@
   gap: var(--space-3);
   padding-block: var(--space-6);
   flex-wrap: wrap;
+
+  /* Stick below the nav (nav.css: position:sticky, top:0, height:var(--space-16)) */
+  position: sticky;
+  top: var(--space-16);
+  z-index: 50;
+  background: var(--color-bg);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.listing-controls.is-stuck {
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Sentinel — invisible 1px element above the controls used to detect stickiness via IntersectionObserver */
+.listing-controls-sentinel {
+  height: 1px;
+  width: 100%;
 }
 
 .listing-controls__search {
@@ -98,6 +119,16 @@
   .listing-controls {
     flex-direction: column;
     align-items: stretch;
+    padding-block: var(--space-3);
+    gap: var(--space-2);
+    /* Bleed bg to viewport edges so the sticky band looks intentional on mobile */
+    margin-inline: calc(var(--padding-x-mobile) * -1);
+    padding-inline: var(--padding-x-mobile);
+  }
+
+  /* When stacked + stuck, hide the count line to keep the sticky band shallow */
+  .listing-controls.is-stuck .listing-controls__count {
+    display: none;
   }
 
   .listing-controls__count {

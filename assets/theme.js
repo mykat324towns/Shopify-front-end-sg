@@ -207,67 +207,7 @@
     if (e.key === 'Escape') closeNavSearchOverlay();
   }
 
-  // ── Swiper carousels (homepage, mobile only) ─────────────────────
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof Swiper === 'undefined') return;
-
-    const initCarousel = (swiperEl, scrollbarEl, thumbEl) => {
-      if (!swiperEl || !scrollbarEl || !thumbEl) return;
-
-      const spv = parseFloat(swiperEl.dataset.slidesPerView) || 2.5;
-      const swiper = new Swiper(swiperEl, {
-        spaceBetween: spv < 2 ? 20 : 14,
-        slidesPerView: spv,
-        freeMode: true,
-        grabCursor: true,
-        simulateTouch: true,
-        touchRatio: 1,
-        touchAngle: 45,
-        resistanceRatio: 0.85,
-      });
-
-      const sync = () => {
-        const tw = Math.max(scrollbarEl.offsetWidth * Math.max(0.15, 1 / swiper.slides.length), 24);
-        thumbEl.style.width = tw + 'px';
-        thumbEl.style.left  = swiper.progress * (scrollbarEl.offsetWidth - tw) + 'px';
-      };
-      swiper.on('progress', sync);
-      swiper.on('resize', sync);
-      window.addEventListener('resize', sync, { passive: true });
-
-      let dragging = false;
-      const dragTo = (clientX) => {
-        const rect = scrollbarEl.getBoundingClientRect();
-        swiper.setProgress(Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)));
-      };
-      thumbEl.addEventListener('mousedown', (e) => { dragging = true; e.preventDefault(); });
-      thumbEl.addEventListener('touchstart', () => { dragging = true; }, { passive: true });
-      document.addEventListener('mousemove', (e) => { if (dragging) dragTo(e.clientX); });
-      document.addEventListener('touchmove', (e) => { if (dragging) dragTo(e.touches[0].clientX); }, { passive: true });
-      document.addEventListener('mouseup',  () => { dragging = false; });
-      document.addEventListener('touchend', () => { dragging = false; });
-      scrollbarEl.addEventListener('click', (e) => dragTo(e.clientX));
-
-      sync();
-    };
-
-    const initAll = () => {
-      if (window.innerWidth > 768) return;
-      // Find all carousel track wrappers and init each one dynamically
-      document.querySelectorAll('.carousel-track').forEach(track => {
-        const swiperEl  = track.querySelector('.swiper');
-        const scrollbar = track.querySelector('.carousel-scroll-bar');
-        const thumb     = track.querySelector('.carousel-scroll-bar__thumb');
-        if (swiperEl && scrollbar && thumb && !swiperEl.dataset.swiperInitialized) {
-          swiperEl.dataset.swiperInitialized = '1';
-          initCarousel(swiperEl, scrollbar, thumb);
-        }
-      });
-    };
-
-    initAll();
-    window.addEventListener('resize', initAll, { passive: true });
-  });
+  // Carousel scroll bars moved to assets/scroll-indicator.js (snippet-driven).
 
   // ── Social Wall (homepage TikTok comments — marquee or swiper) ──────
   document.addEventListener('DOMContentLoaded', function () {

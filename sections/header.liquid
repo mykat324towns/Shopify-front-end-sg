@@ -4,7 +4,7 @@
     <!-- Left nav links -->
     <nav class="nav__links-left" aria-label="Primary navigation">
       {% for link in linklists[section.settings.menu_left].links %}
-        <a class="nav__link" href="{{ link.url }}">{{ link.title }}</a>
+        <a class="nav__link" href="{{ link.url }}"{% if link.current or request.path == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
       {% endfor %}
     </nav>
 
@@ -16,7 +16,7 @@
     <!-- Right nav: search + cart + hamburger -->
     <div class="nav__links-right">
       {% for link in linklists[section.settings.menu_right].links %}
-        <a class="nav__link" href="{{ link.url }}">{{ link.title }}</a>
+        <a class="nav__link" href="{{ link.url }}"{% if link.current or request.path == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
       {% endfor %}
 
       <button class="nav__search" aria-label="Search">
@@ -51,7 +51,7 @@
         <nav aria-label="Mobile navigation">
           {% assign all_links = linklists[section.settings.menu_left].links | concat: linklists[section.settings.menu_right].links %}
           {% for link in all_links %}
-            <a class="nav__drawer-link" href="{{ link.url }}">{{ link.title }}</a>
+            <a class="nav__drawer-link" href="{{ link.url }}"{% if link.current or request.path == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
           {% endfor %}
         </nav>
       </div>

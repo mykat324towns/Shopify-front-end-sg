@@ -1,0 +1,34 @@
+{%- comment -%}
+  Reusable scroll progress indicator — extracted from the original
+  carousel-scroll-bar pattern in collection-grid.css.
+
+  Renders a thin track + draggable thumb beneath any horizontal scroll
+  region. Two operating modes:
+
+    swiper:  attaches to a Swiper instance found inside the parent
+             .carousel-track wrapper (existing behavior — Best Sellers,
+             Latest Pickups).
+
+    native:  attaches to a plain element with overflow-x: auto (testimonials
+             grid, size-guide row). Reads scrollLeft, updates thumb position;
+             dragging the thumb scrolls the container.
+
+  Params:
+    id     (required)  Stable identifier — wires markup to the JS instance.
+    mode   (default: swiper)  "swiper" | "native"
+    target (native only) CSS selector for the scroll container.
+{%- endcomment -%}
+
+{%- assign si_id   = id   | default: 'scroll-indicator' -%}
+{%- assign si_mode = mode | default: 'swiper' -%}
+
+<div
+  class="carousel-scroll-bar"
+  data-scroll-indicator
+  data-mode="{{ si_mode }}"
+  {%- if si_mode == 'native' and target != blank -%} data-target="{{ target }}"{%- endif -%}
+  data-id="{{ si_id }}"
+  aria-hidden="true"
+>
+  <div class="carousel-scroll-bar__thumb"></div>
+</div>

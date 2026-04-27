@@ -44,9 +44,7 @@
             {%- endfor -%}
           </div>
         </div>
-        <div class="carousel-scroll-bar" id="{{ section.id }}-scrollbar">
-          <div class="carousel-scroll-bar__thumb" id="{{ section.id }}-thumb"></div>
-        </div>
+        {%- render 'scroll-indicator', id: section.id, mode: 'swiper' -%}
       </div>
 
       <!-- Desktop grid -->

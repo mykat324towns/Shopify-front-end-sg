@@ -1,0 +1,34 @@
+/* Scroll Indicator — reusable progress track for horizontal scroll regions. */
+/* Extracted from collection-grid.css; used by featured-collection, latest-pickups,
+   testimonials, and size-guide via the scroll-indicator.liquid snippet. */
+
+.carousel-scroll-bar {
+  position: relative;
+  height: 2px;
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-4);
+  overflow: visible;
+}
+
+.carousel-scroll-bar__thumb {
+  position: absolute;
+  top: -2px;
+  height: 6px;
+  min-width: 24px;
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+  transition: left var(--duration-instant) linear;
+  cursor: grab;
+}
+
+.carousel-scroll-bar__thumb:active {
+  cursor: grabbing;
+}
+
+/* Mobile-only — desktop layouts surface all content; affordance is unnecessary. */
+@media (min-width: 769px) {
+  [data-scroll-indicator][data-mode="native"] {
+    display: none;
+  }
+}
