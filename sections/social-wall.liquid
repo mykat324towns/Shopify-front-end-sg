@@ -3,7 +3,21 @@
   rendered as a wall above testimonials. Honest day-one social proof.
 {%- endcomment -%}
 
-{%- assign asset_count = section.settings.asset_image_count | default: 12 -%}
+{%- comment -%}
+  Curated ordering: comment_order is an explicit, comma-separated list of
+  comment-NN.png numbers, ranked by CRO leverage (objection-bunking,
+  specificity, identity reinforcement). Falls back to comment-01..comment-NN
+  if blank, using asset_image_count.
+{%- endcomment -%}
+{%- assign comment_order = section.settings.comment_order | default: '' -%}
+{%- if comment_order != blank -%}
+  {%- assign comment_list = comment_order | replace: ' ', '' | split: ',' -%}
+  {%- assign asset_count = comment_list.size -%}
+{%- else -%}
+  {%- assign asset_count = section.settings.asset_image_count | default: 12 -%}
+  {%- assign comment_list = '' | split: ',' -%}
+{%- endif -%}
+
 {%- if section.settings.title == blank -%}
   {%- assign layout = 'marquee' -%}
 {%- else -%}
@@ -37,17 +51,31 @@
 
       <div class="swiper social-wall__swiper" id="social-wall-swiper">
         <div class="swiper-wrapper">
-          {%- for i in (1..asset_count) -%}
-            {%- assign n = i | prepend: '0' | slice: -2, 2 -%}
-            {%- assign filename = 'comment-' | append: n | append: '.png' -%}
-            <div class="swiper-slide social-wall__slide">
-              <img
-                src="{{ filename | asset_url }}"
-                alt="TikTok community comment screenshot"
-                loading="lazy"
-              >
-            </div>
-          {%- endfor -%}
+          {%- if comment_list.size > 0 -%}
+            {%- for raw in comment_list -%}
+              {%- assign n = raw | prepend: '0' | slice: -2, 2 -%}
+              {%- assign filename = 'comment-' | append: n | append: '.png' -%}
+              <div class="swiper-slide social-wall__slide">
+                <img
+                  src="{{ filename | asset_url }}"
+                  alt="TikTok community comment screenshot"
+                  loading="lazy"
+                >
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..asset_count) -%}
+              {%- assign n = i | prepend: '0' | slice: -2, 2 -%}
+              {%- assign filename = 'comment-' | append: n | append: '.png' -%}
+              <div class="swiper-slide social-wall__slide">
+                <img
+                  src="{{ filename | asset_url }}"
+                  alt="TikTok community comment screenshot"
+                  loading="lazy"
+                >
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
         </div>
         {%- if layout == 'swiper' -%}
           <div class="swiper-pagination social-wall__pagination"></div>
@@ -82,10 +110,17 @@
       "default": "Real comments. Real fragheads. No filters, no edits."
     },
     {
+      "type": "text",
+      "id": "comment_order",
+      "label": "Curated comment order (top-leverage first)",
+      "info": "Comma-separated comment-NN.png numbers in render order. Ranked by /cro: objection-bunking, specificity, ICP voice. Leave blank to use sequential count below.",
+      "default": "01,10,08,12,05,11,02,04"
+    },
+    {
       "type": "range",
       "id": "asset_image_count",
-      "label": "Bundled comment screenshots to show",
-      "info": "Renders comment-01.png through comment-NN.png from theme assets.",
+      "label": "Sequential fallback count",
+      "info": "Used only if curated order is blank. Renders comment-01.png through comment-NN.png in numerical order.",
       "min": 0,
       "max": 12,
       "step": 1,

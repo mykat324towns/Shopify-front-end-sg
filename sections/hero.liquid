@@ -5,45 +5,46 @@
 
   <div class="container hero__inner">
     <div class="hero__content">
-      <span class="hero__overline">{{ section.settings.overline }}</span>
-      <h1 class="hero__headline">{{ section.settings.headline }}</h1>
-      <p class="hero__sub">{{ section.settings.subtext }}</p>
-
-      {%- if section.settings.proof_text != blank -%}
-        <p class="hero__proof hero__proof--text">{{ section.settings.proof_text }}</p>
-      {%- elsif section.settings.proof_count != blank -%}
-        <div class="hero__proof">
-          <span class="hero__proof-num" id="hero-order-count">{{ section.settings.proof_count }}</span>
-          <span class="hero__proof-label">orders packed</span>
-        </div>
-      {%- endif -%}
-
-      {%- if section.settings.trust_cue != blank -%}
-        <div class="cta-trust-cue-line">
-          {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue, payment_marks: 'apple_pay,shop_pay' -%}
-        </div>
-      {%- endif -%}
-
-      <div class="hero__actions">
-        <a href="{{ section.settings.cta_primary_url }}" class="btn-primary">{{ section.settings.cta_primary_text }}</a>
-        <a href="{{ section.settings.cta_secondary_url }}" class="hero__cta-secondary">{{ section.settings.cta_secondary_text }}</a>
+      <div class="hero__text">
+        <span class="hero__overline">{{ section.settings.overline }}</span>
+        <h1 class="hero__headline">{{ section.settings.headline }}</h1>
+        <p class="hero__sub">{{ section.settings.subtext }}</p>
       </div>
 
-      <div class="cta-trust-strip" aria-label="Trust signals">
-        <span class="cta-trust-strip__item">
-          <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          {{ section.settings.trust_1 }}
-        </span>
-        <span class="cta-trust-strip__sep" aria-hidden="true">·</span>
-        <span class="cta-trust-strip__item">
-          <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></span>
-          {{ section.settings.trust_2 }}
-        </span>
-        <span class="cta-trust-strip__sep" aria-hidden="true">·</span>
-        <span class="cta-trust-strip__item">
-          <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></span>
-          {{ section.settings.trust_3 }}
-        </span>
+      <div class="hero__cta">
+        <a href="{{ section.settings.cta_primary_url }}" class="btn-primary">{{ section.settings.cta_primary_text }}</a>
+      </div>
+
+      <div class="hero__below-fold">
+        <div class="cta-trust-strip" aria-label="Trust signals">
+          <span class="cta-trust-strip__item">
+            <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            {{ section.settings.trust_1 }}
+          </span>
+          <span class="cta-trust-strip__sep" aria-hidden="true">·</span>
+          <span class="cta-trust-strip__item">
+            <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></span>
+            {{ section.settings.trust_2 }}
+          </span>
+          <span class="cta-trust-strip__sep" aria-hidden="true">·</span>
+          <span class="cta-trust-strip__item">
+            <span class="cta-trust-strip__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></span>
+            {{ section.settings.trust_3 }}
+          </span>
+        </div>
+
+        {%- if section.settings.proof_text != blank -%}
+          <p class="hero__proof hero__proof--text">{{ section.settings.proof_text }}</p>
+        {%- elsif section.settings.proof_count != blank -%}
+          <div class="hero__proof">
+            <span class="hero__proof-num" id="hero-order-count">{{ section.settings.proof_count }}</span>
+            <span class="hero__proof-label">orders packed</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.cta_secondary_text != blank and section.settings.cta_secondary_url != blank -%}
+          <a href="{{ section.settings.cta_secondary_url }}" class="hero__cta-secondary">{{ section.settings.cta_secondary_text }}</a>
+        {%- endif -%}
       </div>
     </div>
 
@@ -112,21 +113,14 @@
       "type": "text",
       "id": "proof_text",
       "label": "Proof line (authority/curation statement)",
-      "info": "Use this for a static authority statement (e.g. founder/curation/authenticity). Leave the orders-packed count below blank if this is set.",
-      "default": "Hand-poured in Arizona. Authentic-only — no clones, no dupes, no oils."
+      "info": "Renders below the trust strip on mobile, after the product visual. Leave empty to hide.",
+      "default": ""
     },
     {
       "type": "number",
       "id": "proof_count",
       "label": "Orders packed count (fallback only)",
       "info": "Renders only if the proof line above is empty. Don't surface a static number unless it's a live counter."
-    },
-    {
-      "type": "text",
-      "id": "trust_cue",
-      "label": "Inline trust cue (above CTAs)",
-      "info": "Small uppercase microbadge that primes the click. Keep short.",
-      "default": "100% authentic"
     },
     {
       "type": "text",
@@ -142,8 +136,9 @@
     {
       "type": "text",
       "id": "cta_secondary_text",
-      "label": "Secondary CTA text",
-      "default": "How it works →"
+      "label": "Secondary CTA text (optional, renders below the fold)",
+      "info": "Leave blank to hide. Never surfaced above the product visual.",
+      "default": ""
     },
     {
       "type": "url",

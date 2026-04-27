@@ -22,6 +22,16 @@
   gap: var(--space-6);
 }
 
+/* Desktop: inner stacks of the content column flow naturally */
+.hero__text,
+.hero__cta,
+.hero__below-fold {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.hero__text { gap: var(--space-3); }
+
 .hero__overline {
   font-family: var(--font-body);
   font-size: var(--text-label);
@@ -345,59 +355,69 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .hero { min-height: unset; }
+
+  /* Mobile re-stack: text → CTA → media → below-fold (trust + proof + secondary link).
+     Hero__content participates as transparent contents so its children become
+     direct flex items of hero__inner alongside hero__media. */
   .hero__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
   }
+  .hero__content {
+    display: contents;
+  }
+  .hero__text       { order: 1; }
+  .hero__cta        { order: 2; }
+  .hero__media      { order: 3; }
+  .hero__below-fold { order: 4; }
+
   .hero__video {
     min-height: unset;
     max-height: 260px;
     aspect-ratio: 3 / 2;
   }
-  /* Subtext is the 4th text layer — drop it on mobile to keep fold clean */
-  .hero__sub { display: none; }
   /* Decorative sidebar adds no value at mobile widths */
   .hero__sidebar { display: none; }
 }
 
 @media (max-width: 640px) {
-  /* Compress fold so TikTok comments peek above 844px */
+  /* Compress fold so the product visual lands inside it */
   .hero { padding-block: var(--space-3) var(--space-4); min-height: unset; }
   .hero__inner { gap: var(--space-3); }
 
-  /* Tighten internal text-stack rhythm — gap-6 (24px) was tuned for desktop */
-  .hero__content { gap: var(--space-3); }
-
-  /* Drop the eyebrow — tagline duplicates what headline already implies */
+  /* Drop the eyebrow — overline duplicates what headline already implies */
   .hero__overline { display: none; }
 
   /* Slightly smaller headline on small viewports — preserves impact, saves ~16px */
   .hero__headline { font-size: 38px; }
 
-  /* Trust strip: keep horizontal on mobile, tighter to fit */
-  .hero__trust {
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 6px;
-    width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
+  /* JTBD subtext stays — it's the line that earns the click */
+  .hero__sub {
+    font-size: 15px;
+    line-height: 1.5;
   }
-  .hero__trust::-webkit-scrollbar { display: none; }
-  .hero__trust-item {
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-  }
-  .hero__trust-sep {
-    font-size: 10px;
-    color: var(--color-border-strong);
-  }
+
+  /* CTA is the only thing between text and media — no flank elements */
+  .hero__cta { gap: 0; }
 
   /* Video: 4/3 on mobile — less vertical dominance, cleaner crop */
   .hero__video {
     aspect-ratio: 4 / 3;
-    max-height: 180px;
+    max-height: 220px;
+  }
+
+  /* Below-fold cluster: trust strip · proof line · secondary link */
+  .hero__below-fold {
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+  .hero__proof--text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-on-surface-muted);
+  }
+  .hero__cta-secondary {
+    font-size: 13px;
   }
 }

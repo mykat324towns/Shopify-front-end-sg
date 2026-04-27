@@ -45,11 +45,8 @@
           </div>
         </div>
 
-        <p class="comparison__tagline">{{ section.settings.tagline }}</p>
-        {%- if section.settings.trust_cue != blank -%}
-          <div class="cta-trust-cue-line">
-            {%- render 'cta-trust-cue', icon: 'shield', label: section.settings.trust_cue, payment_marks: 'apple_pay,shop_pay' -%}
-          </div>
+        {%- if section.settings.tagline != blank -%}
+          <p class="comparison__tagline">{{ section.settings.tagline }}</p>
         {%- endif -%}
         <a href="{{ section.settings.cta_url }}" class="btn-primary comparison__cta">{{ section.settings.cta_text }}</a>
         {%- if section.settings.reassurance != blank -%}
