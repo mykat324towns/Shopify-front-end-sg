@@ -139,7 +139,18 @@
   filter: drop-shadow(0 6px 16px rgba(0,0,0,0.42));
   transition:
     opacity 0.22s var(--ease-reveal),
-    transform 0.22s var(--ease-reveal);
+    transform 0.22s var(--ease-reveal),
+    filter 0.32s var(--ease-reveal);
+}
+
+/* Premium glow — applied when pressurized upgrade is selected.
+   Layered drop-shadows: keep the original ground shadow, add a tight
+   green halo, then a soft outer bloom. Reads as "this one's special". */
+.product-gallery__variant img.product-gallery__variant-img--pressurized {
+  filter:
+    drop-shadow(0 6px 16px rgba(0,0,0,0.42))
+    drop-shadow(0 0 18px rgba(28, 64, 50, 0.65))
+    drop-shadow(0 0 42px rgba(28, 64, 50, 0.40));
 }
 
 /* Solo state — variant slot empty on initial load, main grows to fill the space.

@@ -195,6 +195,9 @@
         pressBtn.classList.remove('pressurized-toggle__btn--on');
         pressBtn.setAttribute('aria-pressed', 'false');
       }
+      if (variantImg) {
+        variantImg.classList.remove('product-gallery__variant-img--pressurized');
+      }
 
       selectedBaseId   = variantId;
       selectedBaseSize = sizeLower;
@@ -234,14 +237,22 @@
         priceEl.textContent = formatCents(totalCents);
       }
 
-      // Swap the small variant bottle: pressurized version on, base bottle off
+      // Swap the small variant bottle: pressurized version on, base bottle off.
+      // data-press-bottles holds a JSON map of size → pressurized asset URL.
       if (isPressurized && pressToggle) {
-        var pressSrc = (selectedBaseSize === '10ml')
-          ? pressToggle.dataset.bottle10ml
-          : (selectedBaseSize === '30ml' ? pressToggle.dataset.bottle30ml : null);
+        var pressSrc = null;
+        try {
+          var map = JSON.parse(pressToggle.dataset.pressBottles || '{}');
+          pressSrc = map[selectedBaseSize];
+        } catch (err) { /* malformed JSON — leave bottle on base */ }
         if (pressSrc) setVariantImage(pressSrc, true);
       } else if (currentBaseBottle) {
         setVariantImage(currentBaseBottle, true);
+      }
+
+      // Toggle the premium glow on the variant bottle
+      if (variantImg) {
+        variantImg.classList.toggle('product-gallery__variant-img--pressurized', isPressurized);
       }
     });
   }

@@ -184,10 +184,10 @@
         </p>
       {%- endif -%}
 
-      <!-- Pressurized toggle — revealed by JS when applicable -->
+      <!-- Pressurized toggle — revealed by JS when applicable.
+           data-press-bottles is a JSON map of base-size → pressurized bottle asset URL. -->
       <div class="pressurized-toggle" id="pressurized-toggle" aria-hidden="true"
-           data-bottle-10ml="{{ 'bottle-10ml-pressurized.avif' | asset_url }}"
-           data-bottle-30ml="{{ 'bottle-30ml-pressurized.avif' | asset_url }}">
+           data-press-bottles='{"10ml":"{{ 'bottle-10ml-pressurized.avif' | asset_url }}","30ml":"{{ 'bottle-30ml-pressurized.avif' | asset_url }}"}'>
         <div class="pressurized-toggle__inner">
           <div class="pressurized-toggle__info">
             <span class="pressurized-toggle__name">Pressurized Bottle</span>
