@@ -195,8 +195,9 @@
         pressBtn.classList.remove('pressurized-toggle__btn--on');
         pressBtn.setAttribute('aria-pressed', 'false');
       }
-      if (variantImg) {
-        variantImg.classList.remove('product-gallery__variant-img--pressurized');
+      var variantSlot = document.getElementById('product-gallery-variant');
+      if (variantSlot) {
+        variantSlot.classList.remove('is-pressurized');
       }
 
       selectedBaseId   = variantId;
@@ -250,9 +251,10 @@
         setVariantImage(currentBaseBottle, true);
       }
 
-      // Toggle the premium glow on the variant bottle
-      if (variantImg) {
-        variantImg.classList.toggle('product-gallery__variant-img--pressurized', isPressurized);
+      // Toggle the Premium badge + subtle lift on the variant slot
+      var variantSlot = document.getElementById('product-gallery-variant');
+      if (variantSlot) {
+        variantSlot.classList.toggle('is-pressurized', isPressurized);
       }
     });
   }
