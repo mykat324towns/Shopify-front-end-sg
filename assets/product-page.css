@@ -55,10 +55,10 @@
 /* ── Layout grid ── */
 .product-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: var(--space-12);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: var(--space-10);
   align-items: start;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
@@ -71,40 +71,41 @@
 }
 
 .product-gallery__viewer {
+  position: relative;
   background: rgba(255,255,255,0.08);
   box-shadow: 0 4px 32px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
   border-radius: var(--radius-lg);
-  padding: var(--space-6) var(--space-4) var(--space-8);
+  padding: var(--space-3) var(--space-3) var(--space-4);
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 4px;
-  min-height: 700px;
-  /* No overflow:hidden — main image is constrained by .product-gallery__main's
-     own overflow; lifting it here lets future glow/badge effects breathe. */
+  min-height: 720px;
+  overflow: hidden;
 }
 
 .product-gallery__main {
-  flex: 0 0 auto;
-  width: 600px;
+  flex: 1 1 100%;
+  width: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  min-height: 660px;
+  min-height: 700px;
   overflow: hidden;
 }
 
 .product-gallery__main img {
-  max-height: 660px;
+  max-height: 700px;
   width: auto;
   max-width: 100%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
-  filter: drop-shadow(0 14px 36px rgba(0,0,0,0.52));
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,0.55));
+  transform: scale(1.18);
+  transform-origin: center bottom;
   transition:
     opacity 0.22s var(--ease-reveal),
-    transform 0.22s var(--ease-reveal);
+    transform 0.32s var(--ease-reveal);
 }
 
 .main-image--swap {
@@ -121,13 +122,16 @@
 }
 
 .product-gallery__variant {
-  flex: 0 0 auto;
+  position: absolute;
+  bottom: var(--space-4);
+  right: var(--space-4);
   width: 160px;
+  height: 340px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin-left: -60px;
-  position: relative; /* anchors the Premium badge */
+  z-index: 2;
+  pointer-events: none; /* badge + bottle are decorative — no interaction needed */
 }
 
 .product-gallery__variant img {
@@ -180,24 +184,21 @@
   transform: scale(1.04);
 }
 
-/* Solo state — variant slot empty on initial load, main grows to fill the space.
-   Removed by JS on first size click, triggering a smooth shrink + reveal. */
+/* Solo state — variant hidden on initial load, main lifts slightly.
+   On first size click JS removes --solo: variant fades in, main settles. */
 .product-gallery__viewer--solo .product-gallery__main img {
-  transform: scale(1.12);
+  transform: scale(1.26);
 }
 
 .product-gallery__viewer--solo .product-gallery__variant {
-  width: 0;
-  margin-left: 0;
   opacity: 0;
-  pointer-events: none;
+  transform: translateX(24px);
 }
 
 .product-gallery__variant {
   transition:
-    width 0.32s var(--ease-reveal),
-    margin-left 0.32s var(--ease-reveal),
-    opacity 0.32s var(--ease-reveal);
+    opacity 0.36s var(--ease-reveal),
+    transform 0.36s var(--ease-reveal);
 }
 
 /* ── Details column ── */
@@ -840,26 +841,41 @@
   .product-gallery { position: static; }
 
   .product-gallery__viewer {
-    min-height: 340px;
-    padding: var(--space-4);
+    min-height: 520px;
+    padding: var(--space-3);
   }
 
   .product-gallery__main {
-    width: min(600px, 100%);
-    min-height: 305px;
+    width: 100%;
+    min-height: 480px;
+  }
+
+  .product-gallery__main img {
+    max-height: 480px;
+    transform: scale(1.18);
+  }
+
+  .product-gallery__viewer--solo .product-gallery__main img {
+    transform: scale(1.30);
   }
 }
 
 @media (max-width: 768px) {
-  .product-gallery__main {
-    width: 290px;
-    min-height: 320px;
+  .product-gallery__viewer { min-height: 420px; }
+  .product-gallery__main { min-height: 380px; }
+  .product-gallery__main img {
+    max-height: 380px;
+    transform: scale(1.16);
   }
+  .product-gallery__viewer--solo .product-gallery__main img { transform: scale(1.26); }
 
-  .product-gallery__main img { max-height: 320px; }
-
-  .product-gallery__variant { width: 90px; }
-  .product-gallery__variant img { height: 175px; max-height: none; max-width: none; }
+  .product-gallery__variant {
+    width: 100px;
+    height: 200px;
+    right: var(--space-2);
+    bottom: var(--space-2);
+  }
+  .product-gallery__variant img { height: 200px; max-height: none; max-width: none; }
 
   .product-name { font-size: clamp(24px, 7vw, 34px); }
   .size-selector-grid { grid-template-columns: repeat(3, 1fr); }
@@ -971,8 +987,19 @@
 
 @media (max-width: 480px) {
   .size-selector-grid { grid-template-columns: repeat(3, 1fr); }
-  .product-gallery__main { width: 255px; min-height: 280px; }
-  .product-gallery__main img { max-height: 280px; }
-  .product-gallery__variant { width: 75px; }
-  .product-gallery__variant img { height: 150px; max-height: none; max-width: none; }
+  .product-gallery__viewer { min-height: 360px; }
+  .product-gallery__main { width: 100%; min-height: 320px; }
+  .product-gallery__main img {
+    max-height: 320px;
+    transform: scale(1.14);
+  }
+  .product-gallery__viewer--solo .product-gallery__main img { transform: scale(1.24); }
+
+  .product-gallery__variant {
+    width: 84px;
+    height: 168px;
+    right: 6px;
+    bottom: 6px;
+  }
+  .product-gallery__variant img { height: 168px; max-height: none; max-width: none; }
 }
