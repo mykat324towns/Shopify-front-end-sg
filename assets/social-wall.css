@@ -180,11 +180,11 @@
 
 @media (max-width: 768px) {
   .social-wall[data-layout="marquee"] {
-    padding-block: var(--space-5) var(--space-6);
+    padding-block: var(--space-3) var(--space-4);
   }
 
   .social-wall[data-layout="marquee"] .social-wall__eyebrow {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
   }
 
   .social-wall[data-layout="marquee"] .social-wall__slide {

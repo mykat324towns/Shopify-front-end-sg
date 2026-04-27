@@ -279,3 +279,12 @@
     padding: 5px 10px;
   }
 }
+
+/* Hero only: drop the duplicate "100% authentic" trust item on mobile —
+   the trust cue above the CTA already carries that signal with payment marks. */
+@media (max-width: 640px) {
+  .hero .cta-trust-strip > .cta-trust-strip__item:first-child,
+  .hero .cta-trust-strip > .cta-trust-strip__item:first-child + .cta-trust-strip__sep {
+    display: none;
+  }
+}

@@ -361,8 +361,18 @@
 }
 
 @media (max-width: 640px) {
-  .hero { padding-block: var(--space-6) var(--space-8); min-height: unset; }
-  .hero__inner { gap: var(--space-4); }
+  /* Compress fold so TikTok comments peek above 844px */
+  .hero { padding-block: var(--space-3) var(--space-4); min-height: unset; }
+  .hero__inner { gap: var(--space-3); }
+
+  /* Tighten internal text-stack rhythm — gap-6 (24px) was tuned for desktop */
+  .hero__content { gap: var(--space-3); }
+
+  /* Drop the eyebrow — tagline duplicates what headline already implies */
+  .hero__overline { display: none; }
+
+  /* Slightly smaller headline on small viewports — preserves impact, saves ~16px */
+  .hero__headline { font-size: 38px; }
 
   /* Trust strip: keep horizontal on mobile, tighter to fit */
   .hero__trust {
@@ -388,6 +398,6 @@
   /* Video: 4/3 on mobile — less vertical dominance, cleaner crop */
   .hero__video {
     aspect-ratio: 4 / 3;
-    max-height: 220px;
+    max-height: 180px;
   }
 }
