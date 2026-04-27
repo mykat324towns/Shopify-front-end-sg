@@ -24,7 +24,7 @@
 
     <!-- ── Gallery ── -->
     <div class="product-gallery">
-      <div class="product-gallery__viewer">
+      <div class="product-gallery__viewer product-gallery__viewer--solo" id="product-gallery-viewer">
         <div class="product-gallery__main">
           {%- if product.featured_image -%}
             <img
@@ -44,16 +44,14 @@
             >
           {%- endif -%}
         </div>
-        {%- if product.images.size > 1 -%}
-          <div class="product-gallery__variant" id="product-gallery-variant">
-            <img
-              id="product-gallery-variant-img"
-              src="{{ product.images[1] | image_url: width: 300 }}"
-              alt="{{ product.images[1].alt | default: product.title | escape }}"
-              loading="lazy"
-            >
-          </div>
-        {%- endif -%}
+        <div class="product-gallery__variant" id="product-gallery-variant">
+          <img
+            id="product-gallery-variant-img"
+            alt=""
+            loading="lazy"
+            style="display:none"
+          >
+        </div>
       </div>
     </div>
 
@@ -187,7 +185,9 @@
       {%- endif -%}
 
       <!-- Pressurized toggle — revealed by JS when applicable -->
-      <div class="pressurized-toggle" id="pressurized-toggle" aria-hidden="true">
+      <div class="pressurized-toggle" id="pressurized-toggle" aria-hidden="true"
+           data-bottle-10ml="{{ 'bottle-10ml-pressurized.avif' | asset_url }}"
+           data-bottle-30ml="{{ 'bottle-30ml-pressurized.avif' | asset_url }}">
         <div class="pressurized-toggle__inner">
           <div class="pressurized-toggle__info">
             <span class="pressurized-toggle__name">Pressurized Bottle</span>

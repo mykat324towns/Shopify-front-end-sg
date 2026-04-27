@@ -31,11 +31,31 @@
   var sizeGrid     = document.querySelector('.size-selector-grid');
   var scentEl      = document.getElementById('scent-toggle');
   var productForm  = document.getElementById('product-form');
+  var galleryViewer = document.getElementById('product-gallery-viewer');
+  var variantImg    = document.getElementById('product-gallery-variant-img');
 
   // State
   var selectedBaseId       = null;
+  var selectedBaseSize     = null;  // e.g. '10ml' — used to pick pressurized bottle
+  var currentBaseBottle    = null;  // base bottle URL for active size; revert target on pressurized OFF
   var pressurizedVariantId = null;
   var isPressurized        = false;
+
+  // Fade-swap the small variant bottle (mirrors WooCommerce setVariantImage pattern)
+  function setVariantImage(src, animate) {
+    if (!variantImg || !src) return;
+    if (animate && variantImg.src && variantImg.style.display !== 'none') {
+      variantImg.classList.add('main-image--swap');
+      setTimeout(function () {
+        variantImg.src = src;
+        variantImg.style.display = 'block';
+        variantImg.classList.remove('main-image--swap');
+      }, 110);
+    } else {
+      variantImg.src = src;
+      variantImg.style.display = 'block';
+    }
+  }
 
   // ── Bundle override ──────────────────────────────────────────────────────────
   // For bundle products: effective parent_ml = MIN of all component remainders.
@@ -173,18 +193,20 @@
         pressBtn.setAttribute('aria-pressed', 'false');
       }
 
-      selectedBaseId = variantId;
+      selectedBaseId   = variantId;
+      selectedBaseSize = sizeLower;
       setActiveCard(card);
       applyVariant(variantId, cardMl);
       updatePressurizedToggle(sizeLower);
 
-      var mainImg = document.getElementById('product-gallery-main-img');
-      if (mainImg) {
-        var sv = variantById[variantId];
-        var newSrc = (sv && sv.featured_image && sv.featured_image.src)
-          ? sv.featured_image.src
-          : card.dataset.bottle;
-        if (newSrc) mainImg.src = newSrc;
+      // Swap the small variant bottle (main image stays stagnant)
+      var bottleSrc = card.dataset.bottle;
+      if (bottleSrc) {
+        currentBaseBottle = bottleSrc;
+        if (galleryViewer && galleryViewer.classList.contains('product-gallery__viewer--solo')) {
+          galleryViewer.classList.remove('product-gallery__viewer--solo');
+        }
+        setVariantImage(bottleSrc, true);
       }
     });
   }
@@ -205,6 +227,16 @@
         if (variantInput) variantInput.value    = targetId;
         if (priceEl)      priceEl.textContent   = formatCents(v.price);
         if (addBtn)       addBtn.disabled       = !v.available;
+      }
+
+      // Swap the small variant bottle: pressurized version on, base bottle off
+      if (isPressurized && pressToggle) {
+        var pressSrc = (selectedBaseSize === '10ml')
+          ? pressToggle.dataset.bottle10ml
+          : (selectedBaseSize === '30ml' ? pressToggle.dataset.bottle30ml : null);
+        if (pressSrc) setVariantImage(pressSrc, true);
+      } else if (currentBaseBottle) {
+        setVariantImage(currentBaseBottle, true);
       }
     });
   }

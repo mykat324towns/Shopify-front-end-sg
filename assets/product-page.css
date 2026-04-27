@@ -142,6 +142,26 @@
     transform 0.22s var(--ease-reveal);
 }
 
+/* Solo state — variant slot empty on initial load, main grows to fill the space.
+   Removed by JS on first size click, triggering a smooth shrink + reveal. */
+.product-gallery__viewer--solo .product-gallery__main img {
+  transform: scale(1.12);
+}
+
+.product-gallery__viewer--solo .product-gallery__variant {
+  width: 0;
+  margin-left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.product-gallery__variant {
+  transition:
+    width 0.32s var(--ease-reveal),
+    margin-left 0.32s var(--ease-reveal),
+    opacity 0.32s var(--ease-reveal);
+}
+
 /* ── Details column ── */
 .product-details {
   padding-top: var(--space-4);
