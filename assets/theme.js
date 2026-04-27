@@ -397,9 +397,12 @@
       lines.forEach((line, i) => {
         setTimeout(() => {
           line.classList.add('line-visible');
-          const price = parseInt(line.dataset.price, 10) || 0;
+          const price = parseFloat(line.dataset.price) || 0;
           running += price;
-          totalEl.textContent = '$' + running;
+          // Round to 2 decimals to dodge float-precision artifacts (e.g. 50.93999...)
+          const display = Math.round(running * 100) / 100;
+          // If the total ends in .00, drop the cents; otherwise show two decimals
+          totalEl.textContent = '$' + (Number.isInteger(display) ? display : display.toFixed(2));
           totalEl.classList.remove('is-ticking');
           void totalEl.offsetWidth;
           totalEl.classList.add('is-ticking');
