@@ -18,39 +18,38 @@
   <!-- Shopify required -->
   {{ content_for_header }}
 
-  <!-- Fonts -->
+  <!-- Fonts: preconnect + non-blocking load (media-print swap) with noscript fallback -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+  {%- assign google_fonts_url = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Figtree:wght@400;600&display=swap' -%}
+  <link rel="preload" as="style" href="{{ google_fonts_url }}">
+  <link rel="stylesheet" href="{{ google_fonts_url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ google_fonts_url }}"></noscript>
 
-  <!-- Swiper -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <!-- Swiper CSS: defer until paint (only used by below-fold social wall + PDP swipers) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
 
-  <!-- Theme CSS — modular, load order matters -->
+  <!-- Critical theme CSS (above-the-fold, render-blocking on purpose) -->
   {{ 'tokens.css' | asset_url | stylesheet_tag }}
   {{ 'base.css' | asset_url | stylesheet_tag }}
   {{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
   {{ 'nav.css' | asset_url | stylesheet_tag }}
-  {{ 'cart.css' | asset_url | stylesheet_tag }}
-  {{ 'footer.css' | asset_url | stylesheet_tag }}
   {{ 'hero.css' | asset_url | stylesheet_tag }}
-  {{ 'product-card.css' | asset_url | stylesheet_tag }}
   {{ 'cta-trust.css' | asset_url | stylesheet_tag }}
   {{ 'best-sellers-strip.css' | asset_url | stylesheet_tag }}
-  {{ 'collection-grid.css' | asset_url | stylesheet_tag }}
-  {{ 'scroll-indicator.css' | asset_url | stylesheet_tag }}
-  {{ 'listing-controls.css' | asset_url | stylesheet_tag }}
-  {{ 'product-page.css' | asset_url | stylesheet_tag }}
-  {{ 'size-guide.css' | asset_url | stylesheet_tag }}
-  {{ 'comparison.css' | asset_url | stylesheet_tag }}
-  {{ 'how-it-works.css' | asset_url | stylesheet_tag }}
-  {{ 'kit-builder-cta.css' | asset_url | stylesheet_tag }}
-  {{ 'faq.css' | asset_url | stylesheet_tag }}
-  {{ 'cta-section.css' | asset_url | stylesheet_tag }}
-  {{ 'testimonial-card.css' | asset_url | stylesheet_tag }}
-  {{ 'social-wall.css' | asset_url | stylesheet_tag }}
-  {{ 'back-to-top.css' | asset_url | stylesheet_tag }}
-  {{ 'delight.css' | asset_url | stylesheet_tag }}
+  {{ 'product-card.css' | asset_url | stylesheet_tag }}
+
+  <!-- Deferred theme CSS (below-the-fold or template-specific) -->
+  {%- assign deferred_css = 'cart.css,footer.css,collection-grid.css,scroll-indicator.css,listing-controls.css,product-page.css,size-guide.css,comparison.css,how-it-works.css,kit-builder-cta.css,faq.css,cta-section.css,testimonial-card.css,social-wall.css,back-to-top.css,delight.css' | split: ',' -%}
+  {%- for css_file in deferred_css -%}
+    <link rel="stylesheet" href="{{ css_file | asset_url }}" media="print" onload="this.media='all'">
+  {%- endfor -%}
+  <noscript>
+    {%- for css_file in deferred_css -%}
+      <link rel="stylesheet" href="{{ css_file | asset_url }}">
+    {%- endfor -%}
+  </noscript>
 </head>
 
 <body data-template="{{ template | replace: '.', '-' }}">
