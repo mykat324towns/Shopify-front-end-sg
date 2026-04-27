@@ -344,6 +344,14 @@ window.SG_PARENT_ML = {{ product.metafields.scent_gallery.parent_ml_remaining | 
 {%- if product.metafields.scent_gallery.bundle_component_ids -%}
 window.SG_BUNDLE_COMPONENT_REMAINING = [{%- for ref in product.metafields.scent_gallery.bundle_component_ids.value -%}{{ ref.metafields.scent_gallery.parent_ml_remaining | default: 'null' }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}];
 {%- endif -%}
+{%- assign upgrade = all_products['pressurized-atomizer-upgrade'] -%}
+{%- if upgrade != blank and upgrade.variants.first != blank -%}
+window.SG_PRESSURIZED_UPGRADE = {
+  variantId: {{ upgrade.variants.first.id | json }},
+  price: {{ upgrade.variants.first.price | json }},
+  available: {{ upgrade.variants.first.available | json }}
+};
+{%- endif -%}
 </script>
 
 <script src="{{ 'product-page.js' | asset_url }}" defer></script>

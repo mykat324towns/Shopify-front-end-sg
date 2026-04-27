@@ -35,11 +35,16 @@
   var variantImg    = document.getElementById('product-gallery-variant-img');
 
   // State
-  var selectedBaseId       = null;
-  var selectedBaseSize     = null;  // e.g. '10ml' — used to pick pressurized bottle
-  var currentBaseBottle    = null;  // base bottle URL for active size; revert target on pressurized OFF
-  var pressurizedVariantId = null;
-  var isPressurized        = false;
+  var selectedBaseId    = null;
+  var selectedBaseSize  = null;  // e.g. '10ml' — used to pick pressurized bottle
+  var currentBaseBottle = null;  // base bottle URL for active size; revert target on pressurized OFF
+  var isPressurized     = false;
+
+  // Sizes eligible for the +$1 pressurized atomizer upgrade
+  var SIZES_WITH_PRESSURIZED = ['10ml', '30ml'];
+
+  // Hardcoded pressurized spray-count display (driven by base size, not variant)
+  var PRESSURIZED_SPRAYS = { '10ml': '135', '30ml': '400' };
 
   // Fade-swap the small variant bottle (mirrors WooCommerce setVariantImage pattern)
   function setVariantImage(src, animate) {
@@ -139,24 +144,22 @@
   }
 
   function updatePressurizedToggle(baseSizeLower) {
-    // Pressurized counterpart has option1 of e.g. "10ml+"
-    var pressKey = baseSizeLower + '+';
-    var pvList   = variantByOption1[pressKey];
+    // Pressurized is now a separate $1 upgrade product (handle: pressurized-atomizer-upgrade)
+    // exposed via window.SG_PRESSURIZED_UPGRADE. Show the toggle when:
+    //   (a) the selected base size is eligible (10ml or 30ml), AND
+    //   (b) the upgrade product exists and is in stock
+    var upgrade  = window.SG_PRESSURIZED_UPGRADE;
+    var eligible = SIZES_WITH_PRESSURIZED.indexOf(baseSizeLower) !== -1;
+    var canShow  = eligible && upgrade && upgrade.available;
 
-    // Hardcoded spray counts for pressurized sizes
-    var pressSprayCounts = { '10ml+': '135', '30ml+': '400' };
-
-    if (pvList && pvList.length > 0) {
-      var pv           = pvList[0];
-      pressurizedVariantId = pv.id;
-      if (pressPrice)  pressPrice.textContent  = formatCents(pv.price);
-      if (pressSprays) pressSprays.textContent = pressSprayCounts[pressKey] || '';
+    if (canShow) {
+      if (pressPrice)  pressPrice.textContent  = '+' + formatCents(upgrade.price);
+      if (pressSprays) pressSprays.textContent = PRESSURIZED_SPRAYS[baseSizeLower] || '';
       if (pressToggle) {
         pressToggle.classList.add('is-visible');
         pressToggle.setAttribute('aria-hidden', 'false');
       }
     } else {
-      pressurizedVariantId = null;
       if (pressToggle) {
         pressToggle.classList.remove('is-visible');
         pressToggle.setAttribute('aria-hidden', 'true');
@@ -215,18 +218,20 @@
 
   if (pressBtn) {
     pressBtn.addEventListener('click', function () {
-      if (!pressurizedVariantId) return;
+      var upgrade = window.SG_PRESSURIZED_UPGRADE;
+      if (!upgrade || !upgrade.available || !selectedBaseId) return;
 
       isPressurized = !isPressurized;
       pressBtn.classList.toggle('pressurized-toggle__btn--on', isPressurized);
       pressBtn.setAttribute('aria-pressed', String(isPressurized));
 
-      var targetId = isPressurized ? pressurizedVariantId : selectedBaseId;
-      var v        = variantById[targetId];
-      if (v) {
-        if (variantInput) variantInput.value    = targetId;
-        if (priceEl)      priceEl.textContent   = formatCents(v.price);
-        if (addBtn)       addBtn.disabled       = !v.available;
+      // Active variant ID stays as the BASE — pressurizer is a separate cart line item
+      // added at submit. Update the displayed price to reflect base + upgrade.
+      var baseV = variantById[selectedBaseId];
+      if (baseV && priceEl) {
+        var totalCents = parseInt(baseV.price, 10)
+                       + (isPressurized ? parseInt(upgrade.price, 10) : 0);
+        priceEl.textContent = formatCents(totalCents);
       }
 
       // Swap the small variant bottle: pressurized version on, base bottle off
@@ -265,10 +270,29 @@
       addBtn.disabled = true;
       addBtn.textContent = 'Adding…';
 
+      // Build cart payload. When pressurized is on, send TWO line items:
+      //   1. The base fragrance variant, tagged with a Bottle Type property so
+      //      fulfillment fills it into a pressurizer (also keeps it from merging
+      //      with any plain version of the same variant already in cart).
+      //   2. The Pressurized Atomizer Upgrade product, tagged with the fragrance
+      //      name so fulfillment knows which line it pairs with.
+      var items = [{ id: parseInt(id, 10), quantity: 1 }];
+      var upgrade = window.SG_PRESSURIZED_UPGRADE;
+      if (isPressurized && upgrade && upgrade.variantId) {
+        var nameEl = document.querySelector('.product-name');
+        var productName = nameEl ? nameEl.textContent.trim() : '';
+        items[0].properties = { 'Bottle Type': 'Pressurized' };
+        items.push({
+          id: parseInt(upgrade.variantId, 10),
+          quantity: 1,
+          properties: productName ? { 'Linked to': productName } : {}
+        });
+      }
+
       fetch('/cart/add.js', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body:    JSON.stringify({ id: parseInt(id, 10), quantity: 1 }),
+        body:    JSON.stringify({ items: items }),
       })
       .then(function (res) {
         if (!res.ok) throw new Error(res.status);
