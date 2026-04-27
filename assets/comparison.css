@@ -12,6 +12,25 @@
   align-items: center;
 }
 
+/* Solo card-wrap (after receipt was extracted into its own section) */
+.comparison__card-wrap--solo {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ── Standalone Receipt Section ── */
+.comparison-receipt-section {
+  padding-block: var(--space-10) var(--space-12);
+  background: var(--color-bg);
+}
+
+.comparison__receipt--standalone {
+  position: static;
+  max-width: 520px;
+  margin: 0 auto;
+  top: auto;
+}
+
 .comparison__headline {
   font-family: var(--font-display);
   font-size: clamp(26px, 3vw, 44px);

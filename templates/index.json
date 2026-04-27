@@ -51,10 +51,14 @@
         "new_item_3": "Try before you ever commit",
         "new_item_4": "Rotate. Explore. Own your collection.",
         "tagline": "",
-        "trust_cue": "",
         "cta_text": "Build Your Rotation →",
         "cta_url": "/collections/best-sellers",
-        "reassurance": "Free U.S. shipping over $35",
+        "reassurance": "Free U.S. shipping over $35"
+      }
+    },
+    "comparison-receipt": {
+      "type": "comparison-receipt",
+      "settings": {
         "receipt_eyebrow": "The math",
         "receipt_subtitle": "6 fragrances vs. 1",
         "receipt_name_1": "YSL Y EDP",
@@ -74,7 +78,10 @@
         "receipt_price_5": 11.99,
         "receipt_name_6": "PDM Althair",
         "receipt_size_6": "2ml",
-        "receipt_price_6": 11.99
+        "receipt_price_6": 11.99,
+        "total_label": "6 fragrances, tried",
+        "vs_label": "vs. one full bottle",
+        "vs_price": "$300+"
       }
     },
     "size-guide": {
@@ -277,6 +284,7 @@
     "best-sellers-strip",
     "social-wall",
     "featured-collection",
+    "comparison-receipt",
     "latest-collection",
     "comparison",
     "kit-builder-cta",

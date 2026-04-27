@@ -1,0 +1,73 @@
+<section class="comparison-receipt-section" aria-label="The math: 6 fragrances vs 1 full bottle">
+  <div class="container">
+    <div class="comparison__receipt comparison__receipt--standalone">
+      <div class="receipt__header">
+        <span class="receipt__eyebrow">{{ section.settings.receipt_eyebrow }}</span>
+        <h3 class="receipt__subtitle"><em>{{ section.settings.receipt_subtitle }}</em></h3>
+      </div>
+      <ul class="receipt__lines" role="list">
+        {%- for i in (1..6) -%}
+          {%- assign name_key  = 'receipt_name_'  | append: i -%}
+          {%- assign size_key  = 'receipt_size_'  | append: i -%}
+          {%- assign price_key = 'receipt_price_' | append: i -%}
+          {%- assign name_val  = section.settings[name_key]  -%}
+          {%- assign price_val = section.settings[price_key] -%}
+          {%- if name_val != blank -%}
+            <li class="receipt__line" data-price="{{ price_val }}">
+              <span class="receipt__name">
+                {{ name_val }}
+                {%- assign size_val = section.settings[size_key] -%}
+                {%- if size_val != blank -%}
+                  <span class="receipt__size">{{ size_val }}</span>
+                {%- endif -%}
+              </span>
+              <span class="receipt__price">${{ price_val }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      <div class="receipt__sep"></div>
+      <div class="receipt__total">
+        <span class="receipt__total-label">{{ section.settings.total_label }}</span>
+        <span class="receipt__total-value" id="receipt-running-total">$0</span>
+      </div>
+      <div class="receipt__vs-row">
+        <span class="receipt__vs-label">{{ section.settings.vs_label }}</span>
+        <span class="receipt__vs-price">{{ section.settings.vs_price }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison Receipt",
+  "tag": "div",
+  "settings": [
+    { "type": "text",   "id": "receipt_eyebrow",   "label": "Eyebrow",     "default": "The math" },
+    { "type": "text",   "id": "receipt_subtitle",  "label": "Subtitle",    "default": "6 fragrances vs. 1" },
+    { "type": "text",   "id": "receipt_name_1",    "label": "Item 1 name", "default": "YSL Y EDP" },
+    { "type": "text",   "id": "receipt_size_1",    "label": "Item 1 size", "default": "2ml" },
+    { "type": "number", "id": "receipt_price_1",   "label": "Item 1 price","default": 7 },
+    { "type": "text",   "id": "receipt_name_2",    "label": "Item 2 name", "default": "Stronger With You" },
+    { "type": "text",   "id": "receipt_size_2",    "label": "Item 2 size", "default": "2ml" },
+    { "type": "number", "id": "receipt_price_2",   "label": "Item 2 price","default": 6 },
+    { "type": "text",   "id": "receipt_name_3",    "label": "Item 3 name", "default": "JPG Le Beau" },
+    { "type": "text",   "id": "receipt_size_3",    "label": "Item 3 size", "default": "2ml" },
+    { "type": "number", "id": "receipt_price_3",   "label": "Item 3 price","default": 4 },
+    { "type": "text",   "id": "receipt_name_4",    "label": "Item 4 name", "default": "Azzaro TMW" },
+    { "type": "text",   "id": "receipt_size_4",    "label": "Item 4 size", "default": "2ml" },
+    { "type": "number", "id": "receipt_price_4",   "label": "Item 4 price","default": 6 },
+    { "type": "text",   "id": "receipt_name_5",    "label": "Item 5 name", "default": "PDM Greenley" },
+    { "type": "text",   "id": "receipt_size_5",    "label": "Item 5 size", "default": "2ml" },
+    { "type": "number", "id": "receipt_price_5",   "label": "Item 5 price","default": 11 },
+    { "type": "text",   "id": "receipt_name_6",    "label": "Item 6 name", "default": "PDM Althair" },
+    { "type": "text",   "id": "receipt_size_6",    "label": "Item 6 size", "default": "2ml" },
+    { "type": "number", "id": "receipt_price_6",   "label": "Item 6 price","default": 11 },
+    { "type": "text",   "id": "total_label",       "label": "Total label", "default": "6 fragrances, tried" },
+    { "type": "text",   "id": "vs_label",          "label": "VS label",    "default": "vs. one full bottle" },
+    { "type": "text",   "id": "vs_price",          "label": "VS price",    "default": "$300+" }
+  ],
+  "presets": [{ "name": "Comparison Receipt" }]
+}
+{% endschema %}
