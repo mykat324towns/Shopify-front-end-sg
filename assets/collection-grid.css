@@ -230,7 +230,9 @@
   align-items: stretch;
   gap: 16px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
   scroll-padding-inline: 0;
   padding-bottom: var(--space-4);
   scrollbar-width: none;

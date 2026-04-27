@@ -81,20 +81,44 @@
     window.addEventListener('resize', sync, { passive: true });
 
     let dragging = false;
-    const seek = (clientX) => {
+    const seek = (clientX, smooth) => {
       const max = container.scrollWidth - container.clientWidth;
       if (max <= 0) return;
       const rect = barEl.getBoundingClientRect();
       const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      container.scrollLeft = ratio * max;
+      const left = ratio * max;
+      if (smooth && typeof container.scrollTo === 'function') {
+        container.scrollTo({ left: left, behavior: 'smooth' });
+      } else {
+        container.scrollLeft = left;
+      }
     };
     thumbEl.addEventListener('mousedown', (e) => { dragging = true; e.preventDefault(); });
     thumbEl.addEventListener('touchstart', () => { dragging = true; }, { passive: true });
-    document.addEventListener('mousemove', (e) => { if (dragging) seek(e.clientX); });
-    document.addEventListener('touchmove', (e) => { if (dragging) seek(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('mousemove', (e) => { if (dragging) seek(e.clientX, false); });
+    document.addEventListener('touchmove', (e) => { if (dragging) seek(e.touches[0].clientX, false); }, { passive: true });
     document.addEventListener('mouseup', () => { dragging = false; });
     document.addEventListener('touchend', () => { dragging = false; });
-    barEl.addEventListener('click', (e) => seek(e.clientX));
+    barEl.addEventListener('click', (e) => {
+      if (e.target === thumbEl) return;
+      seek(e.clientX, true);
+    });
+
+    // Wheel-to-horizontal: vertical mousewheel scrolls the carousel sideways.
+    // Releases to the page when the carousel hits an end so users are never trapped.
+    container.addEventListener('wheel', (e) => {
+      if (e.ctrlKey) return;
+      const dy = e.deltaY;
+      const dx = e.deltaX;
+      if (Math.abs(dy) <= Math.abs(dx)) return;
+      const max = container.scrollWidth - container.clientWidth;
+      if (max <= 0) return;
+      const atStart = container.scrollLeft <= 0 && dy < 0;
+      const atEnd = container.scrollLeft >= max && dy > 0;
+      if (atStart || atEnd) return;
+      e.preventDefault();
+      container.scrollLeft += dy;
+    }, { passive: false });
 
     sync();
   }

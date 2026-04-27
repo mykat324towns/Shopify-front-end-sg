@@ -107,7 +107,9 @@
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
   padding-bottom: var(--space-4);
   scrollbar-width: none;
   -ms-overflow-style: none;

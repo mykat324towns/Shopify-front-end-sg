@@ -78,6 +78,28 @@
     document.querySelectorAll('.testimonial-card').forEach(card => revealObs.observe(card));
   }
 
+  // ── Hero video: hold playback until first scroll/touch ─────────────
+  const heroVideo = document.querySelector('[data-hero-video]');
+  if (heroVideo) {
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      heroVideo.play().catch(() => {});
+      window.removeEventListener('scroll', start);
+      window.removeEventListener('wheel', start);
+      window.removeEventListener('touchmove', start);
+      window.removeEventListener('keydown', onHeroKey);
+    };
+    const onHeroKey = (e) => {
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' ', 'Spacebar'].includes(e.key)) start();
+    };
+    window.addEventListener('scroll', start, { passive: true });
+    window.addEventListener('wheel', start, { passive: true });
+    window.addEventListener('touchmove', start, { passive: true });
+    window.addEventListener('keydown', onHeroKey);
+  }
+
   // ── Size Pill interaction (homepage cards) ───────────────────────
   // Prices stored as Shopify integers (cents). data-price attr is cents.
   const PILL_INFO = {
