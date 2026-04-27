@@ -304,13 +304,9 @@
           {%- else -%}
             {%- for i in (1..asset_count) -%}
               {%- assign n = i | prepend: '0' | slice: -2, 2 -%}
-              {%- assign filename = 'comment-' | append: n | append: '.png' -%}
+              {%- assign cname = 'comment-' | append: n -%}
               <div class="swiper-slide social-proof__slide">
-                <img
-                  src="{{ filename | asset_url }}"
-                  alt="Customer comment screenshot"
-                  loading="lazy"
-                >
+                {% render 'picture-asset', filename: cname, alt: 'Customer comment screenshot', loading: 'lazy' %}
               </div>
             {%- endfor -%}
           {%- endif -%}

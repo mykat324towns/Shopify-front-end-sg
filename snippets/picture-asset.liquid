@@ -1,0 +1,22 @@
+{%- comment -%}
+  picture-asset — emits a <picture> with AVIF/WebP/PNG sources for theme assets.
+  Browser picks the smallest format it can decode, falls back to PNG.
+
+  Required: filename (no extension), alt
+  Optional: loading (default: lazy), class, width, height, fetchpriority
+{%- endcomment -%}
+{%- assign _loading = loading | default: 'lazy' -%}
+<picture>
+  <source srcset="{{ filename | append: '.avif' | asset_url }}" type="image/avif">
+  <source srcset="{{ filename | append: '.webp' | asset_url }}" type="image/webp">
+  <img
+    src="{{ filename | append: '.png' | asset_url }}"
+    alt="{{ alt | escape }}"
+    loading="{{ _loading }}"
+    decoding="async"
+    {%- if width %} width="{{ width }}"{% endif %}
+    {%- if height %} height="{{ height }}"{% endif %}
+    {%- if fetchpriority %} fetchpriority="{{ fetchpriority }}"{% endif %}
+    {%- if class %} class="{{ class }}"{% endif %}
+  >
+</picture>

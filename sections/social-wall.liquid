@@ -54,25 +54,17 @@
           {%- if comment_list.size > 0 -%}
             {%- for raw in comment_list -%}
               {%- assign n = raw | prepend: '0' | slice: -2, 2 -%}
-              {%- assign filename = 'comment-' | append: n | append: '.png' -%}
+              {%- assign cname = 'comment-' | append: n -%}
               <div class="swiper-slide social-wall__slide">
-                <img
-                  src="{{ filename | asset_url }}"
-                  alt="TikTok community comment screenshot"
-                  loading="lazy"
-                >
+                {% render 'picture-asset', filename: cname, alt: 'TikTok community comment screenshot', loading: 'lazy' %}
               </div>
             {%- endfor -%}
           {%- else -%}
             {%- for i in (1..asset_count) -%}
               {%- assign n = i | prepend: '0' | slice: -2, 2 -%}
-              {%- assign filename = 'comment-' | append: n | append: '.png' -%}
+              {%- assign cname = 'comment-' | append: n -%}
               <div class="swiper-slide social-wall__slide">
-                <img
-                  src="{{ filename | asset_url }}"
-                  alt="TikTok community comment screenshot"
-                  loading="lazy"
-                >
+                {% render 'picture-asset', filename: cname, alt: 'TikTok community comment screenshot', loading: 'lazy' %}
               </div>
             {%- endfor -%}
           {%- endif -%}
