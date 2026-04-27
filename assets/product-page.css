@@ -80,7 +80,8 @@
   justify-content: center;
   gap: 4px;
   min-height: 580px;
-  overflow: hidden;
+  /* No overflow:hidden — pressurized glow needs to breathe past panel edges.
+     Main image is constrained by .product-gallery__main's own overflow. */
 }
 
 .product-gallery__main {
@@ -122,11 +123,11 @@
 .product-gallery__variant {
   flex: 0 0 auto;
   width: 160px;
-  overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   margin-left: -60px;
+  /* No overflow:hidden — pressurized glow extends past the 160px box. */
 }
 
 .product-gallery__variant img {
@@ -143,14 +144,16 @@
     filter 0.32s var(--ease-reveal);
 }
 
-/* Premium glow — applied when pressurized upgrade is selected.
-   Layered drop-shadows: keep the original ground shadow, add a tight
-   green halo, then a soft outer bloom. Reads as "this one's special". */
+/* Premium bloom — applied when pressurized upgrade is selected.
+   Wide soft drop-shadows in lighter green for a "light bouncing off
+   premium glass" feel. No tight inner halo (that read as a stamped-on
+   sticker). All blur radii are large enough that the alpha falls off
+   smoothly before any container edge. */
 .product-gallery__variant img.product-gallery__variant-img--pressurized {
   filter:
-    drop-shadow(0 6px 16px rgba(0,0,0,0.42))
-    drop-shadow(0 0 18px rgba(28, 64, 50, 0.65))
-    drop-shadow(0 0 42px rgba(28, 64, 50, 0.40));
+    drop-shadow(0 8px 20px rgba(0,0,0,0.45))
+    drop-shadow(0 0 60px rgba(120, 200, 150, 0.55))
+    drop-shadow(0 0 140px rgba(28, 64, 50, 0.30));
 }
 
 /* Solo state — variant slot empty on initial load, main grows to fill the space.
