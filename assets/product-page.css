@@ -124,9 +124,9 @@
 .product-gallery__variant {
   position: absolute;
   bottom: var(--space-4);
-  right: var(--space-4);
-  width: 160px;
-  height: 340px;
+  right: var(--space-10);
+  width: 140px;
+  height: 300px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -135,7 +135,7 @@
 }
 
 .product-gallery__variant img {
-  height: 340px;
+  height: 300px;
   width: auto;
   max-height: none;
   max-width: none;
@@ -153,9 +153,9 @@
    as "this one's the upgrade" without anything looking applied or fake. */
 .product-gallery__variant-badge {
   position: absolute;
-  top: 14px;
+  bottom: 248px; /* anchored above the bottle silhouette */
   left: 50%;
-  transform: translate(-50%, -6px);
+  transform: translate(-50%, 6px);
   background: var(--color-primary);
   color: white;
   font-family: var(--font-body);
@@ -858,6 +858,16 @@
   .product-gallery__viewer--solo .product-gallery__main img {
     transform: scale(1.30);
   }
+
+  /* Pull variant well inward on tablet — panel is much wider here */
+  .product-gallery__variant {
+    right: 14%;
+    width: 120px;
+    height: 240px;
+    bottom: var(--space-3);
+  }
+  .product-gallery__variant img { height: 240px; }
+  .product-gallery__variant-badge { bottom: 196px; }
 }
 
 @media (max-width: 768px) {
@@ -870,12 +880,18 @@
   .product-gallery__viewer--solo .product-gallery__main img { transform: scale(1.26); }
 
   .product-gallery__variant {
-    width: 100px;
-    height: 200px;
-    right: var(--space-2);
+    width: 96px;
+    height: 190px;
+    right: 6%;
     bottom: var(--space-2);
   }
-  .product-gallery__variant img { height: 200px; max-height: none; max-width: none; }
+  .product-gallery__variant img { height: 190px; max-height: none; max-width: none; }
+  .product-gallery__variant-badge {
+    bottom: 156px;
+    font-size: 9px;
+    padding: 4px 9px;
+    letter-spacing: 0.12em;
+  }
 
   .product-name { font-size: clamp(24px, 7vw, 34px); }
   .size-selector-grid { grid-template-columns: repeat(3, 1fr); }
@@ -996,10 +1012,11 @@
   .product-gallery__viewer--solo .product-gallery__main img { transform: scale(1.24); }
 
   .product-gallery__variant {
-    width: 84px;
-    height: 168px;
-    right: 6px;
+    width: 80px;
+    height: 158px;
+    right: 6%;
     bottom: 6px;
   }
-  .product-gallery__variant img { height: 168px; max-height: none; max-width: none; }
+  .product-gallery__variant img { height: 158px; max-height: none; max-width: none; }
+  .product-gallery__variant-badge { bottom: 130px; }
 }
