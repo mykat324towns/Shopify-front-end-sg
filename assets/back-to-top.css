@@ -1,19 +1,23 @@
-/* Back-to-top — floating action button, mobile-first, all long-scroll pages */
+/* Back-to-top — floating action button, all viewports, all long-scroll pages */
+/* Designed to NOT blend with the bottle-green primary CTAs that dominate the site:
+   white surface + dark icon + crisp border + lifted shadow. */
 
 .back-to-top {
   position: fixed;
   right: var(--space-4);
   bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-  border: none;
+  background-color: var(--color-bg);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-pill);
-  box-shadow: 0 6px 20px rgba(28, 64, 50, 0.28), 0 2px 6px rgba(28, 64, 50, 0.16);
+  box-shadow:
+    0 12px 32px rgba(20, 20, 20, 0.18),
+    0 4px 10px rgba(20, 20, 20, 0.10);
   cursor: pointer;
   z-index: 60;
   opacity: 0;
@@ -22,11 +26,12 @@
   transition:
     opacity var(--duration-normal) var(--ease-standard),
     transform var(--duration-normal) var(--ease-standard),
-    background-color var(--duration-fast) var(--ease-standard);
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
 }
 
 .back-to-top[hidden] {
-  /* hidden attribute set initially; JS removes it once scrolled */
   display: none;
 }
 
@@ -37,7 +42,12 @@
 }
 
 .back-to-top:hover {
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  border-color: var(--color-primary);
+  box-shadow:
+    0 14px 36px rgba(28, 64, 50, 0.30),
+    0 4px 12px rgba(28, 64, 50, 0.14);
 }
 
 .back-to-top:active {
@@ -46,13 +56,15 @@
 
 .back-to-top:focus-visible {
   outline: none;
-  box-shadow: 0 6px 20px rgba(28, 64, 50, 0.28), 0 2px 6px rgba(28, 64, 50, 0.16),
-              var(--shadow-focus-green);
+  box-shadow:
+    0 12px 32px rgba(20, 20, 20, 0.18),
+    0 4px 10px rgba(20, 20, 20, 0.10),
+    var(--shadow-focus-green);
 }
 
 .back-to-top svg {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   display: block;
 }
 
@@ -60,6 +72,17 @@
    Lift the button so it doesn't collide. */
 body[data-template="product"] .back-to-top {
   bottom: calc(64px + var(--space-4) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Slightly bigger on desktop where the viewport gives room and we want it noticeable */
+@media (min-width: 1024px) {
+  .back-to-top {
+    width: 56px;
+    height: 56px;
+    right: var(--space-6);
+    bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  }
+  .back-to-top svg { width: 28px; height: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

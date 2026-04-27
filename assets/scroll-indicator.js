@@ -100,20 +100,21 @@
   }
 
   function initAll() {
-    if (window.innerWidth > 768) {
-      // Hide native-mode tracks on desktop; CSS handles the visual side.
-      // (Swiper-mode bars belong to mobile-only carousels and are hidden by
-      //  parent .carousel-track CSS.)
-      return;
-    }
+    const isMobile = window.innerWidth <= 768;
     document.querySelectorAll(CONTAINER_SELECTOR).forEach((bar) => {
       if (bar.dataset.indicatorInitialized === '1') return;
       const thumb = bar.querySelector('.carousel-scroll-bar__thumb');
       if (!thumb) return;
-      bar.dataset.indicatorInitialized = '1';
       if (bar.dataset.mode === 'native') {
+        // Native mode runs at all viewports — initNativeMode hides the bar
+        // automatically when the target container has no horizontal overflow.
+        bar.dataset.indicatorInitialized = '1';
         initNativeMode(bar, thumb);
       } else {
+        // Swiper-mode carousels are mobile-only on this site (desktop renders
+        // a static grid instead).
+        if (!isMobile) return;
+        bar.dataset.indicatorInitialized = '1';
         initSwiperMode(bar, thumb);
       }
     });

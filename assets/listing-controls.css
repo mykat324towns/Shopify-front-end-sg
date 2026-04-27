@@ -6,8 +6,11 @@
   gap: var(--space-3);
   padding-block: var(--space-6);
   flex-wrap: wrap;
+}
 
-  /* Stick below the nav (nav.css: position:sticky, top:0, height:var(--space-16)) */
+/* Sticky variant — only enabled on the main catalog (/collections/all)
+   so deeper collection pages keep the controls in normal flow. */
+.listing-controls--sticky {
   position: sticky;
   top: var(--space-16);
   z-index: 50;
@@ -18,12 +21,13 @@
     box-shadow var(--duration-fast) var(--ease-standard);
 }
 
-.listing-controls.is-stuck {
+.listing-controls--sticky.is-stuck {
   border-bottom-color: var(--color-border);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-/* Sentinel — invisible 1px element above the controls used to detect stickiness via IntersectionObserver */
+/* Sentinel — invisible 1px element above the sticky controls; used by
+   IntersectionObserver to detect when the controls have anchored. */
 .listing-controls-sentinel {
   height: 1px;
   width: 100%;
@@ -121,13 +125,16 @@
     align-items: stretch;
     padding-block: var(--space-3);
     gap: var(--space-2);
-    /* Bleed bg to viewport edges so the sticky band looks intentional on mobile */
+  }
+
+  /* Sticky variant on mobile: bleed bg to viewport edges + collapse the count
+     line when stuck so the band stays shallow. */
+  .listing-controls--sticky {
     margin-inline: calc(var(--padding-x-mobile) * -1);
     padding-inline: var(--padding-x-mobile);
   }
 
-  /* When stacked + stuck, hide the count line to keep the sticky band shallow */
-  .listing-controls.is-stuck .listing-controls__count {
+  .listing-controls--sticky.is-stuck .listing-controls__count {
     display: none;
   }
 

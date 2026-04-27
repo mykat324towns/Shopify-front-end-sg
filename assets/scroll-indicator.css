@@ -26,9 +26,4 @@
   cursor: grabbing;
 }
 
-/* Mobile-only — desktop layouts surface all content; affordance is unnecessary. */
-@media (min-width: 769px) {
-  [data-scroll-indicator][data-mode="native"] {
-    display: none;
-  }
-}
+/* Native-mode bars are universal — JS auto-hides when no overflow exists. */

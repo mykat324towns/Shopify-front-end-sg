@@ -26,9 +26,13 @@
 
     {%- if collection.products_count > 0 -%}
       {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+      {%- assign is_main_catalog = false -%}
+      {%- if collection.handle == 'all' -%}{%- assign is_main_catalog = true -%}{%- endif -%}
 
-      <div class="listing-controls-sentinel" aria-hidden="true"></div>
-      <div class="listing-controls">
+      {%- if is_main_catalog -%}
+        <div class="listing-controls-sentinel" aria-hidden="true"></div>
+      {%- endif -%}
+      <div class="listing-controls{% if is_main_catalog %} listing-controls--sticky{% endif %}">
         <input
           id="listing-search"
           class="listing-controls__search"
