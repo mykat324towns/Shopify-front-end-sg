@@ -1,0 +1,46 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "Scent Gallery — Build the Collection"
+handle = "sg-thank-you-collection"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/ThankYou.tsx"
+target = "purchase.thank-you.block.render"
+
+[extensions.capabilities]
+api_access = true
+network_access = false
+block_progress = false
+
+[extensions.settings]
+[[extensions.settings.fields]]
+key = "recommended_product_handle"
+type = "single_line_text_field"
+name = "Recommended product handle"
+description = "Storefront handle of the upsell product (e.g. parfums-de-marly-greenley)."
+
+[[extensions.settings.fields]]
+key = "recommended_variant_id"
+type = "single_line_text_field"
+name = "Recommended variant ID (numeric)"
+description = "Numeric variant ID for the 5ml size (no gid:// prefix)."
+
+[[extensions.settings.fields]]
+key = "discount_code"
+type = "single_line_text_field"
+name = "Discount code"
+description = "Code applied when the customer adds this. Default: COLLECTOR20."
+
+[[extensions.settings.fields]]
+key = "headline"
+type = "single_line_text_field"
+name = "Block headline"
+description = "Default: 'Build the collection.'"
+
+[[extensions.settings.fields]]
+key = "subhead"
+type = "multi_line_text_field"
+name = "Block subhead"
+description = "Default: 'Pair what you ordered with this 5ml. 20% off — collectors only.'"

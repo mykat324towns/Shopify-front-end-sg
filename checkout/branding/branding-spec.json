@@ -1,0 +1,250 @@
+{
+  "designSystem": {
+    "colors": {
+      "global": {
+        "accent": "#1C4032",
+        "brand": "#1C4032",
+        "decorative": "#1C4032",
+        "success": "#1C4032",
+        "info": "#1C4032",
+        "warning": "#C0392B",
+        "critical": "#B94040"
+      },
+      "schemes": {
+        "scheme1": {
+          "base": {
+            "background": "#FFFFFF",
+            "text": "#141414",
+            "accent": "#1C4032",
+            "decorative": "#1C4032",
+            "border": "#0000001F",
+            "icon": "#141414"
+          },
+          "control": {
+            "background": "#FFFFFF",
+            "text": "#141414",
+            "border": "#0000001F",
+            "accent": "#1C4032",
+            "decorative": "#1C4032",
+            "selected": {
+              "background": "#FFFFFF",
+              "text": "#1C4032",
+              "border": "#1C4032",
+              "accent": "#1C4032"
+            }
+          },
+          "primaryButton": {
+            "background": "#1C4032",
+            "text": "#FFFFFF",
+            "border": "#1C4032",
+            "accent": "#FFFFFF",
+            "hover": {
+              "background": "#163529",
+              "text": "#FFFFFF",
+              "border": "#163529",
+              "accent": "#FFFFFF"
+            }
+          },
+          "secondaryButton": {
+            "background": "#FFFFFF",
+            "text": "#1C4032",
+            "border": "#1C4032",
+            "accent": "#1C4032",
+            "hover": {
+              "background": "#F9F7F5",
+              "text": "#163529",
+              "border": "#163529",
+              "accent": "#163529"
+            }
+          }
+        },
+        "scheme2": {
+          "base": {
+            "background": "#F9F7F5",
+            "text": "#141414",
+            "accent": "#1C4032",
+            "decorative": "#1C4032",
+            "border": "#0000001F",
+            "icon": "#141414"
+          },
+          "control": {
+            "background": "#FFFFFF",
+            "text": "#141414",
+            "border": "#0000001F",
+            "accent": "#1C4032",
+            "decorative": "#1C4032"
+          },
+          "primaryButton": {
+            "background": "#1C4032",
+            "text": "#FFFFFF",
+            "border": "#1C4032",
+            "accent": "#FFFFFF",
+            "hover": {
+              "background": "#163529",
+              "text": "#FFFFFF",
+              "border": "#163529",
+              "accent": "#FFFFFF"
+            }
+          },
+          "secondaryButton": {
+            "background": "#F9F7F5",
+            "text": "#1C4032",
+            "border": "#1C4032",
+            "accent": "#1C4032"
+          }
+        }
+      }
+    },
+    "typography": {
+      "primary": {
+        "shopifyFontGroup": {
+          "name": "Bodoni Moda",
+          "baseWeight": 400,
+          "boldWeight": 700
+        }
+      },
+      "secondary": {
+        "shopifyFontGroup": {
+          "name": "Figtree",
+          "baseWeight": 400,
+          "boldWeight": 600
+        }
+      },
+      "size": {
+        "base": 14,
+        "ratio": 1.2
+      }
+    },
+    "cornerRadius": {
+      "small": 4,
+      "base": 7,
+      "large": 12
+    }
+  },
+  "customizations": {
+    "global": {
+      "cornerRadius": "BASE",
+      "typography": {
+        "letterCase": "NONE"
+      }
+    },
+    "header": {
+      "alignment": "START",
+      "position": "INLINE",
+      "logo": {
+        "maxWidth": 160
+      },
+      "banner": {
+        "alignment": "CENTER"
+      }
+    },
+    "headingLevel1": {
+      "typography": {
+        "font": "PRIMARY",
+        "size": "EXTRA_LARGE",
+        "weight": "BASE",
+        "letterCase": "NONE"
+      }
+    },
+    "headingLevel2": {
+      "typography": {
+        "font": "PRIMARY",
+        "size": "LARGE",
+        "weight": "BASE",
+        "letterCase": "NONE"
+      }
+    },
+    "headingLevel3": {
+      "typography": {
+        "font": "PRIMARY",
+        "size": "MEDIUM",
+        "weight": "BASE",
+        "letterCase": "NONE"
+      }
+    },
+    "main": {
+      "colorScheme": "COLOR_SCHEME1"
+    },
+    "orderSummary": {
+      "colorScheme": "COLOR_SCHEME2"
+    },
+    "checkbox": {
+      "cornerRadius": "SMALL"
+    },
+    "control": {
+      "border": "FULL",
+      "color": "COLOR1",
+      "cornerRadius": "BASE",
+      "labelPosition": "INSIDE"
+    },
+    "textField": {
+      "border": "FULL",
+      "cornerRadius": "BASE",
+      "labelPosition": "INSIDE",
+      "typography": {
+        "font": "SECONDARY",
+        "size": "BASE",
+        "weight": "BASE",
+        "letterCase": "NONE"
+      }
+    },
+    "select": {
+      "border": "FULL",
+      "cornerRadius": "BASE",
+      "labelPosition": "INSIDE",
+      "typography": {
+        "font": "SECONDARY",
+        "size": "BASE",
+        "weight": "BASE",
+        "letterCase": "NONE"
+      }
+    },
+    "primaryButton": {
+      "background": "SOLID",
+      "blockPadding": "BASE",
+      "border": "NONE",
+      "cornerRadius": "BASE",
+      "inlinePadding": "BASE",
+      "typography": {
+        "font": "SECONDARY",
+        "size": "BASE",
+        "weight": "BOLD",
+        "letterCase": "NONE"
+      }
+    },
+    "secondaryButton": {
+      "background": "TRANSPARENT",
+      "blockPadding": "BASE",
+      "border": "FULL",
+      "cornerRadius": "BASE",
+      "inlinePadding": "BASE",
+      "typography": {
+        "font": "SECONDARY",
+        "size": "BASE",
+        "weight": "BASE",
+        "letterCase": "NONE"
+      }
+    },
+    "buyerJourney": {
+      "visibility": "VISIBLE"
+    },
+    "merchandiseThumbnail": {
+      "border": "NONE",
+      "cornerRadius": "SMALL"
+    },
+    "expressCheckout": {
+      "button": {
+        "cornerRadius": "BASE",
+        "blockPadding": "BASE",
+        "inlinePadding": "BASE"
+      }
+    },
+    "footer": {
+      "alignment": "START",
+      "position": "INLINE",
+      "content": {
+        "visibility": "VISIBLE"
+      }
+    }
+  }
+}

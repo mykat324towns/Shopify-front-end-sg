@@ -1,0 +1,14 @@
+{
+  "name": "sg-collector-proof",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@shopify/ui-extensions": "2025.1.x",
+    "@shopify/ui-extensions-react": "2025.1.x",
+    "react": "^18.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
+}

@@ -1,0 +1,34 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "Scent Gallery — Trust Block"
+handle = "sg-trust-block"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/Checkout.tsx"
+target = "purchase.checkout.payment-method-list.render-before"
+
+[extensions.capabilities]
+api_access = true
+network_access = false
+block_progress = false
+
+[extensions.settings]
+[[extensions.settings.fields]]
+key = "free_shipping_threshold"
+type = "number_decimal"
+name = "Free shipping threshold (USD)"
+description = "Cart subtotal that unlocks free shipping. Default: 50."
+
+[[extensions.settings.fields]]
+key = "returns_window_days"
+type = "number_integer"
+name = "Returns window (days)"
+description = "Default: 30."
+
+[[extensions.settings.fields]]
+key = "authenticity_copy"
+type = "single_line_text_field"
+name = "Authenticity line"
+description = "Short copy. Default: '100% authentic. Decanted from sealed bottles.'"

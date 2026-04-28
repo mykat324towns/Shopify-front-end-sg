@@ -1,0 +1,13 @@
+name = "scent-gallery-checkout"
+client_id = ""
+application_url = "https://scentgallery.shop"
+embedded = false
+
+[access_scopes]
+scopes = "read_products,read_orders"
+
+[webhooks]
+api_version = "2025-01"
+
+[build]
+include_config_on_deploy = true

@@ -1,0 +1,22 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "Scent Gallery — Collector Proof"
+handle = "sg-collector-proof"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/Checkout.tsx"
+target = "purchase.checkout.contact.render-after"
+
+[extensions.capabilities]
+api_access = false
+network_access = false
+block_progress = false
+
+[extensions.settings]
+[[extensions.settings.fields]]
+key = "rotation_seconds"
+type = "number_integer"
+name = "Quote rotation interval (seconds)"
+description = "How often the displayed review quote rotates. Default: 7."
