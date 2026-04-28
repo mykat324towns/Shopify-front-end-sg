@@ -206,6 +206,15 @@
   color: var(--color-on-surface);
 }
 
+.size-pill--unavailable {
+  opacity: 0.38;
+  text-decoration: line-through;
+  cursor: not-allowed;
+  pointer-events: none;
+  color: var(--color-on-surface-muted);
+  border-color: var(--color-border);
+}
+
 .size-pill:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus-green);

@@ -134,6 +134,7 @@
       if (pill.classList.contains('size-pill--active')) renderPillInfo(infoEl, pill.dataset.size);
 
       pill.addEventListener('click', () => {
+        if (pill.classList.contains('size-pill--unavailable')) return;
         container.querySelectorAll('.size-pill').forEach(p => p.classList.remove('size-pill--active'));
         pill.classList.add('size-pill--active');
 
@@ -282,7 +283,17 @@
     if (!form) return;
     e.preventDefault();
 
-    const activeVariantId = form.querySelector('.size-pill--active')?.dataset.variantId
+    // Hard block: reject if the active pill (or card's parent ML) is unavailable
+    const activePill = form.querySelector('.size-pill--active');
+    if (activePill && activePill.classList.contains('size-pill--unavailable')) return;
+    const card = form.closest('.product-card');
+    if (card && activePill) {
+      const parentMl = parseFloat(card.dataset.parentMl);
+      const pillMl   = parseFloat(activePill.dataset.ml) || parseFloat(activePill.dataset.size) || 0;
+      if (!isNaN(parentMl) && parentMl > 0 && pillMl > 0 && pillMl > parentMl) return;
+    }
+
+    const activeVariantId = activePill?.dataset.variantId
       || form.querySelector('.product-card__variant-id')?.value;
     if (!activeVariantId) return;
 
@@ -318,6 +329,7 @@
   document.addEventListener('click', function (e) {
     const pill = e.target.closest('.size-pill');
     if (!pill) return;
+    if (pill.classList.contains('size-pill--unavailable')) return;
     const form = pill.closest('.product-card__form');
     if (!form) return;
     const idInput = form.querySelector('.product-card__variant-id');

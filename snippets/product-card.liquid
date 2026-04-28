@@ -30,7 +30,7 @@
   {%- assign default_variant = product.variants[fallback_idx] | default: first_variant -%}
 {%- endif -%}
 
-<article class="product-card{% if is_sold_out %} product-card--sold-out{% endif %}" data-product-id="{{ product.id }}">
+<article class="product-card{% if is_sold_out %} product-card--sold-out{% endif %}" data-product-id="{{ product.id }}" data-parent-ml="{{ parent_ml | default: '' }}">
   <a class="product-card__image-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
     <div class="product-card__image-wrap">
       {%- if product.featured_image -%}
@@ -88,15 +88,21 @@
 
       <div class="product-card__sizes" role="group" aria-label="Select size">
         {%- for variant in product.variants -%}
+          {%- assign v_pill_size = variant.option1 | downcase | remove: '+' -%}
+          {%- assign v_pill_ml = v_pill_size | remove: 'ml' | plus: 0 -%}
+          {%- assign v_pill_unavail = false -%}
+          {%- if parent_ml != blank and parent_ml > 0 and v_pill_ml > 0 and v_pill_ml > parent_ml -%}{%- assign v_pill_unavail = true -%}{%- endif -%}
           <button
             type="button"
-            class="size-pill{% if forloop.index == default_index %} size-pill--active{% endif %}"
+            class="size-pill{% if forloop.index == default_index %} size-pill--active{% endif %}{% if v_pill_unavail %} size-pill--unavailable{% endif %}"
             data-variant-id="{{ variant.id }}"
             data-price="{{ variant.price }}"
             data-size="{{ variant.option1 | downcase }}"
+            data-ml="{{ v_pill_ml }}"
             data-sprays="{{ variant.metafields.custom.sprays }}"
             data-label="{{ variant.metafields.custom.size_label }}"
             aria-pressed="{% if forloop.index == default_index %}true{% else %}false{% endif %}"
+            {% if v_pill_unavail %}aria-disabled="true"{% endif %}
           >{{ variant.option1 }}</button>
         {%- endfor -%}
       </div>
