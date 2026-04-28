@@ -32,37 +32,60 @@
       {%- if is_main_catalog -%}
         <div class="listing-controls-sentinel" aria-hidden="true"></div>
       {%- endif -%}
+
       <div class="listing-controls{% if is_main_catalog %} listing-controls--sticky{% endif %}">
-        <input
-          id="listing-search"
-          class="listing-controls__search"
-          type="search"
-          placeholder="Search {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}…"
-          aria-label="Search {{ collection.title | escape }}"
-          autocomplete="off"
-          spellcheck="false"
-        >
-        <select
-          class="listing-controls__sort"
-          aria-label="Sort products"
-          onchange="
-            var u = new URL(window.location.href);
-            u.searchParams.set('sort_by', this.value);
-            u.searchParams.delete('page');
-            window.location = u.toString();
-          "
-        >
-          <option value="manual"{% if current_sort == 'manual' %} selected{% endif %}>Featured</option>
-          <option value="best-selling"{% if current_sort == 'best-selling' %} selected{% endif %}>Best Selling</option>
-          <option value="title-ascending"{% if current_sort == 'title-ascending' %} selected{% endif %}>A–Z</option>
-          <option value="title-descending"{% if current_sort == 'title-descending' %} selected{% endif %}>Z–A</option>
-          <option value="price-ascending"{% if current_sort == 'price-ascending' %} selected{% endif %}>Price: Low–High</option>
-          <option value="price-descending"{% if current_sort == 'price-descending' %} selected{% endif %}>Price: High–Low</option>
-          <option value="created-descending"{% if current_sort == 'created-descending' %} selected{% endif %}>Newest</option>
-        </select>
-        <span class="listing-controls__count" id="listing-count">
-          {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}
-        </span>
+        <div class="listing-controls__top">
+          <input
+            id="listing-search"
+            class="listing-controls__search"
+            type="search"
+            placeholder="Search {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}…"
+            aria-label="Search {{ collection.title | escape }}"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <span class="listing-controls__count" id="listing-count">
+            {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}
+          </span>
+        </div>
+        <div class="listing-controls__pills" role="group" aria-label="Sort products">
+          <button type="button"
+            class="listing-controls__pill{% if current_sort == 'manual' or current_sort == blank %} is-active{% endif %}"
+            data-sort="manual"
+            aria-pressed="{% if current_sort == 'manual' or current_sort == blank %}true{% else %}false{% endif %}">
+            Featured
+          </button>
+          <button type="button"
+            class="listing-controls__pill{% if current_sort == 'best-selling' %} is-active{% endif %}"
+            data-sort="best-selling"
+            aria-pressed="{% if current_sort == 'best-selling' %}true{% else %}false{% endif %}">
+            Best Selling
+          </button>
+          <button type="button"
+            class="listing-controls__pill{% if current_sort == 'price-ascending' %} is-active{% endif %}"
+            data-sort="price-ascending"
+            aria-pressed="{% if current_sort == 'price-ascending' %}true{% else %}false{% endif %}">
+            Price: Low–High
+          </button>
+          <button type="button"
+            class="listing-controls__pill{% if current_sort == 'price-descending' %} is-active{% endif %}"
+            data-sort="price-descending"
+            aria-pressed="{% if current_sort == 'price-descending' %}true{% else %}false{% endif %}">
+            Price: High–Low
+          </button>
+          <button type="button"
+            class="listing-controls__pill{% if current_sort == 'title-ascending' %} is-active{% endif %}"
+            data-sort="title-ascending"
+            aria-pressed="{% if current_sort == 'title-ascending' %}true{% else %}false{% endif %}">
+            A–Z
+          </button>
+          <button type="button"
+            class="listing-controls__pill{% if current_sort == 'created-descending' %} is-active{% endif %}"
+            data-sort="created-descending"
+            aria-pressed="{% if current_sort == 'created-descending' %}true{% else %}false{% endif %}">
+            Newest
+          </button>
+        </div>
       </div>
 
       <div class="collection__grid" id="listing-grid">
@@ -100,6 +123,12 @@
   });
   var total = cards.length;
 
+  // Stagger card entry
+  cards.forEach(function (card, i) {
+    if (i < 16) card.style.setProperty('--card-delay', (i * 28) + 'ms');
+  });
+
+  // Search filter
   input.addEventListener('input', function () {
     var q = input.value.trim().toLowerCase();
     var visible = 0;
@@ -113,7 +142,31 @@
     }
   });
 
-  // Sticky state — toggle .is-stuck on .listing-controls when the sentinel scrolls out of view.
+  // Sort pills
+  var pills = Array.from(document.querySelectorAll('.listing-controls__pill'));
+  pills.forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      var sortVal = this.dataset.sort;
+      // Immediate visual feedback before navigation
+      pills.forEach(function (p) {
+        p.classList.remove('is-active');
+        p.setAttribute('aria-pressed', 'false');
+      });
+      this.classList.add('is-active');
+      this.setAttribute('aria-pressed', 'true');
+      // Navigate
+      var u = new URL(window.location.href);
+      if (sortVal === 'manual') {
+        u.searchParams.delete('sort_by');
+      } else {
+        u.searchParams.set('sort_by', sortVal);
+      }
+      u.searchParams.delete('page');
+      window.location = u.toString();
+    });
+  });
+
+  // Sticky sentinel
   var sentinel = document.querySelector('.listing-controls-sentinel');
   var controls = document.querySelector('.listing-controls');
   if (sentinel && controls && 'IntersectionObserver' in window) {
