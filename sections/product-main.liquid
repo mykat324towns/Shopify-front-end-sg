@@ -144,14 +144,19 @@
                   aria-pressed="false"
                 >
                   <span class="size-card__label">{{ variant.option1 }}</span>
-                  {%- if v_size == '1ml' -%}{%- assign spray_val = 18 -%}
-                  {%- elsif v_size == '2ml' -%}{%- assign spray_val = 36 -%}
-                  {%- elsif v_size == '5ml' -%}{%- assign spray_val = 90 -%}
-                  {%- elsif v_size == '10ml' -%}{%- assign spray_val = 180 -%}
-                  {%- elsif v_size == '30ml' -%}{%- assign spray_val = 540 -%}
-                  {%- else -%}{%- assign spray_val = 0 -%}
+                  {%- assign spray_val = '' -%}
+                  {%- if v_size == '1ml' -%}
+                    {%- assign spray_val = '18' -%}
+                  {%- elsif v_size == '2ml' -%}
+                    {%- assign spray_val = '36' -%}
+                  {%- elsif v_size == '5ml' -%}
+                    {%- assign spray_val = '90' -%}
+                  {%- elsif v_size == '10ml' -%}
+                    {%- assign spray_val = '180' -%}
+                  {%- elsif v_size == '30ml' -%}
+                    {%- assign spray_val = '540' -%}
                   {%- endif -%}
-                  {%- if spray_val > 0 -%}
+                  {%- if spray_val != '' -%}
                     <span class="size-card__sub">~{{ spray_val }} sprays</span>
                   {%- endif -%}
                   <span class="size-card__price">{{ variant.price | money }}</span>
