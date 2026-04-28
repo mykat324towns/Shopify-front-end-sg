@@ -7,6 +7,24 @@
       <button class="cart-drawer__close" aria-label="Close cart">&#x2715;</button>
     </div>
 
+    <div class="cart-drawer__shipping-bar" id="cart-shipping-bar">
+      <p class="cart-shipping-bar__msg" id="cart-shipping-bar-msg">Add $100.00 to unlock free shipping</p>
+      <div class="cart-shipping-bar__track-wrap">
+        <div class="cart-shipping-bar__track"
+             role="progressbar"
+             aria-valuenow="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-label="Free shipping progress">
+          <div class="cart-shipping-bar__fill" id="cart-shipping-bar-fill"></div>
+        </div>
+        <svg class="cart-shipping-bar__truck" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+          <path d="M1 1h10v9H1V1zM11 4h3l2 3v3h-5V4zM3.5 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM14.5 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="cart-drawer__body">
       <p class="cart-drawer__loading">Loading&hellip;</p>
     </div>

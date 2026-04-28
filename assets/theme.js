@@ -482,6 +482,36 @@ window.SG_Cart = (function () {
     return '$' + (parseInt(cents, 10) / 100).toFixed(2);
   }
 
+  var FREE_SHIPPING_THRESHOLD = 10000; // $100.00 in cents
+
+  function updateShippingBar(totalCents) {
+    var bar  = document.getElementById('cart-shipping-bar');
+    var fill = document.getElementById('cart-shipping-bar-fill');
+    var msg  = document.getElementById('cart-shipping-bar-msg');
+    if (!bar || !fill || !msg) return;
+
+    var remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - totalCents);
+    var pct       = Math.min(100, Math.round((totalCents / FREE_SHIPPING_THRESHOLD) * 100));
+
+    fill.style.width = pct + '%';
+    bar.querySelector('.cart-shipping-bar__track').setAttribute('aria-valuenow', pct);
+
+    if (remaining === 0) {
+      msg.textContent = "You've unlocked free shipping!";
+      bar.classList.add('is-unlocked');
+    } else {
+      bar.classList.remove('is-unlocked');
+      var fmt = formatPrice(remaining);
+      if (pct >= 80) {
+        msg.textContent = 'So close — just ' + fmt + ' more for free shipping';
+      } else if (pct >= 50) {
+        msg.textContent = fmt + ' away from free shipping';
+      } else {
+        msg.textContent = 'Add ' + fmt + ' to unlock free shipping';
+      }
+    }
+  }
+
   function updateBadge(count) {
     document.querySelectorAll('.nav__cart').forEach(btn => {
       let badge = btn.querySelector('.nav__cart-badge');
@@ -507,6 +537,7 @@ window.SG_Cart = (function () {
     if (!cart.items || cart.items.length === 0) {
       bodyEl.innerHTML = '<p class="cart-drawer__empty">Your cart is empty.</p>';
       if (footer) footer.hidden = true;
+      updateShippingBar(0);
       return;
     }
 
@@ -534,6 +565,7 @@ window.SG_Cart = (function () {
       const totalEl = footer.querySelector('.cart-drawer__total');
       if (totalEl) totalEl.textContent = formatPrice(cart.total_price);
       footer.hidden = false;
+      updateShippingBar(cart.total_price || 0);
     }
   }
 
