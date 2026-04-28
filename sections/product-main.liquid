@@ -64,6 +64,10 @@
       <p class="product-price" id="product-price" aria-live="polite">
         {{- product.variants.first.price | money -}}
       </p>
+      {%- assign retail_price_text = product.metafields.custom.retail_price.value -%}
+      {%- if retail_price_text != blank -%}
+        <p class="pdp-retail-anchor">Full bottle: <del>{{ retail_price_text }}</del></p>
+      {%- endif -%}
 
       <!-- Scent notes -->
       {%- assign scent_notes  = product.metafields.custom.scent_notes.value -%}
@@ -171,16 +175,27 @@
         </div>
       </div>
 
-      <!-- Parent ML stock indicator — restyled as a confident-not-loud scarcity badge -->
+      <!-- Parent ML stock indicator — urgency-tiered scarcity signal -->
       {%- assign parent_ml = product.metafields.scent_gallery.parent_ml_remaining -%}
       {%- if parent_ml != blank and parent_ml > 0 -%}
-        <p class="pdp-scarcity-badge sg-stock-remaining" data-parent-ml="{{ parent_ml }}">
-          <span class="pdp-scarcity-badge__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg></span>
-          Only {{ parent_ml | round: 1 }} ml left from this bottle
+        {%- assign ml_rounded = parent_ml | round: 1 -%}
+        {%- if parent_ml <= 15 -%}
+          {%- assign scarcity_level = 'critical' -%}
+          {%- assign scarcity_copy = 'Only ' | append: ml_rounded | append: 'ml left — last of this bottle.' -%}
+        {%- elsif parent_ml <= 40 -%}
+          {%- assign scarcity_level = 'low' -%}
+          {%- assign scarcity_copy = 'Only ' | append: ml_rounded | append: 'ml left from this bottle.' -%}
+        {%- else -%}
+          {%- assign scarcity_level = 'normal' -%}
+          {%- assign scarcity_copy = ml_rounded | append: 'ml remaining from this bottle.' -%}
+        {%- endif -%}
+        <p class="pdp-scarcity-badge sg-stock-remaining sg-stock-remaining--{{ scarcity_level }}" data-parent-ml="{{ parent_ml }}">
+          <span class="pdp-scarcity-dot" aria-hidden="true"></span>
+          {{ scarcity_copy }}
         </p>
       {%- elsif parent_ml == 0 -%}
         <p class="pdp-scarcity-badge pdp-scarcity-badge--out sg-stock-remaining sg-stock-remaining--out">
-          <span class="pdp-scarcity-badge__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+          <span class="pdp-scarcity-dot pdp-scarcity-dot--out" aria-hidden="true"></span>
           Sold out — next batch coming soon
         </p>
       {%- endif -%}
@@ -338,6 +353,18 @@
 <script>
 window.SG_VARIANTS = {{ product.variants | json }};
 window.SG_PARENT_ML = {{ product.metafields.scent_gallery.parent_ml_remaining | default: 'null' }};
+{%- assign cs = section.settings.cross_sell_product -%}
+{%- if cs != blank -%}
+window.SG_CROSS_SELL = {
+  variantId: {{ cs.variants.first.id | json }},
+  title: {{ cs.title | json }},
+  price: {{ cs.variants.first.price | json }},
+  image: {{ cs.featured_image | image_url: width: 120 | json }},
+  url: {{ cs.url | json }}
+};
+{%- else -%}
+window.SG_CROSS_SELL = null;
+{%- endif -%}
 {%- if product.metafields.scent_gallery.bundle_component_ids -%}
 window.SG_BUNDLE_COMPONENT_REMAINING = [{%- for ref in product.metafields.scent_gallery.bundle_component_ids.value -%}{{ ref.metafields.scent_gallery.parent_ml_remaining | default: 'null' }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}];
 {%- endif -%}
@@ -350,6 +377,8 @@ window.SG_PRESSURIZED_UPGRADE = {
 };
 {%- endif -%}
 </script>
+
+{%- render 'cross-sell-modal' -%}
 
 <script src="{{ 'product-page.js' | asset_url }}" defer></script>
 <script src="{{ 'sticky-atc.js' | asset_url }}" defer></script>
@@ -386,6 +415,12 @@ window.SG_PRESSURIZED_UPGRADE = {
       "max": 12,
       "step": 1,
       "default": 12
+    },
+    {
+      "type": "product",
+      "id": "cross_sell_product",
+      "label": "Cart upsell product",
+      "info": "When set, a bottom sheet fires after Add to Cart offering this product. Leave blank to disable."
     }
   ],
   "blocks": [

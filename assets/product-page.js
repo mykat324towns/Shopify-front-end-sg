@@ -34,6 +34,16 @@
   var galleryViewer = document.getElementById('product-gallery-viewer');
   var variantImg    = document.getElementById('product-gallery-variant-img');
 
+  // Cross-sell modal
+  var csModal    = document.getElementById('cross-sell-modal');
+  var csOverlay  = csModal ? csModal.querySelector('.cs-modal__overlay') : null;
+  var csImgEl    = document.getElementById('cs-modal-img');
+  var csNameEl   = document.getElementById('cs-modal-name');
+  var csPriceEl  = document.getElementById('cs-modal-price');
+  var csAddBtn   = document.getElementById('cs-modal-add');
+  var csSkipBtn  = document.getElementById('cs-modal-skip');
+  var csCloseBtn = csModal ? csModal.querySelector('.cs-modal__close') : null;
+
   // State
   var selectedBaseId    = null;
   var selectedBaseSize  = null;  // e.g. '10ml' — used to pick pressurized bottle
@@ -271,7 +281,55 @@
     }
   }
 
+  // ── Cross-sell modal ─────────────────────────────────────────────────────────
+
+  function openCsModal() {
+    var cs = window.SG_CROSS_SELL;
+    if (!csModal || !cs) return;
+    if (csImgEl)   { csImgEl.src = cs.image || ''; csImgEl.alt = cs.title || ''; }
+    if (csNameEl)  csNameEl.textContent = cs.title || '';
+    if (csPriceEl) csPriceEl.textContent = '$' + (parseInt(cs.price, 10) / 100).toFixed(2);
+    csModal.classList.add('is-open');
+    csModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeCsModal() {
+    if (!csModal) return;
+    csModal.classList.remove('is-open');
+    csModal.setAttribute('aria-hidden', 'true');
+  }
+
   // ── Add-to-cart ────────────────────────────────────────────────────────────────
+
+  function performCartAdd(items, origText) {
+    fetch('/cart/add.js', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify({ items: items }),
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+      addBtn.textContent = 'Added!';
+      addBtn.classList.add('btn-add-to-cart--success');
+
+      document.querySelectorAll('.nav__cart').forEach(function (el) {
+        el.classList.add('cart-bump');
+        setTimeout(function () { el.classList.remove('cart-bump'); }, 600);
+      });
+
+      if (window.SG_Cart) window.SG_Cart.open();
+
+      setTimeout(function () {
+        addBtn.textContent = origText;
+        addBtn.classList.remove('btn-add-to-cart--success');
+        addBtn.disabled = false;
+      }, 2000);
+    })
+    .catch(function () {
+      addBtn.textContent = origText;
+      addBtn.disabled    = false;
+    });
+  }
 
   if (productForm) {
     productForm.addEventListener('submit', function (e) {
@@ -302,33 +360,34 @@
         });
       }
 
-      fetch('/cart/add.js', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body:    JSON.stringify({ items: items }),
-      })
-      .then(function (res) {
-        if (!res.ok) throw new Error(res.status);
-        addBtn.textContent = 'Added!';
-        addBtn.classList.add('btn-add-to-cart--success');
+      // Show cross-sell upsell modal when a cross-sell product is configured
+      if (window.SG_CROSS_SELL && csModal) {
+        openCsModal();
 
-        document.querySelectorAll('.nav__cart').forEach(function (el) {
-          el.classList.add('cart-bump');
-          setTimeout(function () { el.classList.remove('cart-bump'); }, 600);
-        });
+        function onAdd() {
+          cleanup();
+          var allItems = items.concat([{ id: parseInt(window.SG_CROSS_SELL.variantId, 10), quantity: 1 }]);
+          performCartAdd(allItems, origText);
+        }
+        function onSkip() {
+          cleanup();
+          performCartAdd(items, origText);
+        }
+        function cleanup() {
+          closeCsModal();
+          if (csAddBtn)   csAddBtn.removeEventListener('click', onAdd);
+          if (csSkipBtn)  csSkipBtn.removeEventListener('click', onSkip);
+          if (csCloseBtn) csCloseBtn.removeEventListener('click', onSkip);
+          if (csOverlay)  csOverlay.removeEventListener('click', onSkip);
+        }
+        if (csAddBtn)   csAddBtn.addEventListener('click', onAdd);
+        if (csSkipBtn)  csSkipBtn.addEventListener('click', onSkip);
+        if (csCloseBtn) csCloseBtn.addEventListener('click', onSkip);
+        if (csOverlay)  csOverlay.addEventListener('click', onSkip);
+        return;
+      }
 
-        if (window.SG_Cart) window.SG_Cart.open();
-
-        setTimeout(function () {
-          addBtn.textContent = origText;
-          addBtn.classList.remove('btn-add-to-cart--success');
-          addBtn.disabled = false;
-        }, 2000);
-      })
-      .catch(function () {
-        addBtn.textContent = origText;
-        addBtn.disabled    = false;
-      });
+      performCartAdd(items, origText);
     });
   }
 
