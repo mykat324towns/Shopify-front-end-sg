@@ -1,11 +1,27 @@
 <header class="nav container">
   <div class="nav__inner">
 
-    <!-- Left nav links -->
+    <!-- Left nav: Shop dropdown -->
     <nav class="nav__links-left" aria-label="Primary navigation">
-      {% for link in linklists[section.settings.menu_left].links %}
-        <a class="nav__link" href="{{ link.url }}"{% if link.current or request.path == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
-      {% endfor %}
+      <div class="nav__menu" data-nav-menu>
+        <button
+          type="button"
+          class="nav__link nav__menu-toggle"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="nav-menu-shop"
+        >
+          Shop
+          <svg class="nav__menu-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="nav-menu-shop" class="nav__menu-panel" role="menu">
+          <a class="nav__menu-item" href="/collections/all" role="menuitem"{% if request.path == '/collections/all' %} aria-current="page"{% endif %}>Shop All Decants</a>
+          <a class="nav__menu-item" href="/collections/best-sellers" role="menuitem"{% if request.path == '/collections/best-sellers' %} aria-current="page"{% endif %}>Best Sellers</a>
+          <a class="nav__menu-item" href="/collections/latest-picks" role="menuitem"{% if request.path == '/collections/latest-picks' %} aria-current="page"{% endif %}>Latest Picks</a>
+        </div>
+      </div>
     </nav>
 
     <!-- Logo — centered -->
@@ -13,11 +29,26 @@
       {{ section.settings.logo_text | default: shop.name }}
     </a>
 
-    <!-- Right nav: search + cart + hamburger -->
+    <!-- Right nav: Help dropdown + search + cart + hamburger -->
     <div class="nav__links-right">
-      {% for link in linklists[section.settings.menu_right].links %}
-        <a class="nav__link" href="{{ link.url }}"{% if link.current or request.path == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
-      {% endfor %}
+      <div class="nav__menu nav__menu--right" data-nav-menu>
+        <button
+          type="button"
+          class="nav__link nav__menu-toggle"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="nav-menu-help"
+        >
+          Help
+          <svg class="nav__menu-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="nav-menu-help" class="nav__menu-panel" role="menu">
+          <a class="nav__menu-item" href="/account" role="menuitem"{% if request.path contains '/account' %} aria-current="page"{% endif %}>Track Order</a>
+          <a class="nav__menu-item" href="/pages/contact" role="menuitem"{% if request.path == '/pages/contact' %} aria-current="page"{% endif %}>Contact</a>
+        </div>
+      </div>
 
       <button class="nav__search" aria-label="Search">
         <svg class="nav__search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
@@ -67,6 +98,44 @@
   </div>
 </header>
 
+<script>
+(function () {
+  var menus = document.querySelectorAll('[data-nav-menu]');
+  if (!menus.length) return;
+
+  function closeAll(except) {
+    menus.forEach(function (m) {
+      if (m === except) return;
+      var btn = m.querySelector('.nav__menu-toggle');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      m.classList.remove('is-open');
+    });
+  }
+
+  menus.forEach(function (menu) {
+    var btn = menu.querySelector('.nav__menu-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      closeAll(menu);
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      menu.classList.toggle('is-open', !isOpen);
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    var inside = false;
+    menus.forEach(function (m) { if (m.contains(e.target)) inside = true; });
+    if (!inside) closeAll(null);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll(null);
+  });
+}());
+</script>
+
 {% schema %}
 {
   "name": "Header",
@@ -76,18 +145,6 @@
       "id": "logo_text",
       "label": "Logo text",
       "info": "Overrides shop name. Leave blank to use shop name."
-    },
-    {
-      "type": "link_list",
-      "id": "menu_left",
-      "label": "Left navigation menu",
-      "default": "main-menu"
-    },
-    {
-      "type": "link_list",
-      "id": "menu_right",
-      "label": "Right navigation menu",
-      "default": "main-menu"
     }
   ]
 }
