@@ -143,21 +143,6 @@
                   data-bottle="{{ v_bottle | asset_url }}"
                   aria-pressed="false"
                 >
-                  {%- if variant.featured_image -%}
-                    <img
-                      class="size-card__img"
-                      src="{{ variant.featured_image | image_url: width: 80 }}"
-                      alt="{{ variant.option1 }}"
-                      loading="lazy"
-                    >
-                  {%- else -%}
-                    <img
-                      class="size-card__img"
-                      src="{{ v_bottle | asset_url }}"
-                      alt="{{ variant.option1 }}"
-                      loading="lazy"
-                    >
-                  {%- endif -%}
                   <span class="size-card__label">{{ variant.option1 }}</span>
                   {%- assign spray_val = variant.metafields.custom.sprays.value -%}
                   {%- if spray_val != blank -%}
