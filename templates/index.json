@@ -16,8 +16,8 @@
         "headline": "Ten scents.<br>One bottle's price.",
         "subtext": "Decants from $4.99. Skip the $300 blind-buy regret. Try ten before you commit to one.",
         "proof_text": "",
-        "cta_primary_text": "Browse Best Sellers",
-        "cta_primary_url": "/collections/best-sellers",
+        "cta_primary_text": "Shop All Decants",
+        "cta_primary_url": "/collections/all",
         "cta_secondary_text": "",
         "cta_secondary_url": "",
         "trust_1": "100% authentic",
@@ -52,7 +52,7 @@
         "new_item_4": "Rotate. Explore. Own your collection.",
         "tagline": "",
         "cta_text": "Build Your Rotation →",
-        "cta_url": "/collections/best-sellers",
+        "cta_url": "/collections/all",
         "reassurance": "Free U.S. shipping over $35"
       }
     },
@@ -121,7 +121,7 @@
         "subtext": "Pick your sizes. Stack the ones you've been meaning to try. Ship one box, one tracking number.",
         "trust_cue": "100% authentic · Hand-packed in AZ",
         "cta_text": "Start Building →",
-        "cta_url": "/collections/best-sellers",
+        "cta_url": "/collections/all",
         "trust_line": "Klarna · Afterpay · Shop Pay Installments"
       }
     },
@@ -204,10 +204,10 @@
         "title": "Your signature is in there somewhere.",
         "body": "One of them is the one you'll wear out. The rest live in the rotation. From $4.99 to find out.",
         "trust_cue": "100% authentic",
-        "cta_primary_text": "Browse Best Sellers",
-        "cta_primary_url": "/collections/best-sellers",
-        "cta_secondary_text": "See all sizes →",
-        "cta_secondary_url": "/collections/all",
+        "cta_primary_text": "Browse The Collection",
+        "cta_primary_url": "/collections/all",
+        "cta_secondary_text": "Start with the best sellers →",
+        "cta_secondary_url": "/collections/best-sellers",
         "reassurance": "Free U.S. shipping over $35 · Hand-packed in AZ"
       }
     },
