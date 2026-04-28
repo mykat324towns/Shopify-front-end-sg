@@ -118,6 +118,7 @@
       {%- endif -%}
 
       <!-- Size selector — base variants only (no "+" pressurized) -->
+      {%- assign parent_ml = product.metafields.scent_gallery.parent_ml_remaining -%}
       <div id="size-selector-mount">
         <div class="size-selector">
           <p class="size-selector__label">Select Size</p>
@@ -125,6 +126,9 @@
             {%- for variant in product.variants -%}
               {%- unless variant.option1 contains '+' -%}
                 {%- assign v_size = variant.option1 | downcase -%}
+                {%- assign v_ml_num = v_size | remove: 'ml' | plus: 0 -%}
+                {%- assign v_unavailable = false -%}
+                {%- if parent_ml != blank and v_ml_num > 0 and v_ml_num > parent_ml -%}{%- assign v_unavailable = true -%}{%- endif -%}
                 {%- if v_size == '1ml' -%}{%- assign v_bottle = 'bottle-1ml.avif' -%}
                 {%- elsif v_size == '2ml' -%}{%- assign v_bottle = 'bottle-2ml.avif' -%}
                 {%- elsif v_size == '5ml' -%}{%- assign v_bottle = 'bottle-5ml.avif' -%}
@@ -133,15 +137,16 @@
                 {%- else -%}{%- assign v_bottle = 'bottle-10ml.avif' -%}
                 {%- endif -%}
                 <button
-                  class="size-card"
+                  class="size-card{% if v_unavailable %} size-card--unavailable{% endif %}"
                   type="button"
                   data-variant-id="{{ variant.id }}"
                   data-size="{{ variant.option1 | downcase }}"
                   data-price="{{ variant.price }}"
                   data-available="{{ variant.available }}"
-                  data-ml="{{ variant.metafields.scent_gallery.ml_size | default: 0 }}"
+                  data-ml="{{ v_ml_num }}"
                   data-bottle="{{ v_bottle | asset_url }}"
                   aria-pressed="false"
+                  {% if v_unavailable %}aria-disabled="true"{% endif %}
                 >
                   <span class="size-card__label">{{ variant.option1 }}</span>
                   {%- if v_size == '1ml' -%}<span class="size-card__sub">~18 sprays</span>
@@ -163,7 +168,6 @@
       </div>
 
       <!-- Parent ML stock indicator — urgency-tiered scarcity signal -->
-      {%- assign parent_ml = product.metafields.scent_gallery.parent_ml_remaining -%}
       {%- if parent_ml != blank and parent_ml > 0 -%}
         {%- assign ml_rounded = parent_ml | round: 1 -%}
         {%- if parent_ml <= 15 -%}

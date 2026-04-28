@@ -88,11 +88,17 @@
 
   // ── Initial parent-ML card state ─────────────────────────────────────────────
   // Runs once on load: marks cards whose ml_size exceeds remaining parent stock.
+  function resolveCardMl(card) {
+    var ml = parseFloat(card.dataset.ml) || 0;
+    if (ml === 0 && card.dataset.size) ml = parseFloat(card.dataset.size) || 0;
+    return ml;
+  }
+
   (function initParentMlCards() {
     var parentMl = window.SG_PARENT_ML;
     if (parentMl === null || parentMl === undefined || !sizeGrid) return;
     sizeGrid.querySelectorAll('.size-card').forEach(function (card) {
-      var cardMl = parseFloat(card.dataset.ml) || 0;
+      var cardMl = resolveCardMl(card);
       if (cardMl > 0 && cardMl > parentMl) {
         card.classList.add('size-card--unavailable');
         card.setAttribute('aria-disabled', 'true');
@@ -191,7 +197,7 @@
       if (!card) return;
 
       // Block unavailable sizes when parent ML is set
-      var cardMl    = parseFloat(card.dataset.ml) || 0;
+      var cardMl    = resolveCardMl(card);
       var parentMl  = window.SG_PARENT_ML;
       var hasParent = parentMl !== null && parentMl !== undefined;
       if (hasParent && cardMl > 0 && cardMl > parentMl) return;
