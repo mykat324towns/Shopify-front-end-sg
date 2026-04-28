@@ -103,13 +103,13 @@
   // ── Size Pill interaction (homepage cards) ───────────────────────
   // Prices stored as Shopify integers (cents). data-price attr is cents.
   const PILL_INFO = {
-    '1ml':   { sprays: '~20 sprays',              label: 'Quick Test',               badge: false },
-    '2ml':   { sprays: '~38 sprays',              label: 'Try It',                   badge: false },
-    '5ml':   { sprays: '~90 sprays',              label: '~3 weeks daily wear',      badge: false },
-    '10ml':  { sprays: '~180 sprays',             label: 'Most Popular',             badge: true  },
-    '10ml+': { sprays: '~135 pressurized sprays', label: 'Most Popular — Upgraded', badge: true  },
-    '30ml':  { sprays: '~550 sprays',             label: 'Best Value',               badge: false },
-    '30ml+': { sprays: '~400 pressurized sprays', label: 'Best Value + Pressurized', badge: false },
+    '1ml':   { sprays: '18 sprays',              label: 'Quick Test',               badge: false },
+    '2ml':   { sprays: '36 sprays',              label: 'Try It',                   badge: false },
+    '5ml':   { sprays: '90 sprays',              label: '~3 weeks daily wear',      badge: false },
+    '10ml':  { sprays: '180 sprays',             label: 'Most Popular',             badge: true  },
+    '10ml+': { sprays: '130 pressurized sprays', label: 'Most Popular — Upgraded', badge: true  },
+    '30ml':  { sprays: '540 sprays',             label: 'Best Value',               badge: false },
+    '30ml+': { sprays: '390 pressurized sprays', label: 'Best Value + Pressurized', badge: false },
   };
 
   function renderPillInfo(infoEl, sizeKey) {
