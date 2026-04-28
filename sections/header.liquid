@@ -49,10 +49,17 @@
       <div class="nav__drawer-panel">
         <button class="nav__drawer-close" aria-label="Close menu">&#x2715;</button>
         <nav aria-label="Mobile navigation">
-          {% assign all_links = linklists[section.settings.menu_left].links | concat: linklists[section.settings.menu_right].links %}
-          {% for link in all_links %}
-            <a class="nav__drawer-link" href="{{ link.url }}"{% if link.current or request.path == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
-          {% endfor %}
+          <div class="nav__drawer-section">
+            <span class="nav__drawer-section-label">Shop</span>
+            <a class="nav__drawer-link" href="/collections/best-sellers"{% if request.path == '/collections/best-sellers' %} aria-current="page"{% endif %}>Best Sellers</a>
+            <a class="nav__drawer-link" href="/collections/latest-picks"{% if request.path == '/collections/latest-picks' %} aria-current="page"{% endif %}>Latest Picks</a>
+            <a class="nav__drawer-link" href="/collections/all"{% if request.path == '/collections/all' %} aria-current="page"{% endif %}>Shop All Decants</a>
+          </div>
+          <div class="nav__drawer-section">
+            <span class="nav__drawer-section-label">Help</span>
+            <a class="nav__drawer-link" href="/account"{% if request.path contains '/account' %} aria-current="page"{% endif %}>Track Order</a>
+            <a class="nav__drawer-link" href="/pages/contact"{% if request.path == '/pages/contact' %} aria-current="page"{% endif %}>Contact</a>
+          </div>
         </nav>
       </div>
     </div>
