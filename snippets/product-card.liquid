@@ -27,7 +27,7 @@
   {%- assign default_variant = product.variants[fallback_idx] | default: first_variant -%}
 {%- endif -%}
 
-<article class="product-card" data-product-id="{{ product.id }}">
+<article class="product-card{% unless product.available %} product-card--sold-out{% endunless %}" data-product-id="{{ product.id }}">
   <a class="product-card__image-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
     <div class="product-card__image-wrap">
       {%- if product.featured_image -%}
@@ -40,19 +40,23 @@
           height="240"
         >
       {%- endif -%}
-      {%- if badge != blank -%}
-        <span class="product-card__badge">{{ badge }}</span>
-      {%- elsif product.tags contains 'badge:Trending' -%}
-        <span class="product-card__badge">Trending</span>
-      {%- elsif product.tags contains 'badge:Best Seller' -%}
-        <span class="product-card__badge">Best Seller</span>
-      {%- elsif product.tags contains 'badge:New' -%}
-        <span class="product-card__badge">New</span>
-      {%- elsif product.tags contains 'badge:Popular' -%}
-        <span class="product-card__badge">Popular</span>
-      {%- elsif product.tags contains 'badge:Fan Fave' -%}
-        <span class="product-card__badge">Fan Fave</span>
-      {%- endif -%}
+      {%- unless product.available -%}
+        <span class="product-card__badge product-card__badge--sold-out">Sold Out</span>
+      {%- else -%}
+        {%- if badge != blank -%}
+          <span class="product-card__badge">{{ badge }}</span>
+        {%- elsif product.tags contains 'badge:Trending' -%}
+          <span class="product-card__badge">Trending</span>
+        {%- elsif product.tags contains 'badge:Best Seller' -%}
+          <span class="product-card__badge">Best Seller</span>
+        {%- elsif product.tags contains 'badge:New' -%}
+          <span class="product-card__badge">New</span>
+        {%- elsif product.tags contains 'badge:Popular' -%}
+          <span class="product-card__badge">Popular</span>
+        {%- elsif product.tags contains 'badge:Fan Fave' -%}
+          <span class="product-card__badge">Fan Fave</span>
+        {%- endif -%}
+      {%- endunless -%}
     </div>
   </a>
 
@@ -98,7 +102,11 @@
         {{- default_variant.price | money -}}
       </p>
 
-      <button type="submit" class="product-card__cta">Add to Rotation</button>
+      {%- if product.available -%}
+        <button type="submit" class="product-card__cta">Add to Rotation</button>
+      {%- else -%}
+        <button type="button" class="product-card__cta product-card__cta--sold-out" disabled aria-disabled="true">Sold Out</button>
+      {%- endif -%}
     </form>
   </div>
 </article>
