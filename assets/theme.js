@@ -567,7 +567,9 @@ window.SG_Cart = (function () {
         (variant || pressurized) ? `<p class="cart-drawer__item-variant">${variant}${pressurized}</p>` : '',
         `<p class="cart-drawer__item-price">${formatPrice(item.price)}</p>`,
         `<span class="cart-drawer__item-qty">Qty: ${item.quantity}</span>`,
-        '</div></div>',
+        '</div>',
+        `<button class="cart-drawer__item-remove" data-key="${item.key}" aria-label="Remove ${title} from cart">&#x2715;</button>`,
+        '</div>',
       ].join('');
     });
 
@@ -579,6 +581,17 @@ window.SG_Cart = (function () {
       footer.hidden = false;
       updateShippingBar(cart.total_price || 0);
     }
+  }
+
+  async function removeItem(key) {
+    try {
+      await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: key, quantity: 0 }),
+      });
+      await refresh();
+    } catch (e) { /* silent — cart will resync on next open */ }
   }
 
   async function refresh() {
@@ -617,6 +630,10 @@ window.SG_Cart = (function () {
     if (drawer) {
       drawer.querySelector('.cart-drawer__overlay')?.addEventListener('click', close);
       drawer.querySelector('.cart-drawer__close')?.addEventListener('click', close);
+      drawer.addEventListener('click', e => {
+        const btn = e.target.closest('.cart-drawer__item-remove');
+        if (btn) removeItem(btn.dataset.key);
+      });
     }
 
     document.querySelectorAll('.nav__cart').forEach(btn => btn.addEventListener('click', open));
