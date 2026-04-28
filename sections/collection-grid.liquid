@@ -24,7 +24,14 @@
       {%- endif -%}
     </header>
 
-    {%- if collection.products_count > 0 -%}
+    {%- comment -%} Subtract products tagged `hidden` from the displayed count {%- endcomment -%}
+    {%- assign hidden_count = 0 -%}
+    {%- for product in collection.products -%}
+      {%- if product.tags contains 'hidden' -%}{%- assign hidden_count = hidden_count | plus: 1 -%}{%- endif -%}
+    {%- endfor -%}
+    {%- assign visible_products_count = collection.products_count | minus: hidden_count -%}
+
+    {%- if visible_products_count > 0 -%}
       {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
       {%- assign is_main_catalog = false -%}
       {%- if collection.handle == 'all' -%}{%- assign is_main_catalog = true -%}{%- endif -%}
@@ -39,13 +46,13 @@
             id="listing-search"
             class="listing-controls__search"
             type="search"
-            placeholder="Search {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}…"
+            placeholder="Search {{ visible_products_count }} fragrance{% if visible_products_count != 1 %}s{% endif %}…"
             aria-label="Search {{ collection.title | escape }}"
             autocomplete="off"
             spellcheck="false"
           >
           <span class="listing-controls__count" id="listing-count">
-            {{ collection.products_count }} fragrance{% if collection.products_count != 1 %}s{% endif %}
+            {{ visible_products_count }} fragrance{% if visible_products_count != 1 %}s{% endif %}
           </span>
         </div>
         <div class="listing-controls__pills" role="group" aria-label="Sort products">
@@ -90,14 +97,18 @@
 
       <div class="collection__grid" id="listing-grid">
         {%- for product in collection.products -%}
-          {%- unless product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
-            {%- render 'product-card', product: product -%}
+          {%- unless product.tags contains 'hidden' -%}
+            {%- unless product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+              {%- render 'product-card', product: product -%}
+            {%- endunless -%}
           {%- endunless -%}
         {%- endfor -%}
         {%- for product in collection.products -%}
-          {%- if product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
-            {%- render 'product-card', product: product -%}
-          {%- endif -%}
+          {%- unless product.tags contains 'hidden' -%}
+            {%- if product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+              {%- render 'product-card', product: product -%}
+            {%- endif -%}
+          {%- endunless -%}
         {%- endfor -%}
       </div>
 
