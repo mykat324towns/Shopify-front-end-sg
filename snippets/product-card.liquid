@@ -4,6 +4,9 @@
 {%- endcomment -%}
 
 {%- assign first_variant = product.variants.first -%}
+{%- assign parent_ml = product.metafields.scent_gallery.parent_ml_remaining -%}
+{%- assign is_sold_out = false -%}
+{%- if parent_ml != blank and parent_ml == 0 -%}{%- assign is_sold_out = true -%}{%- endif -%}
 
 {%- comment -%} Pre-select size pill: per-product metafield default, fallback to 5ml, then 2nd variant. {%- endcomment -%}
 {%- assign default_size = product.metafields.scent_gallery.default_pill | default: '5ml' | downcase -%}
@@ -27,7 +30,7 @@
   {%- assign default_variant = product.variants[fallback_idx] | default: first_variant -%}
 {%- endif -%}
 
-<article class="product-card{% unless product.available %} product-card--sold-out{% endunless %}" data-product-id="{{ product.id }}">
+<article class="product-card{% if is_sold_out %} product-card--sold-out{% endif %}" data-product-id="{{ product.id }}">
   <a class="product-card__image-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
     <div class="product-card__image-wrap">
       {%- if product.featured_image -%}
@@ -40,7 +43,7 @@
           height="240"
         >
       {%- endif -%}
-      {%- unless product.available -%}
+      {%- if is_sold_out -%}
         <span class="product-card__badge product-card__badge--sold-out">Sold Out</span>
       {%- else -%}
         {%- if badge != blank -%}
@@ -56,7 +59,7 @@
         {%- elsif product.tags contains 'badge:Fan Fave' -%}
           <span class="product-card__badge">Fan Fave</span>
         {%- endif -%}
-      {%- endunless -%}
+      {%- endif -%}
     </div>
   </a>
 
@@ -102,10 +105,10 @@
         {{- default_variant.price | money -}}
       </p>
 
-      {%- if product.available -%}
-        <button type="submit" class="product-card__cta">Add to Rotation</button>
-      {%- else -%}
+      {%- if is_sold_out -%}
         <button type="button" class="product-card__cta product-card__cta--sold-out" disabled aria-disabled="true">Sold Out</button>
+      {%- else -%}
+        <button type="submit" class="product-card__cta">Add to Rotation</button>
       {%- endif -%}
     </form>
   </div>
