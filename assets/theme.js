@@ -111,6 +111,7 @@
     '30ml':  { sprays: '540 sprays',             label: 'Best Value',               badge: false },
     '30ml+': { sprays: '390 pressurized sprays', label: 'Best Value + Pressurized', badge: false },
   };
+  window.SG_PILL_INFO = PILL_INFO;
 
   function renderPillInfo(infoEl, sizeKey) {
     if (!infoEl) return;

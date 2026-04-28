@@ -366,6 +366,20 @@
         });
       }
 
+      // Attach spray count as a line item property so cart drawer can display it
+      if (selectedBaseSize) {
+        var pillInfo = window.SG_PILL_INFO || {};
+        var sprayText = '';
+        if (isPressurized && PRESSURIZED_SPRAYS[selectedBaseSize]) {
+          sprayText = PRESSURIZED_SPRAYS[selectedBaseSize] + ' pressurized sprays';
+        } else if (pillInfo[selectedBaseSize]) {
+          sprayText = pillInfo[selectedBaseSize].sprays || '';
+        }
+        if (sprayText) {
+          items[0].properties = Object.assign(items[0].properties || {}, { Sprays: sprayText });
+        }
+      }
+
       // Show cross-sell upsell modal when a cross-sell product is configured
       if (window.SG_CROSS_SELL && csModal) {
         openCsModal();
