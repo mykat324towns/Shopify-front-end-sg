@@ -50,14 +50,14 @@
             height="636"
           >
         {%- else -%}
-          {% render 'picture-asset',
-             filename: 'full-box',
-             alt: 'Scent Gallery luxury order — sealed shipping box ready for dispatch',
-             loading: 'lazy',
-             width: 673,
-             height: 636,
-             class: 'testimonials__order-photo'
-          %}
+          <img
+            src="{{ 'full-box.png' | asset_url }}"
+            alt="Scent Gallery luxury order — sealed shipping box ready for dispatch"
+            loading="lazy"
+            width="499"
+            height="486"
+            class="testimonials__order-photo"
+          >
         {%- endif -%}
 
         <button
@@ -82,13 +82,13 @@
               <div class="witb__grid witb__grid--packaging">
                 <div class="witb__item" style="--item-delay:0ms">
                   <div class="witb__item-img-wrap">
-                    {% render 'picture-asset', filename: 'bubble-mailer', alt: 'Bubble Mailer', loading: 'lazy', class: 'witb__item-img' %}
+                    <img src="{{ 'bubble-mailer.png' | asset_url }}" alt="Bubble Mailer" loading="lazy" class="witb__item-img">
                   </div>
                   <span class="witb__item-label">Bubble Mailer</span>
                 </div>
                 <div class="witb__item" style="--item-delay:60ms">
                   <div class="witb__item-img-wrap">
-                    {% render 'picture-asset', filename: 'stretch-wrap', alt: 'Stretch Wrap', loading: 'lazy', class: 'witb__item-img' %}
+                    <img src="{{ 'stretch-wrap.png' | asset_url }}" alt="Stretch Wrap" loading="lazy" class="witb__item-img">
                   </div>
                   <span class="witb__item-label">Stretch Wrap</span>
                 </div>
