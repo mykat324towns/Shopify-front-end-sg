@@ -1,0 +1,13 @@
+{%- for group in robots.default_groups -%}
+  {{- group.user_agent }}
+
+  {%- for rule in group.rules -%}
+    {{ rule }}
+  {%- endfor -%}
+
+  {{- 'Disallow: /products/pressurized-atomizer-upgrade' }}
+
+  {%- if group.sitemap != blank %}
+    {{ group.sitemap }}
+  {% endif %}
+{%- endfor -%}

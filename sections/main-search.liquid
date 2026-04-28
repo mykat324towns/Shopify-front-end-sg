@@ -32,7 +32,9 @@
         <div class="collection__grid">
           {%- for result in search.results -%}
             {%- if result.object_type == 'product' -%}
-              {%- render 'product-card', product: result -%}
+              {%- unless result.tags contains 'hidden' -%}
+                {%- render 'product-card', product: result -%}
+              {%- endunless -%}
             {%- endif -%}
           {%- endfor -%}
         </div>

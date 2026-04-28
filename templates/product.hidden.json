@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "product-hidden": {
+      "type": "product-hidden",
+      "settings": {}
+    }
+  },
+  "order": ["product-hidden"]
+}

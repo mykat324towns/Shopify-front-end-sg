@@ -15,6 +15,11 @@
 
   <link rel="canonical" href="{{ canonical_url }}">
 
+  {%- if template contains 'product' and product.tags contains 'hidden' -%}
+    <meta name="robots" content="noindex,nofollow">
+    <meta http-equiv="refresh" content="0;url=/">
+  {%- endif -%}
+
   <!-- Shopify required -->
   {{ content_for_header }}
 

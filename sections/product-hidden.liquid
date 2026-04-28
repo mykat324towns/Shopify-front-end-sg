@@ -1,0 +1,19 @@
+<script>
+  (function () {
+    try { window.stop(); } catch (e) {}
+    window.location.replace('/');
+  })();
+</script>
+<noscript>
+  <meta http-equiv="refresh" content="0;url=/">
+</noscript>
+<style>html,body{background:#fff}body>*{display:none!important}</style>
+
+{% schema %}
+{
+  "name": "Hidden product",
+  "tag": "section",
+  "settings": [],
+  "presets": []
+}
+{% endschema %}
