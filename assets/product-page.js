@@ -54,7 +54,7 @@
   var SIZES_WITH_PRESSURIZED = ['10ml', '30ml'];
 
   // Hardcoded pressurized spray-count display (driven by base size, not variant)
-  var PRESSURIZED_SPRAYS = { '10ml': '135', '30ml': '400' };
+  var PRESSURIZED_SPRAYS = { '10ml': '130', '30ml': '390' };
 
   // Fade-swap the small variant bottle (mirrors WooCommerce setVariantImage pattern)
   function setVariantImage(src, animate) {
