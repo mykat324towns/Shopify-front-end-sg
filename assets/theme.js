@@ -297,14 +297,21 @@
       || form.querySelector('.product-card__variant-id')?.value;
     if (!activeVariantId) return;
 
+    const sizeKey  = activePill?.dataset.size || '';
+    const sprayText = activePill?.dataset.sprays
+      || (PILL_INFO[sizeKey] && PILL_INFO[sizeKey].sprays)
+      || '';
+
     const btn = form.querySelector('.product-card__cta');
     if (btn) btn.disabled = true;
 
     try {
+      const cartBody = { id: activeVariantId, quantity: 1 };
+      if (sprayText) cartBody.properties = { Sprays: sprayText };
       const res = await fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ id: activeVariantId, quantity: 1 }),
+        body: JSON.stringify(cartBody),
       });
       if (!res.ok) throw new Error('add ' + res.status);
 
@@ -557,14 +564,16 @@ window.SG_Cart = (function () {
       const title    = item.product_title || item.title;
       const variant  = item.variant_title && item.variant_title !== 'Default Title' ? item.variant_title : '';
       const pressurized = item.properties && item.properties['Pressurized'] === 'Yes' ? ' · Pressurized' : '';
-      const img      = item.image || '';
+      const sprays   = (item.properties && item.properties['Sprays']) || '';
+      const img      = item.image ? item.image.replace(/\.jpg|\.png|\.webp/, '_120x120$&') : '';
 
       return [
         '<div class="cart-drawer__item">',
-        img ? `<img class="cart-drawer__item-img" src="${img}" alt="" loading="lazy">` : '',
+        img ? `<img class="cart-drawer__item-img" src="${img}" alt="" loading="eager" decoding="async">` : '',
         '<div class="cart-drawer__item-info">',
         `<p class="cart-drawer__item-name">${title}</p>`,
         (variant || pressurized) ? `<p class="cart-drawer__item-variant">${variant}${pressurized}</p>` : '',
+        sprays ? `<p class="cart-drawer__item-sprays">${sprays}</p>` : '',
         `<p class="cart-drawer__item-price">${formatPrice(item.price)}</p>`,
         `<span class="cart-drawer__item-qty">Qty: ${item.quantity}</span>`,
         '</div>',

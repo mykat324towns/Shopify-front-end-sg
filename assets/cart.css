@@ -147,6 +147,13 @@
   margin: 0;
 }
 
+.cart-drawer__item-sprays {
+  font-size: var(--text-caption);
+  color: var(--color-on-surface-muted);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
 .cart-drawer__item-price {
   font-family: var(--font-body);
   font-size: var(--text-body-sm);
