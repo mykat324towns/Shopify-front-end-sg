@@ -90,7 +90,14 @@
 
       <div class="collection__grid" id="listing-grid">
         {%- for product in collection.products -%}
-          {%- render 'product-card', product: product -%}
+          {%- unless product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+            {%- render 'product-card', product: product -%}
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- for product in collection.products -%}
+          {%- if product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+            {%- render 'product-card', product: product -%}
+          {%- endif -%}
         {%- endfor -%}
       </div>
 

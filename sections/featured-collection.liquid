@@ -34,13 +34,24 @@
 
       <!-- Mobile Swiper -->
       {%- assign slides_per_view = '1.8' -%}
+      {%- assign _fc_limit = section.settings.products_to_show -%}
       <div class="carousel-track {{ section_class }}__swiper">
         <div class="swiper" id="{{ section.id }}-swiper" data-slides-per-view="{{ slides_per_view }}">
           <div class="swiper-wrapper">
-            {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
-              <div class="swiper-slide">
-                {%- render 'product-card', product: product -%}
-              </div>
+            {%- assign _fc_shown = 0 -%}
+            {%- for product in featured_collection.products -%}
+              {%- if _fc_shown >= _fc_limit -%}{%- break -%}{%- endif -%}
+              {%- unless product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+                <div class="swiper-slide">{%- render 'product-card', product: product -%}</div>
+                {%- assign _fc_shown = _fc_shown | plus: 1 -%}
+              {%- endunless -%}
+            {%- endfor -%}
+            {%- for product in featured_collection.products -%}
+              {%- if _fc_shown >= _fc_limit -%}{%- break -%}{%- endif -%}
+              {%- if product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+                <div class="swiper-slide">{%- render 'product-card', product: product -%}</div>
+                {%- assign _fc_shown = _fc_shown | plus: 1 -%}
+              {%- endif -%}
             {%- endfor -%}
           </div>
         </div>
@@ -49,8 +60,20 @@
 
       <!-- Desktop grid -->
       <div class="{{ section_class }}__scroll collection__grid" id="{{ section.id }}-grid">
-        {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
-          {%- render 'product-card', product: product -%}
+        {%- assign _fc_shown = 0 -%}
+        {%- for product in featured_collection.products -%}
+          {%- if _fc_shown >= _fc_limit -%}{%- break -%}{%- endif -%}
+          {%- unless product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+            {%- render 'product-card', product: product -%}
+            {%- assign _fc_shown = _fc_shown | plus: 1 -%}
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- for product in featured_collection.products -%}
+          {%- if _fc_shown >= _fc_limit -%}{%- break -%}{%- endif -%}
+          {%- if product.metafields.scent_gallery.parent_ml_remaining == 0 -%}
+            {%- render 'product-card', product: product -%}
+            {%- assign _fc_shown = _fc_shown | plus: 1 -%}
+          {%- endif -%}
         {%- endfor -%}
       </div>
       {%- assign desktop_target = '#' | append: section.id | append: '-grid' -%}
