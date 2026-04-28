@@ -126,10 +126,67 @@
     return '$' + (parseInt(cents, 10) / 100).toFixed(2);
   }
 
+  // Card-level pressurized atomizer upgrade: same eligibility rules as PDP.
+  // Pressurized is a separate $0.99 add-on product (handle: pressurized-atomizer-upgrade)
+  // exposed globally as window.SG_PRESSURIZED_UPGRADE in layout/theme.liquid.
+  const CARD_PRESS_SIZES   = ['10ml', '30ml'];
+  const CARD_PRESS_SPRAYS  = { '10ml': '130', '30ml': '390' };
+
+  function getCardActivePill(card) {
+    return card ? card.querySelector('.size-pill--active') : null;
+  }
+
+  function setCardPriceFromState(card) {
+    const priceEl = card.querySelector('.product-card__price');
+    const pill    = getCardActivePill(card);
+    if (!priceEl || !pill || !pill.dataset.price) return;
+
+    const baseCents = parseInt(pill.dataset.price, 10);
+    const toggleOn  = card.querySelector('.product-card__pressurized-btn.pressurized-toggle__btn--on');
+    const upgrade   = window.SG_PRESSURIZED_UPGRADE;
+    const total     = (toggleOn && upgrade) ? baseCents + parseInt(upgrade.price, 10) : baseCents;
+    priceEl.textContent = formatPriceCents(total);
+  }
+
+  function resetCardPressurizedToggle(card) {
+    const btn = card.querySelector('.product-card__pressurized-btn');
+    if (!btn) return;
+    btn.classList.remove('pressurized-toggle__btn--on');
+    btn.setAttribute('aria-pressed', 'false');
+  }
+
+  function updateCardPressurizedToggle(card, sizeLower) {
+    const wrap   = card.querySelector('.product-card__pressurized');
+    if (!wrap) return;
+    const upgrade  = window.SG_PRESSURIZED_UPGRADE;
+    const eligible = CARD_PRESS_SIZES.indexOf(sizeLower) !== -1;
+    const canShow  = eligible && upgrade && upgrade.available;
+
+    if (canShow) {
+      const priceEl  = wrap.querySelector('.product-card__pressurized-price');
+      const spraysEl = wrap.querySelector('.product-card__pressurized-sprays');
+      if (priceEl)  priceEl.textContent  = '+' + formatPriceCents(upgrade.price);
+      if (spraysEl) spraysEl.textContent = CARD_PRESS_SPRAYS[sizeLower] || '';
+      wrap.classList.add('is-visible');
+      wrap.setAttribute('aria-hidden', 'false');
+    } else {
+      wrap.classList.remove('is-visible');
+      wrap.setAttribute('aria-hidden', 'true');
+      resetCardPressurizedToggle(card);
+    }
+  }
+
   document.querySelectorAll('.product-card__sizes').forEach(container => {
+    const card     = container.closest('.product-card');
     const cardInfo = container.closest('.product-card__info');
     const infoEl   = cardInfo ? cardInfo.querySelector('.pill-info') : null;
     const priceEl  = cardInfo ? cardInfo.querySelector('.product-card__price') : null;
+
+    // Init: if the default-active pill is pressurizable, reveal the toggle.
+    const initActive = container.querySelector('.size-pill--active');
+    if (card && initActive) {
+      updateCardPressurizedToggle(card, initActive.dataset.size);
+    }
 
     container.querySelectorAll('.size-pill').forEach(pill => {
       if (pill.classList.contains('size-pill--active')) renderPillInfo(infoEl, pill.dataset.size);
@@ -144,13 +201,34 @@
         pill.classList.add('just-selected');
         pill.addEventListener('animationend', () => pill.classList.remove('just-selected'), { once: true });
 
+        // Reset pressurized state any time size changes (matches PDP behavior)
+        if (card) resetCardPressurizedToggle(card);
+
         // data-price is in cents (Shopify format)
         if (priceEl && pill.dataset.price) {
           priceEl.textContent = formatPriceCents(pill.dataset.price);
         }
         renderPillInfo(infoEl, pill.dataset.size);
+        if (card) updateCardPressurizedToggle(card, pill.dataset.size);
       });
     });
+  });
+
+  // Pressurized toggle clicks (delegated — works for any product card on the page)
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.product-card__pressurized-btn');
+    if (!btn) return;
+    const card    = btn.closest('.product-card');
+    const upgrade = window.SG_PRESSURIZED_UPGRADE;
+    if (!card || !upgrade || !upgrade.available) return;
+
+    // Block if no eligible size is currently active
+    const pill = getCardActivePill(card);
+    if (!pill || CARD_PRESS_SIZES.indexOf(pill.dataset.size) === -1) return;
+
+    const isOn = btn.classList.toggle('pressurized-toggle__btn--on');
+    btn.setAttribute('aria-pressed', String(isOn));
+    setCardPriceFromState(card);
   });
 
   // ── Nav Search ──────────────────────────────────────────────────
@@ -306,13 +384,44 @@
     const btn = form.querySelector('.product-card__cta');
     if (btn) btn.disabled = true;
 
+    // Build cart payload. If pressurized toggle is ON for this card, send TWO
+    // line items (mirrors PDP behavior in product-page.js):
+    //   1. Base fragrance variant — tagged with Bottle Type: Pressurized so
+    //      fulfillment fills it into a pressurizer (also keeps it from merging
+    //      with any plain version of the same variant already in cart).
+    //   2. Pressurized Atomizer Upgrade product — tagged with the fragrance
+    //      name so fulfillment knows which line it pairs with.
+    const pressBtn = card ? card.querySelector('.product-card__pressurized-btn.pressurized-toggle__btn--on') : null;
+    const upgrade  = window.SG_PRESSURIZED_UPGRADE;
+    const isPress  = !!(pressBtn && upgrade && upgrade.available);
+
+    const baseItem = { id: parseInt(activeVariantId, 10), quantity: 1 };
+    const baseProps = {};
+    if (isPress) {
+      baseProps['Bottle Type'] = 'Pressurized';
+      const pressSprayText = CARD_PRESS_SPRAYS[sizeKey] ? CARD_PRESS_SPRAYS[sizeKey] + ' pressurized sprays' : '';
+      if (pressSprayText) baseProps['Sprays'] = pressSprayText;
+    } else if (sprayText) {
+      baseProps['Sprays'] = sprayText;
+    }
+    if (Object.keys(baseProps).length > 0) baseItem.properties = baseProps;
+
+    const items = [baseItem];
+    if (isPress) {
+      const nameEl = card.querySelector('.product-card__name');
+      const productName = nameEl ? nameEl.textContent.trim() : '';
+      items.push({
+        id: parseInt(upgrade.variantId, 10),
+        quantity: 1,
+        properties: productName ? { 'Linked to': productName } : {}
+      });
+    }
+
     try {
-      const cartBody = { id: activeVariantId, quantity: 1 };
-      if (sprayText) cartBody.properties = { Sprays: sprayText };
       const res = await fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(cartBody),
+        body: JSON.stringify({ items: items }),
       });
       if (!res.ok) throw new Error('add ' + res.status);
 

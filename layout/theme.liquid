@@ -70,6 +70,22 @@
   {% render 'cart-drawer' %}
   {% render 'back-to-top' %}
 
+  {%- comment -%}
+    Pressurized atomizer upgrade — exposed globally so product cards on every
+    page (home, collections, search) can offer the upgrade option without each
+    section having to re-render this lookup.
+  {%- endcomment -%}
+  {%- assign sg_press_upgrade = all_products['pressurized-atomizer-upgrade'] -%}
+  {%- if sg_press_upgrade != blank and sg_press_upgrade.variants.first != blank -%}
+    <script>
+      window.SG_PRESSURIZED_UPGRADE = {
+        variantId: {{ sg_press_upgrade.variants.first.id | json }},
+        price:     {{ sg_press_upgrade.variants.first.price | json }},
+        available: {{ sg_press_upgrade.variants.first.available | json }}
+      };
+    </script>
+  {%- endif -%}
+
   <!-- Swiper -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
   <!-- Theme JS -->

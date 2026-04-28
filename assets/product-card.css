@@ -367,3 +367,61 @@
   .product-card:hover { transform: none; box-shadow: none; border-color: var(--color-border); }
   .product-card:hover .product-card__image { transform: none; }
 }
+
+/* ── Pressurized atomizer toggle (card-scoped overrides) ──
+   Base styles live in product-page.css. Cards are narrower than the PDP, so
+   we tighten paddings, drop type sizes, and swap the max-height transition
+   for display:none so the hidden toggle doesn't consume a flex gap. */
+.product-card .pressurized-toggle {
+  display: none;
+  max-height: none;
+  opacity: 1;
+  overflow: visible;
+  transition: none;
+}
+
+.product-card .pressurized-toggle.is-visible {
+  display: block;
+  animation: card-press-reveal 0.22s var(--ease-reveal);
+}
+
+@keyframes card-press-reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.product-card .pressurized-toggle__inner {
+  padding: var(--space-2) var(--space-3);
+  gap: var(--space-2);
+  border-width: 1px;
+}
+
+.product-card .pressurized-toggle__name {
+  font-size: var(--text-caption);
+}
+
+.product-card .pressurized-toggle__sub {
+  font-size: 10px;
+}
+
+.product-card .pressurized-toggle__price {
+  font-size: 11px;
+}
+
+.product-card .pressurized-toggle__track {
+  width: 36px;
+  height: 20px;
+}
+
+.product-card .pressurized-toggle__thumb-pill {
+  width: 16px;
+  height: 16px;
+}
+
+.product-card .pressurized-toggle__btn--on .pressurized-toggle__thumb-pill {
+  transform: translateX(16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card .pressurized-toggle.is-visible { animation: none; }
+}

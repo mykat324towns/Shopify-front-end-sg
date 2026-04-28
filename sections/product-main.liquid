@@ -197,8 +197,8 @@
            data-press-bottles='{"10ml":"{{ 'bottle-10ml-pressurized.avif' | asset_url }}","30ml":"{{ 'bottle-30ml-pressurized.avif' | asset_url }}"}'>
         <div class="pressurized-toggle__inner">
           <div class="pressurized-toggle__info">
-            <span class="pressurized-toggle__name">Pressurized Bottle</span>
-            <span class="pressurized-toggle__sub">Finer mist &middot; ~<span id="pressurized-sprays"></span> sprays</span>
+            <span class="pressurized-toggle__name">Upgrade to pressurized</span>
+            <span class="pressurized-toggle__sub">Stronger projection &middot; ~<span id="pressurized-sprays"></span> sprays</span>
           </div>
           <div class="pressurized-toggle__right">
             <span class="pressurized-toggle__price" id="pressurized-price"></span>
@@ -359,14 +359,7 @@ window.SG_CROSS_SELL = null;
 {%- if product.metafields.scent_gallery.bundle_component_ids -%}
 window.SG_BUNDLE_COMPONENT_REMAINING = [{%- for ref in product.metafields.scent_gallery.bundle_component_ids.value -%}{{ ref.metafields.scent_gallery.parent_ml_remaining | default: 'null' }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}];
 {%- endif -%}
-{%- assign upgrade = all_products['pressurized-atomizer-upgrade'] -%}
-{%- if upgrade != blank and upgrade.variants.first != blank -%}
-window.SG_PRESSURIZED_UPGRADE = {
-  variantId: {{ upgrade.variants.first.id | json }},
-  price: {{ upgrade.variants.first.price | json }},
-  available: {{ upgrade.variants.first.available | json }}
-};
-{%- endif -%}
+{%- comment -%} SG_PRESSURIZED_UPGRADE is exposed globally in layout/theme.liquid. {%- endcomment -%}
 </script>
 
 {%- render 'cross-sell-modal' -%}
