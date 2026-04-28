@@ -152,10 +152,16 @@
   .latest-pickups__swiper { display: block; }
   .swiper { overflow: hidden; padding-bottom: 0; }
   .swiper-pagination { display: none; }
+  /* Hide the desktop-mode (native) carousel indicator on mobile — Swiper has its own. */
+  .latest-pickups > .container > .carousel-scroll-bar,
+  .collection > .container > .carousel-scroll-bar {
+    display: none;
+  }
 }
 @media (min-width: 769px) {
-  .latest-pickups__swiper,
-  .carousel-scroll-bar { display: none; }
+  .latest-pickups__swiper { display: none; }
+  /* Hide swiper-mode indicator on desktop (lives inside .carousel-track); the native one outside stays visible. */
+  .carousel-track .carousel-scroll-bar { display: none; }
   .latest-pickups__scroll { display: flex; }
 }
 

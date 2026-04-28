@@ -53,6 +53,8 @@
           {%- render 'product-card', product: product -%}
         {%- endfor -%}
       </div>
+      {%- assign desktop_target = '#' | append: section.id | append: '-grid' -%}
+      {%- render 'scroll-indicator', id: section.id, mode: 'native', target: desktop_target -%}
 
     {%- else -%}
       <p style="color: var(--color-on-surface-muted); font-family: var(--font-body); padding: var(--space-8) 0;">
