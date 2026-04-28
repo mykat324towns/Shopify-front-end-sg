@@ -240,20 +240,6 @@
         {%- render 'cta-trust-cue', icon: 'shield', label: '100% authentic', payment_marks: 'apple_pay,shop_pay' -%}
       </div>
 
-      <!-- Add to cart -->
-      <div class="product-actions">
-        <form id="product-form" method="post" action="/cart/add">
-          <input type="hidden" name="id" id="selected-variant-id" value="{{ product.variants.first.id }}">
-          <input type="hidden" name="quantity" value="1">
-          <button
-            class="btn-add-to-cart"
-            type="submit"
-            id="btn-add-to-cart"
-            disabled
-          >Select a Size</button>
-        </form>
-      </div>
-
       <!-- Trust strip -->
       <div class="product-trust" aria-label="Purchase guarantees">
         <div class="product-trust__item">
@@ -271,6 +257,20 @@
           <span class="product-trust__label">Free Returns</span>
           <span class="product-trust__sub">If something's off, we replace it</span>
         </div>
+      </div>
+
+      <!-- Add to cart -->
+      <div class="product-actions">
+        <form id="product-form" method="post" action="/cart/add">
+          <input type="hidden" name="id" id="selected-variant-id" value="{{ product.variants.first.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button
+            class="btn-add-to-cart"
+            type="submit"
+            id="btn-add-to-cart"
+            disabled
+          >Select a Size</button>
+        </form>
       </div>
 
     </div><!-- .product-details -->
