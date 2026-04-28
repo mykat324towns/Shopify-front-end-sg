@@ -144,20 +144,11 @@
                   aria-pressed="false"
                 >
                   <span class="size-card__label">{{ variant.option1 }}</span>
-                  {%- assign spray_val = '' -%}
-                  {%- if v_size == '1ml' -%}
-                    {%- assign spray_val = '18' -%}
-                  {%- elsif v_size == '2ml' -%}
-                    {%- assign spray_val = '36' -%}
-                  {%- elsif v_size == '5ml' -%}
-                    {%- assign spray_val = '90' -%}
-                  {%- elsif v_size == '10ml' -%}
-                    {%- assign spray_val = '180' -%}
-                  {%- elsif v_size == '30ml' -%}
-                    {%- assign spray_val = '540' -%}
-                  {%- endif -%}
-                  {%- if spray_val != '' -%}
-                    <span class="size-card__sub">~{{ spray_val }} sprays</span>
+                  {%- if v_size == '1ml' -%}<span class="size-card__sub">~18 sprays</span>
+                  {%- elsif v_size == '2ml' -%}<span class="size-card__sub">~36 sprays</span>
+                  {%- elsif v_size == '5ml' -%}<span class="size-card__sub">~90 sprays</span>
+                  {%- elsif v_size == '10ml' -%}<span class="size-card__sub">~180 sprays</span>
+                  {%- elsif v_size == '30ml' -%}<span class="size-card__sub">~540 sprays</span>
                   {%- endif -%}
                   <span class="size-card__price">{{ variant.price | money }}</span>
                   {%- assign badge_val = variant.metafields.custom.size_label.value -%}
