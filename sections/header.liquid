@@ -51,9 +51,9 @@
         <nav aria-label="Mobile navigation">
           <div class="nav__drawer-section">
             <span class="nav__drawer-section-label">Shop</span>
+            <a class="nav__drawer-link" href="/collections/all"{% if request.path == '/collections/all' %} aria-current="page"{% endif %}>Shop All Decants</a>
             <a class="nav__drawer-link" href="/collections/best-sellers"{% if request.path == '/collections/best-sellers' %} aria-current="page"{% endif %}>Best Sellers</a>
             <a class="nav__drawer-link" href="/collections/latest-picks"{% if request.path == '/collections/latest-picks' %} aria-current="page"{% endif %}>Latest Picks</a>
-            <a class="nav__drawer-link" href="/collections/all"{% if request.path == '/collections/all' %} aria-current="page"{% endif %}>Shop All Decants</a>
           </div>
           <div class="nav__drawer-section">
             <span class="nav__drawer-section-label">Help</span>
