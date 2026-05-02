@@ -19,7 +19,7 @@ block_progress = false
 key = "free_shipping_threshold"
 type = "number_decimal"
 name = "Free shipping threshold (USD)"
-description = "Cart subtotal that unlocks free shipping. Default: 50."
+description = "Cart subtotal that unlocks free shipping. Default: 100."
 
 [[extensions.settings.fields]]
 key = "returns_window_days"

@@ -19,7 +19,7 @@ function TrustBlock() {
   const settings = useSettings();
   const total = useTotalAmount();
 
-  const threshold = Number(settings.free_shipping_threshold ?? 50);
+  const threshold = Number(settings.free_shipping_threshold ?? 100);
   const returnsDays = Number(settings.returns_window_days ?? 30);
   const authenticityCopy = String(
     settings.authenticity_copy ??
