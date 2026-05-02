@@ -13,7 +13,43 @@
     "color_bg": "#FFFFFF",
     "color_on_surface": "#141414",
     "social_tiktok": "",
-    "social_instagram": ""
+    "social_instagram": "",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Free U.S. shipping over $100",
+          "dismissible": true
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_text": ""
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "brand_name": "",
+          "brand_desc": "Hand-poured fragrance decants. Built for collectors who want the rotation without the full-bottle price.",
+          "tiktok_url": "",
+          "instagram_url": "",
+          "menu_shop": "",
+          "menu_support": "",
+          "menu_legal": "",
+          "newsletter_desc": "Get first access to new drops and last-batch alerts before they sell out."
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "2567389343055140935": {
+        "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {}
 }
